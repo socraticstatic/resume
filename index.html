@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en" data-os="mac7">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Micah Boswell - Resume</title>
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ===== THEME: Mac OS 7 ===== */
+    [data-os="mac7"] {
+      --desktop-bg: #667;
+      --win-bg: #fff;
+      --win-border: #000;
+      --win-radius: 0px;
+      --win-shadow: 2px 2px 0 #000;
+      --titlebar-bg: #fff;
+      --titlebar-text: #000;
+      --titlebar-height: 20px;
+      --body-font: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --body-size: 12px;
+      --menubar-bg: #fff;
+      --menubar-border: #000;
+      --scrollbar-bg: #ccc;
+      --scrollbar-thumb: #888;
+      --icon-text: #000;
+      --selection-bg: #000;
+      --selection-text: #fff;
+    }
+
+    /* ===== BASE ===== */
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      font-family: var(--body-font);
+      font-size: var(--body-size);
+      -webkit-font-smoothing: none;
+      -moz-osx-font-smoothing: unset;
+    }
+
+    /* ===== DESKTOP ===== */
+    #desktop {
+      width: 100%; height: 100%;
+      background: var(--desktop-bg);
+      position: relative;
+      user-select: none;
+    }
+
+    /* ===== MENU BAR ===== */
+    #menubar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 20px;
+      background: var(--menubar-bg);
+      border-bottom: 1px solid var(--menubar-border);
+      display: flex;
+      align-items: center;
+      z-index: 10000;
+      padding: 0 8px;
+      font-size: 12px;
+      gap: 0;
+    }
+
+    .menu-apple {
+      width: 18px;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      cursor: default;
+    }
+
+    /* CSS-drawn apple icon (simplified) */
+    .menu-apple-icon {
+      width: 10px;
+      height: 12px;
+      position: relative;
+    }
+    .menu-apple-icon::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      background: #000;
+      border-radius: 2px 2px 3px 3px;
+    }
+    .menu-apple-icon::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 1px;
+      width: 3px;
+      height: 4px;
+      border-right: 2px solid #000;
+      border-top: 1px solid #000;
+      border-radius: 0 3px 0 0;
+    }
+
+    .menu-item {
+      padding: 2px 10px;
+      cursor: default;
+      font-weight: bold;
+      line-height: 16px;
+    }
+    .menu-item:hover {
+      background: var(--selection-bg);
+      color: var(--selection-text);
+    }
+
+    /* ===== DESKTOP ICONS ===== */
+    .icon-column {
+      position: absolute;
+      top: 32px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .desktop-icon {
+      width: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      cursor: default;
+      padding: 4px 2px;
+    }
+    .desktop-icon:hover .icon-label {
+      background: var(--selection-bg);
+      color: var(--selection-text);
+    }
+
+    .icon-graphic {
+      width: 32px;
+      height: 32px;
+      position: relative;
+    }
+
+    .icon-label {
+      font-size: 10px;
+      text-align: center;
+      color: #fff;
+      line-height: 1.2;
+      padding: 1px 3px;
+      max-width: 64px;
+      word-wrap: break-word;
+    }
+
+    /* CSS-drawn icons */
+    /* About icon - document with lines */
+    .icon-about .icon-graphic::before {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: #fff;
+      border: 1px solid #000;
+    }
+    .icon-about .icon-graphic::after {
+      content: '';
+      position: absolute;
+      top: 8px; left: 7px;
+      width: 14px; height: 1px;
+      background: #000;
+      box-shadow: 0 4px 0 #000, 0 8px 0 #000, 0 12px 0 #000;
+    }
+
+    /* Career icon - folder */
+    .icon-career .icon-graphic::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 2px;
+      width: 28px; height: 20px;
+      background: #fff;
+      border: 1px solid #000;
+    }
+    .icon-career .icon-graphic::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 12px; height: 6px;
+      background: #fff;
+      border: 1px solid #000;
+      border-bottom: none;
+    }
+
+    /* Projects icon - gear/cog (simplified as overlapping squares) */
+    .icon-projects .icon-graphic::before {
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px;
+      width: 16px; height: 16px;
+      border: 2px solid #000;
+      background: #fff;
+      transform: rotate(45deg);
+    }
+    .icon-projects .icon-graphic::after {
+      content: '';
+      position: absolute;
+      top: 6px; left: 6px;
+      width: 20px; height: 20px;
+      border: 1px solid #000;
+      background: #fff;
+    }
+
+    /* Contact icon - envelope */
+    .icon-contact .icon-graphic::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 2px;
+      width: 28px; height: 18px;
+      background: #fff;
+      border: 1px solid #000;
+    }
+    .icon-contact .icon-graphic::after {
+      content: '';
+      position: absolute;
+      top: 6px; left: 2px;
+      width: 14px; height: 10px;
+      border-right: 1px solid #000;
+      border-bottom: 1px solid #000;
+      transform: rotate(-45deg);
+      transform-origin: top left;
+    }
+
+    /* Ask icon - speech bubble */
+    .icon-ask .icon-graphic::before {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 24px; height: 16px;
+      background: #fff;
+      border: 1px solid #000;
+      border-radius: 2px;
+    }
+    .icon-ask .icon-graphic::after {
+      content: '';
+      position: absolute;
+      bottom: 5px; left: 8px;
+      width: 8px; height: 8px;
+      background: #fff;
+      border-right: 1px solid #000;
+      border-bottom: 1px solid #000;
+      transform: rotate(45deg);
+    }
+
+    /* Themes icon - paint palette (overlapping circles) */
+    .icon-themes .icon-graphic::before {
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px;
+      width: 24px; height: 24px;
+      border: 1px solid #000;
+      background: #fff;
+      border-radius: 50%;
+    }
+    .icon-themes .icon-graphic::after {
+      content: '';
+      position: absolute;
+      top: 10px; left: 10px;
+      width: 6px; height: 6px;
+      background: #000;
+      border-radius: 50%;
+      box-shadow: 7px -2px 0 #000, -2px -5px 0 #000;
+    }
+
+    /* ===== WINDOW SYSTEM ===== */
+    .window {
+      position: absolute;
+      background: var(--win-bg);
+      border: 1px solid var(--win-border);
+      border-radius: var(--win-radius);
+      box-shadow: var(--win-shadow);
+      display: none;
+      flex-direction: column;
+      min-width: 200px;
+      min-height: 100px;
+    }
+    .window.open {
+      display: flex;
+    }
+
+    /* Title bar */
+    .titlebar {
+      height: var(--titlebar-height);
+      background: var(--titlebar-bg);
+      border-bottom: 1px solid var(--win-border);
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+      cursor: grab;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .titlebar:active {
+      cursor: grabbing;
+    }
+
+    /* Mac OS 7 horizontal lines in title bar */
+    .titlebar-lines {
+      position: absolute;
+      inset: 3px 24px;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 1px,
+        #000 1px,
+        #000 2px,
+        transparent 2px,
+        transparent 3px
+      );
+      pointer-events: none;
+    }
+
+    /* Close box */
+    .closebox {
+      width: 12px;
+      height: 12px;
+      border: 1px solid #000;
+      background: #fff;
+      cursor: default;
+      flex-shrink: 0;
+      z-index: 1;
+      position: relative;
+    }
+    .closebox:hover {
+      background: #000;
+    }
+    .closebox:hover::before,
+    .closebox:hover::after {
+      background: #fff;
+    }
+
+    /* Title text */
+    .titlebar-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--titlebar-text);
+      white-space: nowrap;
+      background: var(--titlebar-bg);
+      padding: 0 6px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Window body */
+    .win-body {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 12px;
+      font-size: var(--body-size);
+      line-height: 1.5;
+    }
+
+    /* Retro scrollbar */
+    .win-body::-webkit-scrollbar {
+      width: 16px;
+    }
+    .win-body::-webkit-scrollbar-track {
+      background: var(--scrollbar-bg);
+      border-left: 1px solid #000;
+    }
+    .win-body::-webkit-scrollbar-thumb {
+      background: #fff;
+      border: 1px solid #000;
+    }
+    .win-body::-webkit-scrollbar-button {
+      height: 16px;
+      background: #fff;
+      border: 1px solid #000;
+      display: block;
+    }
+
+    /* ===== ABOUT WINDOW CONTENT ===== */
+    .about-header {
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #000;
+      margin-bottom: 10px;
+    }
+    .about-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+    .about-title {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .about-thesis {
+      font-size: 11px;
+      line-height: 1.5;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .about-metrics {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-bottom: 1px solid #000;
+      margin-bottom: 10px;
+    }
+    .about-metric {
+      text-align: center;
+    }
+    .about-metric-num {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .about-metric-label {
+      font-size: 10px;
+    }
+
+    .about-section {
+      margin-bottom: 10px;
+    }
+    .about-section-title {
+      font-weight: bold;
+      font-size: 11px;
+      margin-bottom: 4px;
+      text-decoration: underline;
+    }
+    .about-section p,
+    .about-section div {
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .about-caps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .about-cap {
+      font-size: 10px;
+      border: 1px solid #000;
+      padding: 1px 5px;
+      background: #fff;
+    }
+
+    /* ===== PLACEHOLDER CONTENT ===== */
+    .placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* ===== THEMES WINDOW ===== */
+    .theme-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      padding: 8px;
+    }
+    .theme-box {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: center;
+      font-size: 10px;
+      cursor: default;
+      background: #fff;
+    }
+    .theme-box:hover {
+      background: #000;
+      color: #fff;
+    }
+    .theme-box.active {
+      background: #000;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="desktop">
+
+    <!-- MENU BAR -->
+    <div id="menubar">
+      <div class="menu-apple"><div class="menu-apple-icon"></div></div>
+      <div class="menu-item">File</div>
+      <div class="menu-item">Theme</div>
+    </div>
+
+    <!-- DESKTOP ICONS -->
+    <div class="icon-column">
+      <div class="desktop-icon icon-about" ondblclick="openWin('about')">
+        <div class="icon-graphic"></div>
+        <div class="icon-label">About Micah</div>
+      </div>
+      <div class="desktop-icon icon-career" ondblclick="openWin('career')">
+        <div class="icon-graphic"></div>
+        <div class="icon-label">Career</div>
+      </div>
+      <div class="desktop-icon icon-projects" ondblclick="openWin('projects')">
+        <div class="icon-graphic"></div>
+        <div class="icon-label">Projects</div>
+      </div>
+      <div class="desktop-icon icon-contact" ondblclick="openWin('contact')">
+        <div class="icon-graphic"></div>
+        <div class="icon-label">Contact</div>
+      </div>
+      <div class="desktop-icon icon-ask" ondblclick="openWin('ask')">
+        <div class="icon-graphic"></div>
+        <div class="icon-label">Ask Micah</div>
+      </div>
+      <div class="desktop-icon icon-themes" ondblclick="openWin('themes')">
+        <div class="icon-graphic"></div>
+        <div class="icon-label">Themes</div>
+      </div>
+    </div>
+
+    <!-- WINDOWS -->
+
+    <!-- About Micah -->
+    <div class="window" id="win-about" style="width:480px; height:520px;">
+      <div class="titlebar" onmousedown="startDrag(event, 'about')">
+        <div class="closebox" onclick="closeWin('about')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">About Micah</div>
+      </div>
+      <div class="win-body">
+        <div class="about-header">
+          <div class="about-name">Micah Boswell</div>
+          <div class="about-title">Lead Product Designer</div>
+          <div class="about-thesis">I turn complex systems into things people can actually use. Right now that means AI agents that manage AT&T's network infrastructure.</div>
+        </div>
+
+        <div class="about-metrics">
+          <div class="about-metric">
+            <div class="about-metric-num">$300K+</div>
+            <div class="about-metric-label">Hardware Savings</div>
+          </div>
+          <div class="about-metric">
+            <div class="about-metric-num">126</div>
+            <div class="about-metric-label">Products Shipped</div>
+          </div>
+          <div class="about-metric">
+            <div class="about-metric-num">48%</div>
+            <div class="about-metric-label">Error Drop</div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <div class="about-section-title">Contact</div>
+          <p>214-543-2098</p>
+          <p>micah@conscious-shell.com</p>
+          <p>conscious-shell.com</p>
+          <p>github/socraticstatic</p>
+          <p>linkedin/micahboswell</p>
+        </div>
+
+        <div class="about-section">
+          <div class="about-section-title">Capabilities</div>
+          <div class="about-caps">
+            <span class="about-cap">Agentic AI</span>
+            <span class="about-cap">LLM Tooling</span>
+            <span class="about-cap">MCP</span>
+            <span class="about-cap">Design Systems</span>
+            <span class="about-cap">Design Ops</span>
+            <span class="about-cap">API Design</span>
+            <span class="about-cap">Cloud Platforms</span>
+            <span class="about-cap">Figma</span>
+            <span class="about-cap">Axure</span>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <div class="about-section-title">Also</div>
+          <p>Spanish fluent (raised in Lima, Peru).</p>
+          <p>Mentored 47 designers.</p>
+          <p>Author of Data-Driven Design.</p>
+          <p>Education: Hardin-Simmons BA, Samford.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Career -->
+    <div class="window" id="win-career" style="width:420px; height:360px;">
+      <div class="titlebar" onmousedown="startDrag(event, 'career')">
+        <div class="closebox" onclick="closeWin('career')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Career</div>
+      </div>
+      <div class="win-body">
+        <div class="placeholder">Career content coming soon</div>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="window" id="win-projects" style="width:420px; height:360px;">
+      <div class="titlebar" onmousedown="startDrag(event, 'projects')">
+        <div class="closebox" onclick="closeWin('projects')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Projects</div>
+      </div>
+      <div class="win-body">
+        <div class="placeholder">Projects content coming soon</div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="window" id="win-contact" style="width:360px; height:280px;">
+      <div class="titlebar" onmousedown="startDrag(event, 'contact')">
+        <div class="closebox" onclick="closeWin('contact')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Contact</div>
+      </div>
+      <div class="win-body">
+        <div class="placeholder">Contact content coming soon</div>
+      </div>
+    </div>
+
+    <!-- Ask Micah -->
+    <div class="window" id="win-ask" style="width:420px; height:360px;">
+      <div class="titlebar" onmousedown="startDrag(event, 'ask')">
+        <div class="closebox" onclick="closeWin('ask')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Ask Micah</div>
+      </div>
+      <div class="win-body">
+        <div class="placeholder">Ask Micah content coming soon</div>
+      </div>
+    </div>
+
+    <!-- Themes -->
+    <div class="window" id="win-themes" style="width:320px; height:220px;">
+      <div class="titlebar" onmousedown="startDrag(event, 'themes')">
+        <div class="closebox" onclick="closeWin('themes')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Themes</div>
+      </div>
+      <div class="win-body">
+        <div class="theme-grid">
+          <div class="theme-box active" id="theme-mac7" onclick="setTheme('mac7')">Mac OS 7</div>
+          <div class="theme-box" id="theme-mac9" onclick="setTheme('mac9')">Mac OS 9</div>
+          <div class="theme-box" id="theme-win31" onclick="setTheme('win31')">Windows 3.1</div>
+          <div class="theme-box" id="theme-winxp" onclick="setTheme('winxp')">Windows XP</div>
+          <div class="theme-box" id="theme-aqua" onclick="setTheme('aqua')">Mac OS X Aqua</div>
+          <div class="theme-box" id="theme-beos" onclick="setTheme('beos')">BeOS</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* ===== WINDOW STATE ===== */
+    const wins = {};
+    let topZ = 10;
+    let nextX = 80, nextY = 60;
+
+    /* ===== OPEN WINDOW ===== */
+    function openWin(id) {
+      const el = document.getElementById('win-' + id);
+      if (!el) return;
+
+      if (!wins[id]) {
+        // First open - position it
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const w = el.offsetWidth || 400;
+        const h = el.offsetHeight || 300;
+
+        // Center first window, cascade others
+        if (id === 'about') {
+          el.style.left = Math.max(40, (vw - w) / 2 - 40) + 'px';
+          el.style.top = Math.max(28, (vh - h) / 2) + 'px';
+        } else {
+          el.style.left = nextX + 'px';
+          el.style.top = nextY + 'px';
+          nextX += 28;
+          nextY += 28;
+          if (nextX > vw - 200) { nextX = 80; nextY = 60; }
+        }
+
+        wins[id] = { el: el };
+      }
+
+      el.classList.add('open');
+      bringToFront(id);
+    }
+
+    /* ===== CLOSE WINDOW ===== */
+    function closeWin(id) {
+      const el = document.getElementById('win-' + id);
+      if (el) el.classList.remove('open');
+    }
+
+    /* ===== BRING TO FRONT ===== */
+    function bringToFront(id) {
+      topZ++;
+      const el = document.getElementById('win-' + id);
+      if (el) el.style.zIndex = topZ;
+    }
+
+    /* Click anywhere on window brings to front */
+    document.addEventListener('mousedown', function(e) {
+      const win = e.target.closest('.window');
+      if (win) {
+        const id = win.id.replace('win-', '');
+        bringToFront(id);
+      }
+    });
+
+    /* ===== DRAG SYSTEM ===== */
+    let dragState = null;
+
+    function startDrag(e, id) {
+      // Don't drag if clicking close box
+      if (e.target.classList.contains('closebox')) return;
+
+      const el = document.getElementById('win-' + id);
+      if (!el) return;
+
+      bringToFront(id);
+
+      dragState = {
+        el: el,
+        startX: e.clientX,
+        startY: e.clientY,
+        origLeft: parseInt(el.style.left) || 0,
+        origTop: parseInt(el.style.top) || 0
+      };
+
+      e.preventDefault();
+    }
+
+    document.addEventListener('mousemove', function(e) {
+      if (!dragState) return;
+      const dx = e.clientX - dragState.startX;
+      const dy = e.clientY - dragState.startY;
+      dragState.el.style.left = (dragState.origLeft + dx) + 'px';
+      dragState.el.style.top = (dragState.origTop + dy) + 'px';
+    });
+
+    document.addEventListener('mouseup', function() {
+      dragState = null;
+    });
+
+    /* ===== THEME SWITCHER ===== */
+    function setTheme(os) {
+      document.documentElement.dataset.os = os;
+      localStorage.setItem('os-theme', os);
+
+      // Update active state on theme boxes
+      document.querySelectorAll('.theme-box').forEach(function(box) {
+        box.classList.remove('active');
+      });
+      const activeBox = document.getElementById('theme-' + os);
+      if (activeBox) activeBox.classList.add('active');
+    }
+
+    /* ===== INIT ===== */
+    (function() {
+      // Restore saved theme
+      const saved = localStorage.getItem('os-theme');
+      if (saved) setTheme(saved);
+
+      // Open About window by default
+      openWin('about');
+    })();
+  </script>
+</body>
+</html>
