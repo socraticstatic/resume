@@ -18,8 +18,8 @@
       --titlebar-bg: #fff;
       --titlebar-text: #000;
       --titlebar-height: 20px;
-      --body-font: system-ui, -apple-system, 'Segoe UI', sans-serif;
-      --body-size: 12px;
+      --body-font: 'Geneva', system-ui, -apple-system, sans-serif;
+      --body-size: 14px;
       --menubar-bg: #fff;
       --menubar-border: #000;
       --scrollbar-bg: #ccc;
@@ -29,14 +29,373 @@
       --selection-text: #fff;
     }
 
+    /* ===== THEME: Mac OS 9 (Platinum) ===== */
+    [data-os="mac9"] {
+      --desktop-bg: #3a6669;
+      --win-bg: #ececec;
+      --win-border: #888;
+      --win-radius: 0px;
+      --win-shadow: 1px 1px 4px rgba(0,0,0,0.35);
+      --titlebar-bg: linear-gradient(to bottom, #e8e8e8, #c0c0c0);
+      --titlebar-text: #000;
+      --titlebar-height: 22px;
+      --body-font: 'Charcoal', system-ui, -apple-system, sans-serif;
+      --body-size: 12px;
+      --menubar-bg: linear-gradient(to bottom, #eee, #ccc);
+      --menubar-border: #999;
+      --scrollbar-bg: #ddd;
+      --scrollbar-thumb: #aaa;
+      --icon-text: #fff;
+      --selection-bg: #336;
+      --selection-text: #fff;
+    }
+    [data-os="mac9"] .titlebar-lines { display: none; }
+    [data-os="mac9"] .closebox {
+      width: 13px; height: 13px;
+      border: 1px solid #888;
+      background: #ddd;
+      border-radius: 0;
+      box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #999;
+    }
+    [data-os="mac9"] .closebox:hover {
+      background: #bbb;
+    }
+    [data-os="mac9"] .titlebar-title {
+      background: transparent;
+    }
+    [data-os="mac9"] .win-body::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border: 1px solid #999;
+    }
+    [data-os="mac9"] .win-body::-webkit-scrollbar-track {
+      border-left: 1px solid #999;
+      background: #e8e8e8;
+    }
+
+    /* ===== THEME: Windows 3.1 (Program Manager) ===== */
+    [data-os="win31"] {
+      --desktop-bg: #008080;
+      --win-bg: #c0c0c0;
+      --win-border: #000;
+      --win-radius: 0px;
+      --win-shadow: none;
+      --titlebar-bg: #000080;
+      --titlebar-text: #fff;
+      --titlebar-height: 20px;
+      --body-font: 'Courier New', Courier, monospace;
+      --body-size: 12px;
+      --menubar-bg: #c0c0c0;
+      --menubar-border: #000;
+      --scrollbar-bg: #c0c0c0;
+      --scrollbar-thumb: #aaa;
+      --icon-text: #fff;
+      --selection-bg: #000080;
+      --selection-text: #fff;
+    }
+    [data-os="win31"] .window {
+      border: 2px outset #ddd;
+    }
+    [data-os="win31"] .titlebar-lines { display: none; }
+    [data-os="win31"] .closebox {
+      left: auto;
+      right: 4px;
+      position: absolute;
+      width: 16px; height: 14px;
+      border: 1px outset #ddd;
+      background: #c0c0c0;
+      border-radius: 0;
+    }
+    [data-os="win31"] .closebox:hover {
+      background: #aaa;
+    }
+    [data-os="win31"] .closebox::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px; height: 1px;
+      background: #000;
+    }
+    [data-os="win31"] .titlebar-title {
+      background: transparent;
+      left: 8px;
+      transform: none;
+    }
+    [data-os="win31"] .win-body::-webkit-scrollbar-thumb {
+      background: #c0c0c0;
+      border: 1px outset #ddd;
+    }
+    [data-os="win31"] .win-body::-webkit-scrollbar-track {
+      background: #fff;
+      border-left: 1px solid #808080;
+    }
+    [data-os="win31"] .win-body::-webkit-scrollbar-button {
+      background: #c0c0c0;
+      border: 1px outset #ddd;
+    }
+    [data-os="win31"] .about-cap {
+      border: 1px outset #ddd;
+      background: #c0c0c0;
+    }
+    [data-os="win31"] #menubar {
+      border-bottom: 1px solid #808080;
+      box-shadow: inset 0 -1px 0 #fff;
+    }
+
+    /* ===== THEME: Windows XP (Luna Blue) ===== */
+    [data-os="winxp"] {
+      --desktop-bg: linear-gradient(to bottom, #245edb 0%, #3a8ae6 40%, #5fa85e 100%);
+      --win-bg: #ece9d8;
+      --win-border: #0054e3;
+      --win-radius: 8px 8px 0 0;
+      --win-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      --titlebar-bg: linear-gradient(to bottom, #0a8be8, #0054e3, #003daa);
+      --titlebar-text: #fff;
+      --titlebar-height: 26px;
+      --body-font: Tahoma, 'Segoe UI', sans-serif;
+      --body-size: 12px;
+      --menubar-bg: #ece9d8;
+      --menubar-border: #aca899;
+      --scrollbar-bg: #ece9d8;
+      --scrollbar-thumb: #c5c3b8;
+      --icon-text: #fff;
+      --selection-bg: #316ac5;
+      --selection-text: #fff;
+    }
+    [data-os="winxp"] .titlebar {
+      border-radius: 8px 8px 0 0;
+      border-bottom: none;
+    }
+    [data-os="winxp"] .titlebar-lines { display: none; }
+    [data-os="winxp"] .closebox {
+      left: auto;
+      right: 4px;
+      position: absolute;
+      width: 20px; height: 18px;
+      border: none;
+      background: linear-gradient(to bottom, #e87654, #c53728);
+      border-radius: 3px;
+    }
+    [data-os="winxp"] .closebox:hover {
+      background: linear-gradient(to bottom, #f09070, #d94a38);
+    }
+    [data-os="winxp"] .closebox::before,
+    [data-os="winxp"] .closebox::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 10px; height: 2px;
+      background: #fff;
+    }
+    [data-os="winxp"] .closebox::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    [data-os="winxp"] .closebox::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+    [data-os="winxp"] .titlebar-title {
+      background: transparent;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      left: 8px;
+      transform: none;
+    }
+    [data-os="winxp"] .window {
+      border: 1px solid #0054e3;
+      border-top: none;
+    }
+    [data-os="winxp"] .win-body::-webkit-scrollbar-thumb {
+      background: #c5c3b8;
+      border: 1px solid #aca899;
+      border-radius: 2px;
+    }
+    [data-os="winxp"] .win-body::-webkit-scrollbar-track {
+      background: #f1efe2;
+      border-left: 1px solid #aca899;
+    }
+    [data-os="winxp"] .about-cap {
+      border: 1px solid #aca899;
+      background: #ece9d8;
+    }
+
+    /* ===== THEME: Mac OS X Aqua ===== */
+    [data-os="aqua"] {
+      --desktop-bg: linear-gradient(135deg, #1a0533 0%, #0d1f4b 40%, #1a3a5c 70%, #2a1a4a 100%);
+      --win-bg: #f5f5f5;
+      --win-border: #aaa;
+      --win-radius: 10px;
+      --win-shadow: 0 4px 20px rgba(0,0,0,0.35);
+      --titlebar-bg: linear-gradient(to bottom, #e8e8e8, #c8c8c8, #d4d4d4);
+      --titlebar-text: #333;
+      --titlebar-height: 24px;
+      --body-font: 'Lucida Grande', system-ui, -apple-system, sans-serif;
+      --body-size: 13px;
+      --menubar-bg: rgba(255,255,255,0.8);
+      --menubar-border: rgba(0,0,0,0.15);
+      --scrollbar-bg: #eee;
+      --scrollbar-thumb: #bbb;
+      --icon-text: #fff;
+      --selection-bg: #3f80f6;
+      --selection-text: #fff;
+    }
+    [data-os="aqua"] .titlebar {
+      border-radius: 10px 10px 0 0;
+      border-bottom: 1px solid #bbb;
+    }
+    [data-os="aqua"] .titlebar-lines { display: none; }
+    [data-os="aqua"] .closebox {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #ff5f57;
+      border: 1px solid #e2463d;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
+    }
+    [data-os="aqua"] .closebox:hover {
+      background: #ff3b30;
+    }
+    [data-os="aqua"] .closebox::before,
+    [data-os="aqua"] .closebox::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 6px; height: 1.5px;
+      background: transparent;
+    }
+    [data-os="aqua"] .closebox:hover::before {
+      background: #4a0002;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    [data-os="aqua"] .closebox:hover::after {
+      background: #4a0002;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+    [data-os="aqua"] .titlebar-title {
+      background: transparent;
+      font-weight: bold;
+      font-size: 13px;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    }
+    [data-os="aqua"] .win-body::-webkit-scrollbar {
+      width: 8px;
+    }
+    [data-os="aqua"] .win-body::-webkit-scrollbar-thumb {
+      background: #bbb;
+      border-radius: 4px;
+      border: none;
+    }
+    [data-os="aqua"] .win-body::-webkit-scrollbar-track {
+      background: transparent;
+      border: none;
+    }
+    [data-os="aqua"] .win-body::-webkit-scrollbar-button {
+      display: none;
+    }
+    [data-os="aqua"] .about-cap {
+      border: 1px solid #ccc;
+      background: #f0f0f0;
+      border-radius: 3px;
+    }
+    [data-os="aqua"] #menubar {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    [data-os="aqua"] .menu-apple-icon::before {
+      background: #333;
+    }
+    [data-os="aqua"] .menu-apple-icon::after {
+      border-right-color: #333;
+      border-top-color: #333;
+    }
+
+    /* ===== THEME: BeOS R5 ===== */
+    [data-os="beos"] {
+      --desktop-bg: #336;
+      --win-bg: #d8d8d8;
+      --win-border: #999;
+      --win-radius: 0px;
+      --win-shadow: 1px 1px 2px rgba(0,0,0,0.25);
+      --titlebar-bg: #ffcb00;
+      --titlebar-text: #000;
+      --titlebar-height: 20px;
+      --body-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --body-size: 12px;
+      --menubar-bg: #d8d8d8;
+      --menubar-border: #999;
+      --scrollbar-bg: #d8d8d8;
+      --scrollbar-thumb: #aaa;
+      --icon-text: #fff;
+      --selection-bg: #4488cc;
+      --selection-text: #fff;
+    }
+    [data-os="beos"] .titlebar {
+      width: fit-content;
+      min-width: 120px;
+      border-radius: 0;
+      border-bottom: 1px solid #b89e00;
+      padding-right: 24px;
+    }
+    [data-os="beos"] .titlebar-lines { display: none; }
+    [data-os="beos"] .titlebar-title {
+      position: relative;
+      left: auto;
+      transform: none;
+      background: transparent;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 0 6px;
+    }
+    [data-os="beos"] .closebox {
+      left: auto;
+      right: 2px;
+      position: absolute;
+      width: 14px; height: 14px;
+      border: 1px solid #b89e00;
+      background: #e8b800;
+      border-radius: 0;
+    }
+    [data-os="beos"] .closebox:hover {
+      background: #cc9900;
+    }
+    [data-os="beos"] .closebox::before,
+    [data-os="beos"] .closebox::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 8px; height: 1.5px;
+      background: transparent;
+    }
+    [data-os="beos"] .closebox:hover::before {
+      background: #000;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    [data-os="beos"] .closebox:hover::after {
+      background: #000;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+    [data-os="beos"] .window {
+      border: 1px solid #888;
+    }
+    [data-os="beos"] .win-body::-webkit-scrollbar-thumb {
+      background: #bbb;
+      border: 1px solid #888;
+    }
+    [data-os="beos"] .win-body::-webkit-scrollbar-track {
+      background: #e0e0e0;
+      border-left: 1px solid #888;
+    }
+    [data-os="beos"] .about-cap {
+      border: 1px solid #888;
+      background: #d8d8d8;
+    }
+
     /* ===== BASE ===== */
     html, body {
       width: 100%; height: 100%;
       overflow: hidden;
       font-family: var(--body-font);
       font-size: var(--body-size);
-      -webkit-font-smoothing: none;
-      -moz-osx-font-smoothing: unset;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* ===== DESKTOP ===== */
@@ -389,51 +748,51 @@
       margin-bottom: 10px;
     }
     .about-name {
-      font-size: 18px;
+      font-size: 22px;
       font-weight: bold;
       margin-bottom: 2px;
     }
     .about-title {
-      font-size: 12px;
+      font-size: 14px;
       margin-bottom: 8px;
     }
     .about-thesis {
-      font-size: 11px;
+      font-size: 14px;
       line-height: 1.5;
-      max-width: 400px;
+      max-width: 440px;
       margin: 0 auto;
     }
 
     .about-metrics {
       display: flex;
       justify-content: space-around;
-      padding: 10px 0;
+      padding: 12px 0;
       border-bottom: 1px solid #000;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .about-metric {
       text-align: center;
     }
     .about-metric-num {
-      font-size: 14px;
+      font-size: 18px;
       font-weight: bold;
     }
     .about-metric-label {
-      font-size: 10px;
+      font-size: 12px;
     }
 
     .about-section {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .about-section-title {
       font-weight: bold;
-      font-size: 11px;
+      font-size: 14px;
       margin-bottom: 4px;
       text-decoration: underline;
     }
     .about-section p,
     .about-section div {
-      font-size: 11px;
+      font-size: 14px;
       line-height: 1.5;
     }
 
@@ -444,9 +803,9 @@
       margin-top: 4px;
     }
     .about-cap {
-      font-size: 10px;
+      font-size: 12px;
       border: 1px solid #000;
-      padding: 1px 5px;
+      padding: 2px 6px;
       background: #fff;
     }
 
@@ -456,22 +815,69 @@
       align-items: center;
       justify-content: center;
       height: 100%;
-      font-size: 12px;
+      font-size: 14px;
       color: #666;
     }
+
+    /* ===== CAREER WINDOW ===== */
+    .career-list { }
+    .career-role {
+      border-bottom: 1px solid #ccc;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+    .career-role:hover { background: rgba(0,0,0,0.03); }
+    .career-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 14px;
+    }
+    .career-head span { font-size: 12px; color: #666; white-space: nowrap; margin-left: 12px; }
+    .career-body {
+      display: none;
+      padding: 8px 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .career-metrics {
+      margin: 8px 0;
+      font-size: 12px;
+    }
+    .career-pill {
+      font-family: inherit;
+      font-size: 11px;
+      padding: 3px 8px;
+      border: 1px solid #999;
+      background: #fff;
+      cursor: pointer;
+      margin: 2px;
+    }
+    .career-pill:hover { background: #000; color: #fff; border-color: #000; }
+    .career-answer {
+      margin-top: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #444;
+      padding: 8px;
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      display: none;
+    }
+    .career-answer:not(:empty) { display: block; }
 
     /* ===== THEMES WINDOW ===== */
     .theme-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      padding: 8px;
+      gap: 10px;
+      padding: 10px;
     }
     .theme-box {
       border: 1px solid #000;
-      padding: 8px;
+      padding: 10px;
       text-align: center;
-      font-size: 10px;
+      font-size: 12px;
       cursor: default;
       background: #fff;
     }
@@ -526,7 +932,7 @@
     <!-- WINDOWS -->
 
     <!-- About Micah -->
-    <div class="window" id="win-about" style="width:480px; height:520px;">
+    <div class="window" id="win-about" style="width:540px; height:580px;">
       <div class="titlebar" onmousedown="startDrag(event, 'about')">
         <div class="closebox" onclick="closeWin('about')"></div>
         <div class="titlebar-lines"></div>
@@ -589,14 +995,168 @@
     </div>
 
     <!-- Career -->
-    <div class="window" id="win-career" style="width:420px; height:360px;">
+    <div class="window" id="win-career" style="width:520px; height:500px;">
       <div class="titlebar" onmousedown="startDrag(event, 'career')">
         <div class="closebox" onclick="closeWin('career')"></div>
         <div class="titlebar-lines"></div>
         <div class="titlebar-title">Career</div>
       </div>
       <div class="win-body">
-        <div class="placeholder">Career content coming soon</div>
+        <div class="career-list">
+          <div class="career-role" onclick="toggleRole(this)">
+            <div class="career-head">
+              <strong>Lead Product Designer</strong>
+              <span>AT&amp;T, 2021 - Present</span>
+            </div>
+            <div class="career-body">
+              <p>Built the AI agent framework that manages AT&amp;T's network infrastructure lifecycle. Led the first enterprise AI design pilot. Saved $300K through one diagnostic redesign.</p>
+              <div class="career-metrics">
+                <strong>$300K+</strong> hardware savings &nbsp;
+                <strong>26 tasks</strong> automated &nbsp;
+                <strong>Weeks to minutes</strong> resolution
+              </div>
+              <div class="career-ask">
+                <div style="font-size:11px;font-weight:bold;margin:8px 0 4px;">Ask about this role:</div>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('att',0)">What was the agentic framework?</button>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('att',1)">How did you save $300K?</button>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('att',2)">What was the AI design pilot?</button>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('att',3)">Tell me about the team</button>
+              </div>
+              <div class="career-answer" id="ans-att"></div>
+            </div>
+          </div>
+
+          <div class="career-role" onclick="toggleRole(this)">
+            <div class="career-head">
+              <strong>CX/UX Design Lead</strong>
+              <span>Wells Fargo, 2020 - 2021</span>
+            </div>
+            <div class="career-body">
+              <p>Aligned product strategy across 8 departments that had never shared a design language.</p>
+              <div class="career-ask">
+                <div style="font-size:11px;font-weight:bold;margin:8px 0 4px;">Ask about this role:</div>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('wells',0)">What departments?</button>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('wells',1)">Why only one year?</button>
+              </div>
+              <div class="career-answer" id="ans-wells"></div>
+            </div>
+          </div>
+
+          <div class="career-role" onclick="toggleRole(this)">
+            <div class="career-head">
+              <strong>VP Experience Design</strong>
+              <span>Treverity, 2016 - 2020</span>
+            </div>
+            <div class="career-body">
+              <p>Ran design ops for 20+ energy grid products. My dashboards were used during Hurricane Harvey for emergency response. Company acquired by ARCOS - design cited as material.</p>
+              <div class="career-metrics">
+                <strong>36 products</strong> &nbsp;
+                <strong>Hurricane Harvey</strong> &nbsp;
+                <strong>Acquisition</strong>
+              </div>
+              <div class="career-ask">
+                <div style="font-size:11px;font-weight:bold;margin:8px 0 4px;">Ask about this role:</div>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('treverity',0)">How was design material to the acquisition?</button>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('treverity',1)">Tell me about Hurricane Harvey</button>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('treverity',2)">What was Human Integration?</button>
+              </div>
+              <div class="career-answer" id="ans-treverity"></div>
+            </div>
+          </div>
+
+          <div class="career-role" onclick="toggleRole(this)">
+            <div class="career-head">
+              <strong>Senior UX Architect</strong>
+              <span>Citi, 2016</span>
+            </div>
+            <div class="career-body">
+              <p>Redesigned 68 mobile payment workflows for tap-to-pay across three continents.</p>
+              <div class="career-ask">
+                <div style="font-size:11px;font-weight:bold;margin:8px 0 4px;">Ask about this role:</div>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('citi',0)">What kind of payments?</button>
+              </div>
+              <div class="career-answer" id="ans-citi"></div>
+            </div>
+          </div>
+
+          <div class="career-role" onclick="toggleRole(this)">
+            <div class="career-head">
+              <strong>UX Consultant</strong>
+              <span>GE Nuclear, 2012 - 2016</span>
+            </div>
+            <div class="career-body">
+              <p>Proposed and led unification of hundreds of legacy Fortran apps into role-based dashboards. 48% error reduction. My idea, my execution.</p>
+              <div class="career-ask">
+                <div style="font-size:11px;font-weight:bold;margin:8px 0 4px;">Ask about this role:</div>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('ge',0)">How did you reduce errors 48%?</button>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('ge',1)">Whose idea was this?</button>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('ge',2)">Nuclear compliance?</button>
+              </div>
+              <div class="career-answer" id="ans-ge"></div>
+            </div>
+          </div>
+
+          <div class="career-role" onclick="toggleRole(this)">
+            <div class="career-head">
+              <strong>Director, UX Strategy</strong>
+              <span>U.S. Mint, 2013</span>
+            </div>
+            <div class="career-body">
+              <p>Cut cart abandonment 31% and lifted revenue 20% by building the first persona-driven e-commerce strategy for a government retailer.</p>
+              <div class="career-ask">
+                <div style="font-size:11px;font-weight:bold;margin:8px 0 4px;">Ask about this role:</div>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('mint',0)">How did you cut cart abandonment?</button>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('mint',1)">Government e-commerce?</button>
+              </div>
+              <div class="career-answer" id="ans-mint"></div>
+            </div>
+          </div>
+
+          <div class="career-role" onclick="toggleRole(this)">
+            <div class="career-head">
+              <strong>UX Architect</strong>
+              <span>Dell, 2011 - 2012</span>
+            </div>
+            <div class="career-body">
+              <p>Re-architected Dell.com search around customer intent, not product specs.</p>
+              <div class="career-ask">
+                <div style="font-size:11px;font-weight:bold;margin:8px 0 4px;">Ask about this role:</div>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('dell',0)">What was intent-based strategy?</button>
+              </div>
+              <div class="career-answer" id="ans-dell"></div>
+            </div>
+          </div>
+
+          <div class="career-role" onclick="toggleRole(this)">
+            <div class="career-head">
+              <strong>Creative Director</strong>
+              <span>Broadlane, 2005 - 2010</span>
+            </div>
+            <div class="career-body">
+              <p>21 products branded. Rose from IC to CD in 5 years. CEO credited design as key factor in sale.</p>
+              <div class="career-ask">
+                <div style="font-size:11px;font-weight:bold;margin:8px 0 4px;">Ask about this role:</div>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('broadlane',0)">How was design key to the sale?</button>
+              </div>
+              <div class="career-answer" id="ans-broadlane"></div>
+            </div>
+          </div>
+
+          <div class="career-role" onclick="toggleRole(this)">
+            <div class="career-head">
+              <strong>Foundation</strong>
+              <span>Hitachi/Richards/Perot/NCH/IMC2/GSK/Nortel, 1996 - 2005</span>
+            </div>
+            <div class="career-body">
+              <p>Pier1.com, Home Depot, Nurse.com, Zyban. Started on a Quadra 700.</p>
+              <div class="career-ask">
+                <div style="font-size:11px;font-weight:bold;margin:8px 0 4px;">Ask about this role:</div>
+                <button class="career-pill" onclick="event.stopPropagation();askRole('early',0)">Where did you start?</button>
+              </div>
+              <div class="career-answer" id="ans-early"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -637,13 +1197,14 @@
     </div>
 
     <!-- Themes -->
-    <div class="window" id="win-themes" style="width:320px; height:220px;">
+    <div class="window" id="win-themes" style="width:400px; height:380px;">
       <div class="titlebar" onmousedown="startDrag(event, 'themes')">
         <div class="closebox" onclick="closeWin('themes')"></div>
         <div class="titlebar-lines"></div>
-        <div class="titlebar-title">Themes</div>
+        <div class="titlebar-title">Appearance</div>
       </div>
       <div class="win-body">
+        <div class="about-section-title" style="margin-bottom:8px;">Operating System</div>
         <div class="theme-grid">
           <div class="theme-box active" id="theme-mac7" onclick="setTheme('mac7')">Mac OS 7</div>
           <div class="theme-box" id="theme-mac9" onclick="setTheme('mac9')">Mac OS 9</div>
@@ -651,6 +1212,16 @@
           <div class="theme-box" id="theme-winxp" onclick="setTheme('winxp')">Windows XP</div>
           <div class="theme-box" id="theme-aqua" onclick="setTheme('aqua')">Mac OS X Aqua</div>
           <div class="theme-box" id="theme-beos" onclick="setTheme('beos')">BeOS</div>
+        </div>
+        <div class="about-section-title" style="margin-top:14px; margin-bottom:8px;">Desktop Wallpaper</div>
+        <div class="about-section" style="font-size:12px; margin-bottom:8px;">Photography by Micah Boswell via Unsplash</div>
+        <div class="theme-grid">
+          <div class="theme-box" onclick="setWallpaper('none')" style="background:var(--desktop-bg);color:#fff;">Solid</div>
+          <div class="theme-box" onclick="setWallpaper('https://images.unsplash.com/photo-1533387520709-752d83de3630?w=1920&q=80')">Peru</div>
+          <div class="theme-box" onclick="setWallpaper('https://images.unsplash.com/photo-1518834107591-e75e2e5f4015?w=1920&q=80')">Abstract</div>
+          <div class="theme-box" onclick="setWallpaper('https://images.unsplash.com/photo-1534237886190-eeaa2cf33654?w=1920&q=80')">Dallas</div>
+          <div class="theme-box" onclick="setWallpaper('https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=1920&q=80')">Nature</div>
+          <div class="theme-box" onclick="setWallpaper('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&q=80')">Fog</div>
         </div>
       </div>
     </div>
@@ -764,11 +1335,85 @@
       if (activeBox) activeBox.classList.add('active');
     }
 
+    function setWallpaper(url) {
+      const desktop = document.getElementById('desktop');
+      if (url === 'none') {
+        desktop.style.backgroundImage = 'none';
+        localStorage.removeItem('wallpaper');
+      } else {
+        desktop.style.backgroundImage = 'url(' + url + ')';
+        desktop.style.backgroundSize = 'cover';
+        desktop.style.backgroundPosition = 'center';
+        localStorage.setItem('wallpaper', url);
+      }
+    }
+
+    /* ===== CAREER ACCORDION + AI CHAT ===== */
+    const QA = {
+      att: [
+        {q:'What was the agentic framework?', a:'A modular AI-agent system I architected that manages the full infrastructure lifecycle - from provisioning through optimization to decommissioning. Each agent handles a specific domain and they coordinate through a shared context layer.'},
+        {q:'How did you save $300K?', a:'I redesigned the DNI Portal with diagnostics that identified underutilized hardware across the network. Equipment running but serving no traffic became visible for the first time. The savings came from targeted removal rather than blanket audits.'},
+        {q:'What was the AI design pilot?', a:'I led the first enterprise adoption of Lovable AI within product design at AT&T. Created reusable templates, playbooks, and best-practice frameworks. It went from my experiment to an adopted practice across multiple teams.'},
+        {q:'Tell me about the team', a:'I work across multiple internal platform teams - DNI, NetBond, Cloud Designer, VLAN tools. I partner directly with API engineering and global marketing on productization strategy.'}
+      ],
+      wells: [
+        {q:'What departments?', a:'Eight departments across consumer banking. They had been working in silos with no shared design language. I led cross-functional strategy sessions and delivered frameworks that aligned them.'},
+        {q:'Why only one year?', a:'Contract role through Granite Solutions. Scoped for the strategic phase - assess, align, deliver frameworks. Once the departments had shared direction, work transitioned to internal teams.'}
+      ],
+      treverity: [
+        {q:'How was design material to the acquisition?', a:'ARCOS acquired Treverity in January 2023. The design ops program, the energy grid platforms, the field systems were specifically cited as material to the acquisition value.'},
+        {q:'Tell me about Hurricane Harvey', a:'During Harvey, the dashboards I designed for the Houston grid were used for real-time emergency response. Flood levels, road elevation data, power outage mapping. The field apps worked offline. Life-safety tools.'},
+        {q:'What was Human Integration?', a:'I established it as Treverity\'s primary product service. Digital transformation fails when it treats humans as an afterthought. Every system started with the field worker, their workflows, their constraints.'}
+      ],
+      citi: [
+        {q:'What kind of payments?', a:'Mobile tap-to-pay, customer profiles, payment subscriptions. Spanned Latin America, Asia, U.S. with different regulatory requirements and user expectations.'}
+      ],
+      ge: [
+        {q:'How did you reduce errors 48%?', a:'Hundreds of separate Fortran apps, each built over decades. Data in silos. Errors from manual transfer. I unified everything into one database with role-based dashboards. One source of truth.'},
+        {q:'Whose idea was this?', a:'Mine. The existing team accepted the fragmentation as normal. I studied the workflows and proposed the unification. Then I executed it.'},
+        {q:'Nuclear compliance?', a:'Everything requires federal compliance and safety certification. I designed a modular system that preserved every compliance requirement while eliminating the manual handoffs.'}
+      ],
+      mint: [
+        {q:'How did you cut cart abandonment?', a:'The Mint treated all buyers identically. I identified 5 personas with completely different motivations. Tailoring the experience to each removed friction at each group\'s specific drop-off points.'},
+        {q:'Government e-commerce?', a:'The U.S. Mint is one of the largest government retail operations. Nobody had applied commercial e-commerce best practices systematically. That was my job.'}
+      ],
+      dell: [
+        {q:'What was intent-based strategy?', a:'Instead of organizing search by specs, I redesigned around customer goals. A small business owner and an enterprise IT buyer searching the same term have different needs. The UX adapted based on detected intent.'}
+      ],
+      broadlane: [
+        {q:'How was design key to the sale?', a:'Started as IC, rose to Creative Director over 5 years. Branded 21 products. When the company sold, the CEO specifically credited the design work as a key factor.'}
+      ],
+      early: [
+        {q:'Where did you start?', a:'Nortel Networks in 1996. Built their websites on a Quadra 700. From there: GSK, IMC2, NCH, Perot Systems, Richards Group, Hitachi. Each role was bigger than the last.'}
+      ]
+    };
+
+    function toggleRole(el) {
+      var body = el.querySelector('.career-body');
+      var wasOpen = body.style.display === 'block';
+      document.querySelectorAll('.career-body').forEach(function(b) { b.style.display = 'none'; });
+      document.querySelectorAll('.career-answer').forEach(function(a) { a.innerHTML = ''; });
+      if (!wasOpen) body.style.display = 'block';
+    }
+
+    function askRole(key, idx) {
+      var qa = QA[key];
+      if (!qa || !qa[idx]) return;
+      var el = document.getElementById('ans-' + key);
+      if (!el) return;
+      el.innerHTML = '<em>Thinking...</em>';
+      setTimeout(function() { el.innerHTML = qa[idx].a; }, 300 + Math.random() * 400);
+    }
+
     /* ===== INIT ===== */
     (function() {
       // Restore saved theme
       const saved = localStorage.getItem('os-theme');
       if (saved) setTheme(saved);
+
+      // Restore saved wallpaper
+      const savedWp = localStorage.getItem('wallpaper');
+      if (savedWp) setWallpaper(savedWp);
 
       // Open About window by default
       openWin('about');
