@@ -1650,8 +1650,11 @@
         (cfg.sub ? '<div>' + cfg.sub + '</div>' : '') +
         '<div class="boot-bar"><div class="boot-fill" style="background:' + (cfg.bar || cfg.fg) + '"></div></div>';
       document.body.appendChild(overlay);
-      if (startupSoundEnabled && bootSounds[os]) {
-        try { var a = new Audio(bootSounds[os]); a.volume = 0.3; a.play(); } catch(e) {}
+      if (startupSoundEnabled && bootSounds[os] && userInteracted) {
+        try {
+          var a = new Audio(bootSounds[os]); a.volume = 0.3;
+          var p = a.play(); if (p && p.catch) p.catch(function(){});
+        } catch(e) {}
       }
       requestAnimationFrame(function() { overlay.querySelector('.boot-fill').style.width = '100%'; });
       setTimeout(function() {
@@ -1727,6 +1730,10 @@
 
     /* ===== STARTUP CHIME ===== */
     var startupSoundEnabled = false;
+    var userInteracted = false;
+    ['click','keydown','touchstart'].forEach(function(ev) {
+      document.addEventListener(ev, function mark() { userInteracted = true; }, { once: true, capture: true });
+    });
     function toggleStartupSound() {
       startupSoundEnabled = !startupSoundEnabled;
       localStorage.setItem('startup-sound', startupSoundEnabled ? '1' : '');
