@@ -10,7 +10,6 @@
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect x='1' y='1' width='14' height='14' rx='2' fill='%23666699' stroke='%23000' stroke-width='1'/><text x='8' y='12' text-anchor='middle' font-size='10' fill='white' font-family='sans-serif'>MB</text></svg>">
   <link href="https://fonts.cdnfonts.com/css/chicagoflf" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/charcoal" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/geneva" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/tahoma" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/lucida-grande" rel="stylesheet">
@@ -101,7 +100,7 @@
 
     /* =========================================================================
        THEME: Mac OS 9 (Platinum)
-       Subtle pinstripes, refined gray, Geneva/Charcoal, NOT Windows-style bevels
+       Subtle pinstripes, refined gray, Geneva, NOT Windows-style bevels
        ========================================================================= */
     [data-os="mac9"] {
       --desktop-bg: #336666;
@@ -112,7 +111,7 @@
       --titlebar-bg: #d0d0d0;
       --titlebar-text: #000;
       --titlebar-height: 20px;
-      --title-font: Charcoal, 'Lucida Grande', Arial, sans-serif;
+      --title-font: Geneva, 'Lucida Grande', Arial, sans-serif;
       --body-font: Geneva, Helvetica, sans-serif;
       --body-size: 12px;
       --menubar-bg: #e0e0e0;
@@ -144,7 +143,7 @@
     }
     [data-os="mac9"] .titlebar-lines { display: none; }
     [data-os="mac9"] .titlebar-title {
-      background: transparent; font-family: Charcoal, 'Lucida Grande', Arial, sans-serif;
+      background: transparent; font-family: Geneva, 'Lucida Grande', Arial, sans-serif;
     }
     /* Platinum close box: subtle gradient, thin border */
     [data-os="mac9"] .closebox {
@@ -162,7 +161,7 @@
     [data-os="mac9"] #menubar {
       background: linear-gradient(to bottom, #f0f0f0, #d8d8d8);
       border-bottom: 1px solid #999;
-      font-family: Charcoal, 'Lucida Grande', Arial, sans-serif;
+      font-family: Geneva, 'Lucida Grande', Arial, sans-serif;
     }
     [data-os="mac9"] .menu-item:hover { background: #336; }
     /* Scrollbars: proportional, subtle gray */
@@ -1617,7 +1616,8 @@
       mac7: { bg: '#c0c0c0', fg: '#000', bar: '#888',
         logo: happyMac, sub: '' },
       mac9: { bg: '#d8d8d8', fg: '#000', bar: '#666',
-        logo: happyMac, sub: '' },
+        logo: '<div style="font-family:Geneva,\'Lucida Grande\',Helvetica,sans-serif;font-weight:300;display:flex;align-items:baseline;gap:10px;font-size:52px;letter-spacing:-2px;line-height:1"><span style="color:#444">Mac OS</span><span style="color:#0066cc;font-weight:500">9</span></div>',
+        sub: '<div style="font-family:Geneva,\'Lucida Grande\',sans-serif;font-size:11px;margin-top:10px;color:#666;letter-spacing:1px">Starting up\u2026</div>' },
       win31: { bg: '#000', fg: '#aaa', bar: '#666',
         logo: '<div style="font-family:Courier New,monospace;font-size:14px;text-align:left;line-height:2;max-width:320px"><div style="color:#ccc">Microsoft(R) Windows</div><div style="color:#ccc">Version 3.1</div><div style="color:#666;margin-top:6px">(C) Copyright Microsoft Corp. 1985-1992</div></div>',
         sub: '' },
