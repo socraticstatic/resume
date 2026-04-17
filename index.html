@@ -861,6 +861,67 @@
       opacity: 1; transition: opacity 0.3s;
     }
     .boot-overlay.fade { opacity: 0; pointer-events: none; }
+    /* Mac 9 extensions-loading strip */
+    .extensions-strip {
+      position: absolute; bottom: 32px; left: 0; right: 0;
+      display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;
+      padding: 0 24px; max-width: 90vw; margin: 0 auto;
+    }
+    .ext-chip {
+      width: 56px; text-align: center; opacity: 0;
+      animation: extPop 0.28s ease-out forwards;
+      font-family: Charcoal, Geneva, sans-serif;
+    }
+    .ext-chip .ext-em {
+      width: 36px; height: 36px; line-height: 32px; margin: 0 auto 2px;
+      border: 1px solid rgba(0,0,0,0.25);
+      background: rgba(255,255,255,0.55);
+      border-radius: 4px; font-size: 20px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+    .ext-chip .ext-n { font-size: 9px; color: rgba(0,0,0,0.75); letter-spacing: 0.2px; }
+    @keyframes extPop { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Chooser dialog styling */
+    .chooser-grid { display:flex; flex-direction:column; gap:2px; border:1px solid #999; background:#fff; }
+    .chooser-row { padding:8px 10px; cursor:pointer; border-bottom:1px solid #eee; }
+    .chooser-row:last-child { border-bottom:none; }
+    .chooser-row:hover { background: var(--selection-bg, #336); color: var(--selection-text, #fff); }
+    .chooser-row:hover .chooser-note { color: var(--selection-text, #fff); opacity: 0.9; }
+    .chooser-ico { display:inline-block; width:24px; font-size:18px; vertical-align:middle; margin-right:6px; }
+    .chooser-name { display:inline-block; font-weight:bold; font-size:13px; vertical-align:middle; }
+    .chooser-note { font-size:11px; opacity:0.75; margin-top:3px; margin-left:30px; }
+
+    /* Mac 9 Get Info dialog */
+    #get-info-dialog {
+      display: none; position: fixed; z-index: 10003;
+      width: 280px; background: var(--win-bg, #ebebeb);
+      border: 1px solid #666; box-shadow: 3px 3px 8px rgba(0,0,0,0.35);
+      font-family: Charcoal, Geneva, 'Lucida Grande', sans-serif; font-size: 12px;
+    }
+    #get-info-dialog.visible { display: block; }
+    #get-info-dialog .gi-titlebar {
+      background: repeating-linear-gradient(to bottom,#ccc 0px,#ccc 1px,#ddd 1px,#ddd 2px);
+      border-bottom: 1px solid #999; padding: 4px 8px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; height: 22px;
+    }
+    #get-info-dialog .gi-close {
+      position: absolute; left: 6px; top: 4px;
+      width: 14px; height: 14px; border: 1px solid #888;
+      background: linear-gradient(to bottom,#e8e8e8,#c8c8c8); cursor: pointer;
+    }
+    #get-info-dialog .gi-title { font-size: 12px; font-weight: bold; }
+    #get-info-dialog .gi-body { padding: 12px 14px; }
+    #get-info-dialog .gi-head { display: flex; gap: 10px; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #bbb; margin-bottom: 8px; }
+    #get-info-dialog .gi-icon { width: 48px; height: 48px; font-size: 38px; line-height: 1; text-align: center; flex-shrink: 0; }
+    #get-info-dialog .gi-name { font-size: 13px; font-weight: bold; line-height: 1.2; }
+    #get-info-dialog .gi-kind { font-size: 10px; opacity: 0.7; margin-top: 2px; }
+    #get-info-dialog .gi-row { display: flex; justify-content: space-between; gap: 10px; padding: 2px 0; font-size: 11px; }
+    #get-info-dialog .gi-row .gi-k { color: #666; min-width: 70px; }
+    #get-info-dialog .gi-row .gi-v { text-align: right; color: #111; font-variant-numeric: tabular-nums; }
+    #get-info-dialog .gi-notes { margin-top: 8px; padding-top: 6px; border-top: 1px solid #ddd; font-size: 11px; line-height: 1.4; color: #222; }
+
     .boot-logo { font-size: 48px; margin-bottom: 16px; }
     .boot-logo svg { height: 96px; width: auto; image-rendering: pixelated; }
     .boot-logo .big-icon { display: inline-block; }
@@ -1010,7 +1071,8 @@
           <div class="menu-dd-item" onclick="openWin('projects')">Open Projects</div>
           <div class="menu-dd-item" onclick="openWin('contact')">Open Contact</div>
           <div class="menu-dd-sep"></div>
-          <div class="menu-dd-item" onclick="exportPDF()">Save as PDF...<span class="menu-dd-shortcut">Cmd+P</span></div>
+          <div class="menu-dd-item" onclick="openWin('chooser')">Chooser...</div>
+          <div class="menu-dd-item" onclick="saveAsSit()">Save as Resume.sit...<span class="menu-dd-shortcut">Cmd+P</span></div>
         </div>
       </div>
       <div class="menu-item">Theme
@@ -1477,6 +1539,63 @@
       <div class="win-resize" onmousedown="startResize(event, 'themes')"></div>
     </div>
 
+    <!-- Chooser dialog (Mac 9 Chooser pattern - pick which "Micah" you're hiring) -->
+    <div class="window" id="win-chooser" style="width:420px; height:auto;">
+      <div class="titlebar" onmousedown="startDrag(event, 'chooser')">
+        <div class="closebox" onclick="closeWin('chooser')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Chooser</div>
+      </div>
+      <div class="win-body" style="padding:14px;">
+        <div style="font-size:12px;margin-bottom:10px;">Which version of Micah are you hiring?</div>
+        <div class="chooser-grid">
+          <div class="chooser-row" onclick="applyRole('lead')">
+            <div class="chooser-ico">\uD83C\uDFAF</div>
+            <div class="chooser-name">Lead Product Designer</div>
+            <div class="chooser-note">AT&amp;T scale. Agentic AI, network ops, design systems.</div>
+          </div>
+          <div class="chooser-row" onclick="applyRole('builder')">
+            <div class="chooser-ico">\uD83E\uDD16</div>
+            <div class="chooser-name">AI Builder</div>
+            <div class="chooser-note">MCP servers, agent frameworks, TypeScript infra.</div>
+          </div>
+          <div class="chooser-row" onclick="applyRole('consultant')">
+            <div class="chooser-ico">\uD83D\uDCBC</div>
+            <div class="chooser-name">Consultant</div>
+            <div class="chooser-note">13+ indie years. Fast diagnostics, clean handoffs.</div>
+          </div>
+          <div class="chooser-row" onclick="applyRole('mentor')">
+            <div class="chooser-ico">\uD83E\uDDED</div>
+            <div class="chooser-name">Mentor</div>
+            <div class="chooser-note">47 designers mentored. CareerFoundry advisor.</div>
+          </div>
+        </div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'chooser')"></div>
+    </div>
+
+    <!-- Get Info Dialog (Mac 9 pattern; populated on right-click) -->
+    <div id="get-info-dialog">
+      <div class="gi-titlebar">
+        <div class="gi-close" onclick="hideGetInfo()"></div>
+        <div class="gi-title">Info</div>
+      </div>
+      <div class="gi-body">
+        <div class="gi-head">
+          <div class="gi-icon" id="gi-icon">\uD83D\uDCC1</div>
+          <div>
+            <div class="gi-name" id="gi-name">Project</div>
+            <div class="gi-kind" id="gi-kind">Project</div>
+          </div>
+        </div>
+        <div class="gi-row"><span class="gi-k">Kind</span><span class="gi-v" id="gi-r-kind">Project</span></div>
+        <div class="gi-row"><span class="gi-k">When</span><span class="gi-v" id="gi-r-when">-</span></div>
+        <div class="gi-row"><span class="gi-k">Size</span><span class="gi-v" id="gi-r-size">-</span></div>
+        <div class="gi-row"><span class="gi-k">Stack</span><span class="gi-v" id="gi-r-stack">-</span></div>
+        <div class="gi-notes" id="gi-r-notes"></div>
+      </div>
+    </div>
+
     <!-- Easter Egg -->
     <div class="window" id="win-easter" style="width:380px; height:auto;">
       <div class="titlebar" onmousedown="startDrag(event, 'easter')">
@@ -1702,6 +1821,110 @@
       }
     }
 
+    /* Stuffit-style "Save as Resume.sit..." progress dialog, then print-to-PDF */
+    function saveAsSit() {
+      var sit = document.createElement('div');
+      sit.style.cssText = 'position:fixed;z-index:10010;left:50%;top:50%;transform:translate(-50%,-50%);width:320px;background:#ebebeb;border:1px solid #666;box-shadow:4px 4px 12px rgba(0,0,0,0.35);font-family:Charcoal,Geneva,\'Lucida Grande\',sans-serif;font-size:12px;';
+      sit.innerHTML = '<div style="background:repeating-linear-gradient(to bottom,#ccc 0px,#ccc 1px,#ddd 1px,#ddd 2px);border-bottom:1px solid #999;padding:4px 8px;font-weight:bold;text-align:center;height:22px;">StuffIt Deluxe</div>'
+        + '<div style="padding:14px 16px;">'
+        + '<div style="margin-bottom:8px;">Stuffing Resume.sit...</div>'
+        + '<div style="height:12px;background:#fff;border:1px solid #888;padding:1px;">'
+        + '<div id="sit-fill" style="height:100%;width:0;background:repeating-linear-gradient(90deg,#5a83c4 0,#5a83c4 4px,#7aa3d4 4px,#7aa3d4 8px);transition:width 1.4s linear;"></div>'
+        + '</div>'
+        + '<div id="sit-ratio" style="margin-top:8px;font-size:11px;color:#444;font-family:Monaco-OS9,Monaco,monospace;">Compressing... 0%</div>'
+        + '</div>';
+      document.body.appendChild(sit);
+      requestAnimationFrame(function(){ sit.querySelector('#sit-fill').style.width = '100%'; });
+      var ratio = sit.querySelector('#sit-ratio');
+      var pct = 0;
+      var tick = setInterval(function(){
+        pct = Math.min(100, pct + Math.floor(8 + Math.random() * 14));
+        ratio.textContent = 'Compressing... ' + pct + '% (ratio 3.2:1)';
+        if (pct >= 100) clearInterval(tick);
+      }, 180);
+      setTimeout(function(){
+        ratio.textContent = 'Resume.sit written (38 KB, was 125 KB)';
+        setTimeout(function(){
+          sit.remove();
+          exportPDF();
+        }, 350);
+      }, 1500);
+    }
+
+    /* Chooser: pick a "version" of Micah, which rewrites the About thesis and title */
+    var roleData = {
+      lead: {
+        title: 'Lead Product Designer',
+        thesis: 'I turn complex systems into things people can actually use. Right now that means AI agents that manage AT&T\'s network infrastructure. Thirty years of shipping enterprise software taught me that good design is usually just honest design - name the problem, measure the cost, build the smallest thing that fixes it.'
+      },
+      builder: {
+        title: 'AI Builder',
+        thesis: 'I build the tools between the model and the work. vault-daemon (58-tool MCP server), NetBond Advanced, AIConcierge, APIConcierge - production TypeScript for agents, not demos. Design eye on the frontend, infra instincts on the backend, and a working opinion about when to use an LLM and when not to.'
+      },
+      consultant: {
+        title: 'Consultant',
+        thesis: 'Thirteen independent years before the full-time years, and the independent habits never left. I walk in, name what\'s actually broken, build the smallest thing that fixes it, and hand off so your team can run without me. Citi, GE Nuclear, U.S. Mint, Dell, Hitachi, Toyota - short engagements, clean exits, measurable deltas.'
+      },
+      mentor: {
+        title: 'Mentor',
+        thesis: '47 designers mentored. Five years on CareerFoundry\'s Instructor Advisory Board. I teach systems thinking, context-driven design, and how to stay honest when you\'re the newest voice in the room. Best speaker at Ignite. Books on data-driven design and interactive identity.'
+      }
+    };
+    function applyRole(key) {
+      var d = roleData[key]; if (!d) return;
+      var titleEl = document.querySelector('.about-title'); if (titleEl) titleEl.textContent = d.title;
+      var thesisEl = document.querySelector('.about-thesis'); if (thesisEl) thesisEl.textContent = d.thesis;
+      var contactRole = document.querySelector('.contact-role'); if (contactRole) contactRole.textContent = d.title;
+      closeWin('chooser');
+      openWin('about');
+      localStorage.setItem('chosen-role', key);
+    }
+
+    function hideGetInfo() { var el = document.getElementById('get-info-dialog'); if (el) el.classList.remove('visible'); }
+    function showGetInfo(projEl, x, y) {
+      var head = projEl.querySelector('.project-head');
+      var detail = projEl.querySelector('.project-detail p');
+      var tags = Array.from(projEl.querySelectorAll('.project-detail .about-cap')).map(function(t){return t.textContent;});
+      var nameEl = head ? head.querySelector('strong') : null;
+      var whenEl = head ? head.querySelector('span') : null;
+      var name = nameEl ? nameEl.textContent : 'Project';
+      var when = whenEl ? whenEl.textContent : '-';
+      var notes = detail ? detail.textContent.trim() : '';
+      var sizeKB = Math.max(8, Math.round(notes.length * 1.4));
+      var icon = '\uD83D\uDCC1';
+      var lower = name.toLowerCase();
+      if (lower.indexOf('ai') > -1 || lower.indexOf('concierge') > -1) icon = '\uD83E\uDD16';
+      else if (lower.indexOf('vault') > -1 || lower.indexOf('mcp') > -1) icon = '\uD83D\uDDC4';
+      else if (lower.indexOf('netbond') > -1 || lower.indexOf('cloud') > -1) icon = '\u2601\uFE0F';
+      else if (lower.indexOf('hurricane') > -1 || lower.indexOf('portal') > -1) icon = '\uD83C\uDF2A';
+      else if (lower.indexOf('mint') > -1) icon = '\uD83D\uDCB0';
+      else if (lower.indexOf('citi') > -1 || lower.indexOf('tap-to-pay') > -1) icon = '\uD83D\uDCB3';
+      else if (lower.indexOf('myspace') > -1 || lower.indexOf('toyota') > -1) icon = '\uD83D\uDCBB';
+      document.getElementById('gi-icon').textContent = icon;
+      document.getElementById('gi-name').textContent = name;
+      document.getElementById('gi-kind').textContent = 'Project';
+      document.getElementById('gi-r-kind').textContent = 'Project';
+      document.getElementById('gi-r-when').textContent = when;
+      document.getElementById('gi-r-size').textContent = sizeKB + ' KB on disk';
+      document.getElementById('gi-r-stack').textContent = tags.length ? tags.join(', ') : '-';
+      document.getElementById('gi-r-notes').textContent = notes;
+      var dlg = document.getElementById('get-info-dialog');
+      dlg.style.left = Math.min(x, window.innerWidth - 300) + 'px';
+      dlg.style.top = Math.min(y, window.innerHeight - 260) + 'px';
+      dlg.classList.add('visible');
+    }
+    document.addEventListener('contextmenu', function(e) {
+      var proj = e.target.closest('.project-item');
+      if (!proj) return;
+      e.preventDefault();
+      e.stopPropagation();
+      showGetInfo(proj, e.clientX, e.clientY);
+    });
+    document.addEventListener('click', function(e) {
+      var dlg = document.getElementById('get-info-dialog');
+      if (dlg && dlg.classList.contains('visible') && !dlg.contains(e.target)) hideGetInfo();
+    });
+
     var mac9SkinWallpapers = {
       graphite:   'mac-os-background.jpg',
       blueberry:  'blueberry-union.jpg',
@@ -1853,6 +2076,21 @@
         logo: '<div style="font-family:Helvetica,Arial,sans-serif;font-size:72px;font-weight:900;letter-spacing:-3px;line-height:1"><span style="color:#e44">B</span><span style="color:#4c4">e</span></div>',
         sub: '<div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;margin-top:10px;opacity:0.6">Loading Be Operating System...</div>' }
     };
+    /* Mac 9 boot extensions (the iconic row of loading icons) */
+    var mac9Extensions = [
+      { n: 'About Micah',     em: '\uD83D\uDC64' },
+      { n: 'Career',          em: '\uD83D\uDCBC' },
+      { n: 'Projects',        em: '\uD83D\uDCC1' },
+      { n: 'Publications',    em: '\uD83D\uDCDA' },
+      { n: 'Awards',          em: '\uD83C\uDFC6' },
+      { n: 'Contact',         em: '\u2709\uFE0F' },
+      { n: 'Ask Micah',       em: '\u2753' },
+      { n: 'AppleScript',     em: '\uD83E\uDDEC' },
+      { n: 'QuickTime',       em: '\uD83C\uDFAC' },
+      { n: 'ColorSync',       em: '\uD83C\uDFA8' },
+      { n: 'OpenDoc',         em: '\uD83D\uDCDD' },
+      { n: 'Sherlock',        em: '\uD83D\uDD0D' }
+    ];
     function switchTheme(os) {
       var cfg = bootConfig[os] || { bg: '#000', fg: '#fff', logo: '', sub: '', bar: '#fff' };
       var overlay = document.createElement('div');
@@ -1861,13 +2099,26 @@
       overlay.innerHTML = '<div class="boot-logo">' + cfg.logo + '</div>' +
         (cfg.sub ? '<div>' + cfg.sub + '</div>' : '') +
         '<div class="boot-bar"><div class="boot-fill" style="background:' + (cfg.bar || cfg.fg) + '"></div></div>';
+      if (os === 'mac9') {
+        var strip = document.createElement('div');
+        strip.className = 'extensions-strip';
+        mac9Extensions.forEach(function(ext, i) {
+          var chip = document.createElement('div');
+          chip.className = 'ext-chip';
+          chip.style.animationDelay = (i * 90) + 'ms';
+          chip.innerHTML = '<div class="ext-em">' + ext.em + '</div><div class="ext-n">' + ext.n + '</div>';
+          strip.appendChild(chip);
+        });
+        overlay.appendChild(strip);
+      }
       document.body.appendChild(overlay);
       requestAnimationFrame(function() { overlay.querySelector('.boot-fill').style.width = '100%'; });
+      var bootMs = (os === 'mac9') ? 1700 : 1000;
       setTimeout(function() {
         setTheme(os);
         overlay.classList.add('fade');
         setTimeout(function() { overlay.remove(); }, 400);
-      }, 1000);
+      }, bootMs);
     }
 
     /* ===== KEYBOARD SHORTCUTS ===== */
