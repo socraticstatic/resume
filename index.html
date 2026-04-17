@@ -17,6 +17,10 @@
     /* ===== RESET ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    /* Self-hosted Mac OS 9 system fonts (grassmunk/Platinum9, 1995-1997 Font Bureau) */
+    @font-face { font-family: 'Charcoal'; src: url('assets/fonts/Charcoal.ttf') format('truetype'); font-display: swap; }
+    @font-face { font-family: 'Monaco-OS9'; src: url('assets/fonts/Monaco.ttf') format('truetype'); font-display: swap; }
+
     /* ===== SHARED VARIABLES ===== */
     :root {
       --divider: #000;
@@ -111,7 +115,7 @@
       --titlebar-bg: #d0d0d0;
       --titlebar-text: #000;
       --titlebar-height: 20px;
-      --title-font: Geneva, 'Lucida Grande', Arial, sans-serif;
+      --title-font: Charcoal, Geneva, 'Lucida Grande', Arial, sans-serif;
       --body-font: Geneva, Helvetica, sans-serif;
       --body-size: 12px;
       --menubar-bg: #e0e0e0;
@@ -143,7 +147,7 @@
     }
     [data-os="mac9"] .titlebar-lines { display: none; }
     [data-os="mac9"] .titlebar-title {
-      background: transparent; font-family: Geneva, 'Lucida Grande', Arial, sans-serif;
+      background: transparent; font-family: Charcoal, Geneva, 'Lucida Grande', Arial, sans-serif;
     }
     /* Platinum close box: subtle gradient, thin border */
     [data-os="mac9"] .closebox {
@@ -161,7 +165,7 @@
     [data-os="mac9"] #menubar {
       background: linear-gradient(to bottom, #f0f0f0, #d8d8d8);
       border-bottom: 1px solid #999;
-      font-family: Geneva, 'Lucida Grande', Arial, sans-serif;
+      font-family: Charcoal, Geneva, 'Lucida Grande', Arial, sans-serif;
     }
     [data-os="mac9"] .menu-item:hover { background: #336; }
     /* Scrollbars: proportional, subtle gray */
@@ -174,6 +178,29 @@
       background: linear-gradient(to bottom, #e0e0e0, #c8c8c8); border: 1px solid #999; height: 15px;
     }
     [data-os="mac9"] .icon-graphic svg { filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.1)); }
+    /* Real Platinum button chrome from grassmunk/Platinum9 (16x16 9-sliced) */
+    [data-os="mac9"] .about-cap,
+    [data-os="mac9"] .career-pill,
+    [data-os="mac9"] .ask-pill,
+    [data-os="mac9"] .wp-box,
+    [data-os="mac9"] .menu-dd-item:active,
+    [data-os="mac9"] .theme-box {
+      background: #f0f0f0 url('assets/chrome/mac9/button-normal.png') center/cover no-repeat;
+      border: 1px solid #888;
+      border-image: url('assets/chrome/mac9/button-normal.png') 4 fill stretch;
+    }
+    [data-os="mac9"] .about-cap:active,
+    [data-os="mac9"] .career-pill:active,
+    [data-os="mac9"] .ask-pill:active,
+    [data-os="mac9"] .wp-box:active {
+      border-image: url('assets/chrome/mac9/button-pressed.png') 4 fill stretch;
+    }
+    /* Platinum scrollbar slider (16x16 PNG, vertical gradient) */
+    [data-os="mac9"] .win-body::-webkit-scrollbar-thumb {
+      background-image: url('assets/chrome/mac9/scroll-slider.png');
+      background-size: 100% 100%;
+      border: 1px solid #556;
+    }
 
     /* =========================================================================
        THEME: Windows 3.1 (Program Manager)
@@ -1530,9 +1557,25 @@
       'photo-1601742891608-9c1577b3a4b3','photo-1601743240194-f45724587958',
       'photo-1601743218901-129830ae823f','photo-1588172058134-f4b0b6e9ec31'
     ];
+    /* Mac 9 theme uses authentic Apple Ensemble Pictures (grassmunk/Platinum9) */
+    var mac9Wallpapers = [
+      'mac-os-background.jpg',
+      'blueberry-union.jpg','blueberry-oxygen.jpg','tangerine-fusion.jpg','tangerine-melt.jpg',
+      'grape-mission.jpg','grape-gravity.jpg','lime-horizon.jpg','lime-sharp.jpg',
+      'strawberry-parabola.jpg','strawberry-baby.jpg','ruby-foam.jpg','quantum-foam.jpg',
+      'sage-foam.jpg','indigo-foam.jpg','metallic-foam.jpg','blue-dalmatian.jpg',
+      'extra-green.jpg','flower-power.jpg','heavy-petal-1.jpg','heavy-petal-2.jpg',
+      'heavy-petal-3.jpg','heavy-petal-4.jpg'
+    ];
+    function wallpaperPool() {
+      var os = document.documentElement.dataset.os;
+      if (os === 'mac9') return { list: mac9Wallpapers, url: function(n){ return 'assets/wallpapers/mac9/' + n; } };
+      return { list: wallpapers, url: function(n){ return 'https://images.unsplash.com/' + n + '?w=1920&q=80'; } };
+    }
     function randomWallpaper() {
-      var id = wallpapers[Math.floor(Math.random() * wallpapers.length)];
-      setWallpaper('https://images.unsplash.com/' + id + '?w=1920&q=80');
+      var pool = wallpaperPool();
+      var id = pool.list[Math.floor(Math.random() * pool.list.length)];
+      setWallpaper(pool.url(id));
     }
 
     
@@ -1782,8 +1825,9 @@
     /* ===== SEQUENTIAL WALLPAPER ===== */
     var wpIndex = 0;
     function nextWallpaper() {
-      wpIndex = (wpIndex + 1) % wallpapers.length;
-      setWallpaper('https://images.unsplash.com/' + wallpapers[wpIndex] + '?w=1920&q=80');
+      var pool = wallpaperPool();
+      wpIndex = (wpIndex + 1) % pool.list.length;
+      setWallpaper(pool.url(pool.list[wpIndex]));
     }
 
     /* ===== IMPROVED ACCORDION TOGGLE ===== */
