@@ -2,9 +2,14 @@
 
 Micah Boswell's resume optimization workspace. Uses Rezi MCP for resume management and ATS optimization.
 
-## Tools
+## Design Tools (auto-activated)
 
-- **Rezi MCP** - connected at `https://api.rezi.ai/mcp`. Use `list_resumes`, `read_resume`, `write_resume`, `search_jobs`, `get_job_details`.
+Design skills fire automatically on frontend work via the `frontend-design-enforcer` hook. No invocation needed.
+
+- **Impeccable** (18 sub-skills) - Primary design skill. Typography, color, layout, motion, audit, polish.
+- **Taste Skill** (7 variants) - Anti-slop framework. Premium OLED aesthetic, metric-based rules.
+- **Awesome Design MD** (59 brands) - Drop-in brand design systems. Say "build like Stripe" or "match Linear's style."
+- **UI UX Pro Max** (7 sub-skills) - Design intelligence engine. 50+ styles, 161 palettes, 57 font pairings, design system generation.
 
 ## Context
 
