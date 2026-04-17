@@ -1084,12 +1084,6 @@
           <p>Daddy Lives Downtown - a children's book.</p>
           <p>50 COVID Haiku Epiphanies.</p>
         </div>
-        <div class="about-section">
-          <div class="about-section-title">Personal Projects</div>
-          <p>vault-daemon: 58+ tool MCP server (TypeScript) for Obsidian, iMessages, Mail, GitHub, Dropbox, Leonardo AI, Facebook, X, Substack.</p>
-          <p>NetBond Advanced: cloud network provisioning tool (TypeScript, public).</p>
-          <p>Cloud_Designer, product-value-engine, AIConcierge, APIConcierge, ServiceAssurance, GPSail.</p>
-        </div>
       </div>
       <div class="win-resize" onmousedown="startResize(event, 'about')"></div>
     </div>
@@ -1299,9 +1293,51 @@
               <div class="project-tags"><span class="about-cap">UX Research</span> <span class="about-cap">API Design</span></div>
             </div>
           </div>
+          <div class="project-item" onclick="toggleProject(this)">
+            <div class="project-head"><strong>vault-daemon</strong><span>Personal, ongoing</span></div>
+            <div class="project-detail">
+              <p>58+ tool MCP server in TypeScript exposing Obsidian vault, Apple Mail (IMAP), iMessages, GitHub, Dropbox, Leonardo AI, Facebook, X, and Substack to Claude. Single-file local integration layer for the Helen agent stack.</p>
+              <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">MCP</span> <span class="about-cap">TypeScript</span></div>
+            </div>
+          </div>
+          <div class="project-item" onclick="toggleProject(this)">
+            <div class="project-head"><strong>NetBond Advanced</strong><span>Personal, 2025</span></div>
+            <div class="project-detail">
+              <p>Cloud network provisioning tool written in TypeScript. Public GitHub project modeling the connection wizard for AT&amp;T NetBond across AWS Direct Connect, Azure ExpressRoute, Google Cloud Interconnect, and Oracle FastConnect.</p>
+              <div class="project-tags"><span class="about-cap">Cloud Platforms</span> <span class="about-cap">TypeScript</span></div>
+            </div>
+          </div>
+          <div class="project-item" onclick="toggleProject(this)">
+            <div class="project-head"><strong>Cloud Designer</strong><span>Personal, 2024-2025</span></div>
+            <div class="project-detail">
+              <p>Cloud infrastructure design tool. Sibling to NetBond Advanced, focused on topology planning and the executive review surface.</p>
+              <div class="project-tags"><span class="about-cap">Cloud Platforms</span> <span class="about-cap">TypeScript</span></div>
+            </div>
+          </div>
+          <div class="project-item" onclick="toggleProject(this)">
+            <div class="project-head"><strong>AI Concierge / API Concierge</strong><span>Personal, 2024-2025</span></div>
+            <div class="project-detail">
+              <p>AI-powered concierge tools. AIConcierge handles conversational product assistance; APIConcierge exposes the same surface through a public API. Shared TypeScript core.</p>
+              <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">LLM Tooling</span></div>
+            </div>
+          </div>
+          <div class="project-item" onclick="toggleProject(this)">
+            <div class="project-head"><strong>Product Value Engine</strong><span>Personal, 2024</span></div>
+            <div class="project-detail">
+              <p>B2B sales enablement tool. Calculates quantified value narratives for enterprise product pitches.</p>
+              <div class="project-tags"><span class="about-cap">LLM Tooling</span></div>
+            </div>
+          </div>
+          <div class="project-item" onclick="toggleProject(this)">
+            <div class="project-head"><strong>Service Assurance (Revised)</strong><span>Personal, 2024</span></div>
+            <div class="project-detail">
+              <p>Service assurance platform prototype. TypeScript; observability + incident triage for network services.</p>
+              <div class="project-tags"><span class="about-cap">Design Systems</span> <span class="about-cap">TypeScript</span></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="win-status">8 projects</div>
+      <div class="win-status">14 projects</div>
       <div class="win-resize" onmousedown="startResize(event, 'projects')"></div>
     </div>
 
