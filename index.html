@@ -178,6 +178,24 @@
       background: linear-gradient(to bottom, #e0e0e0, #c8c8c8); border: 1px solid #999; height: 15px;
     }
     [data-os="mac9"] .icon-graphic svg { filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.1)); }
+    /* iMac G3 flavor chips + accent overrides (only meaningful for Mac 9) */
+    .skin-row { display:flex; gap:10px; align-items:center; padding:4px 2px; }
+    .skin-chip { width:28px; height:28px; border-radius:50%; cursor:pointer; border:2px solid rgba(0,0,0,0.25); box-shadow: inset 0 2px 3px rgba(255,255,255,0.7), inset 0 -3px 6px rgba(0,0,0,0.25); transition: transform 0.12s ease; }
+    .skin-chip:hover { transform: scale(1.08); }
+    .skin-chip.active { border-color:#000; box-shadow: inset 0 2px 3px rgba(255,255,255,0.7), inset 0 -3px 6px rgba(0,0,0,0.25), 0 0 0 2px rgba(0,0,0,0.15); }
+    .skin-graphite { background: radial-gradient(circle at 30% 30%, #c4c6ca, #7a8189); }
+    .skin-blueberry { background: radial-gradient(circle at 30% 30%, #9ab4db, #2e55a3); }
+    .skin-tangerine { background: radial-gradient(circle at 30% 30%, #ffc88a, #e26a1e); }
+    .skin-grape { background: radial-gradient(circle at 30% 30%, #c9a6d7, #6a3d88); }
+    .skin-lime { background: radial-gradient(circle at 30% 30%, #d9ed8f, #6da524); }
+    .skin-strawberry { background: radial-gradient(circle at 30% 30%, #f4a4b8, #c43960); }
+    /* Skin-scoped accent (only when a skin is set inside mac9) */
+    [data-os="mac9"][data-mac9-skin="blueberry"]  { --selection-bg:#2e55a3; --pill-hover-bg:#2e55a3; --link-color:#2e55a3; }
+    [data-os="mac9"][data-mac9-skin="tangerine"]  { --selection-bg:#e26a1e; --pill-hover-bg:#e26a1e; --link-color:#a04d10; }
+    [data-os="mac9"][data-mac9-skin="grape"]      { --selection-bg:#6a3d88; --pill-hover-bg:#6a3d88; --link-color:#6a3d88; }
+    [data-os="mac9"][data-mac9-skin="lime"]       { --selection-bg:#6da524; --pill-hover-bg:#6da524; --link-color:#4a7315; }
+    [data-os="mac9"][data-mac9-skin="strawberry"] { --selection-bg:#c43960; --pill-hover-bg:#c43960; --link-color:#c43960; }
+
     /* Real Platinum button chrome from grassmunk/Platinum9 (16x16 9-sliced) */
     [data-os="mac9"] .about-cap,
     [data-os="mac9"] .career-pill,
@@ -1440,6 +1458,17 @@
           <div class="wp-box" onclick="randomWallpaper()">Random</div>
           <div class="wp-box" onclick="nextWallpaper()">Next</div>
         </div>
+        <div class="mac9-skins" id="mac9-skins" style="display:none;margin-top:14px;">
+          <div class="about-section-title" style="margin-bottom:8px;">iMac Flavor</div>
+          <div class="skin-row">
+            <div class="skin-chip skin-graphite" onclick="setMac9Skin('graphite')" title="Graphite"></div>
+            <div class="skin-chip skin-blueberry" onclick="setMac9Skin('blueberry')" title="Blueberry"></div>
+            <div class="skin-chip skin-tangerine" onclick="setMac9Skin('tangerine')" title="Tangerine"></div>
+            <div class="skin-chip skin-grape" onclick="setMac9Skin('grape')" title="Grape"></div>
+            <div class="skin-chip skin-lime" onclick="setMac9Skin('lime')" title="Lime"></div>
+            <div class="skin-chip skin-strawberry" onclick="setMac9Skin('strawberry')" title="Strawberry"></div>
+          </div>
+        </div>
         <div class="about-section-title" style="margin-top:14px; margin-bottom:8px;">Effects</div>
         <div class="theme-grid" style="grid-template-columns: 1fr;">
           <div class="wp-box" onclick="toggleCRT()" id="crt-toggle">CRT Scanlines</div>
@@ -1662,6 +1691,36 @@
       var box = document.getElementById('theme-' + os);
       if (box) box.classList.add('active');
       swapIcons(os);
+      if (typeof updateClock === 'function') updateClock();
+      var skinBlock = document.getElementById('mac9-skins');
+      if (skinBlock) skinBlock.style.display = (os === 'mac9') ? 'block' : 'none';
+      if (os === 'mac9') {
+        var savedSkin = localStorage.getItem('mac9-skin');
+        if (savedSkin) applyMac9Skin(savedSkin);
+      } else {
+        document.documentElement.removeAttribute('data-mac9-skin');
+      }
+    }
+
+    var mac9SkinWallpapers = {
+      graphite:   'mac-os-background.jpg',
+      blueberry:  'blueberry-union.jpg',
+      tangerine:  'tangerine-fusion.jpg',
+      grape:      'grape-mission.jpg',
+      lime:       'lime-horizon.jpg',
+      strawberry: 'strawberry-parabola.jpg'
+    };
+    function applyMac9Skin(skin) {
+      document.documentElement.setAttribute('data-mac9-skin', skin);
+      document.querySelectorAll('.skin-chip').forEach(function(c){ c.classList.remove('active'); });
+      var chip = document.querySelector('.skin-' + skin);
+      if (chip) chip.classList.add('active');
+      var wp = mac9SkinWallpapers[skin];
+      if (wp) setWallpaper('assets/wallpapers/mac9/' + wp);
+    }
+    function setMac9Skin(skin) {
+      applyMac9Skin(skin);
+      localStorage.setItem('mac9-skin', skin);
     }
 
     function setWallpaper(url) {
@@ -1749,13 +1808,27 @@
     }
 
     /* ===== CLOCK ===== */
+    /* Theme-era dates: each OS shows a plausible calendar date from its release window */
+    var themeEra = {
+      mac7:  { year: 1993, monAbbr: 'Mar' },  // Mac OS 7.1 era
+      mac9:  { year: 1999, monAbbr: 'Dec' },  // Mac OS 9.0 shipped Oct 1999
+      win31: { year: 1993, monAbbr: 'Aug' },  // Win 3.1 peak
+      winxp: { year: 2002, monAbbr: 'Jul' },  // XP service pack era
+      aqua:  { year: 2001, monAbbr: 'Apr' },  // Mac OS X 10.0 Cheetah
+      beos:  { year: 2000, monAbbr: 'Jun' }   // BeOS R5 release
+    };
     function updateClock() {
       var now = new Date();
       var h = now.getHours(), m = now.getMinutes();
       var ampm = h >= 12 ? 'PM' : 'AM';
       h = h % 12 || 12;
       var el = document.getElementById('menu-clock');
-      if (el) el.textContent = h + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+      if (!el) return;
+      var os = document.documentElement.dataset.os || 'mac7';
+      var era = themeEra[os];
+      var stamp = h + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+      if (era) stamp += '  \u00B7  ' + era.monAbbr + ' ' + era.year;
+      el.textContent = stamp;
     }
     setInterval(updateClock, 30000);
 
