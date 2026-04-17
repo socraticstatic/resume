@@ -196,29 +196,14 @@
     [data-os="mac9"][data-mac9-skin="lime"]       { --selection-bg:#6da524; --pill-hover-bg:#6da524; --link-color:#4a7315; }
     [data-os="mac9"][data-mac9-skin="strawberry"] { --selection-bg:#c43960; --pill-hover-bg:#c43960; --link-color:#c43960; }
 
-    /* Real Platinum button chrome from grassmunk/Platinum9 (16x16 9-sliced) */
-    [data-os="mac9"] .about-cap,
-    [data-os="mac9"] .career-pill,
-    [data-os="mac9"] .ask-pill,
-    [data-os="mac9"] .wp-box,
-    [data-os="mac9"] .menu-dd-item:active,
-    [data-os="mac9"] .theme-box {
-      background: #f0f0f0 url('assets/chrome/mac9/button-normal.png') center/cover no-repeat;
-      border: 1px solid #888;
-      border-image: url('assets/chrome/mac9/button-normal.png') 4 fill stretch;
-    }
-    [data-os="mac9"] .about-cap:active,
-    [data-os="mac9"] .career-pill:active,
-    [data-os="mac9"] .ask-pill:active,
-    [data-os="mac9"] .wp-box:active {
-      border-image: url('assets/chrome/mac9/button-pressed.png') 4 fill stretch;
-    }
-    /* Platinum scrollbar slider (16x16 PNG, vertical gradient) */
+    /* Platinum scrollbar slider (real PNG from grassmunk/Platinum9) */
     [data-os="mac9"] .win-body::-webkit-scrollbar-thumb {
       background-image: url('assets/chrome/mac9/scroll-slider.png');
       background-size: 100% 100%;
       border: 1px solid #556;
     }
+    /* Note: Platinum button PNGs (16x16) don't 9-slice well at small pill sizes.
+       Mac 9 pills use the --pill-bg gradient from the theme vars above. */
 
     /* =========================================================================
        THEME: Windows 3.1 (Program Manager)
@@ -1819,6 +1804,9 @@
       } else {
         document.documentElement.removeAttribute('data-mac9-skin');
       }
+      /* Restore this theme's wallpaper (if any) or clear whatever was showing */
+      var themeWp = localStorage.getItem('wallpaper-' + os);
+      applyWallpaperCss(themeWp || 'none');
     }
 
     /* Stuffit-style "Save as Resume.sit..." progress dialog, then print-to-PDF */
@@ -1946,10 +1934,21 @@
       localStorage.setItem('mac9-skin', skin);
     }
 
-    function setWallpaper(url) {
+    function wallpaperKey() {
+      return 'wallpaper-' + (document.documentElement.dataset.os || 'mac7');
+    }
+    function applyWallpaperCss(url) {
       var d = document.getElementById('desktop');
-      if (url === 'none') { d.style.backgroundImage = 'none'; localStorage.removeItem('wallpaper'); }
-      else { d.style.backgroundImage = 'url(' + url + ')'; d.style.backgroundSize = 'cover'; d.style.backgroundPosition = 'center'; localStorage.setItem('wallpaper', url); }
+      if (!d) return;
+      if (!url || url === 'none') { d.style.backgroundImage = 'none'; return; }
+      d.style.backgroundImage = 'url(' + url + ')';
+      d.style.backgroundSize = 'cover';
+      d.style.backgroundPosition = 'center';
+    }
+    function setWallpaper(url) {
+      var key = wallpaperKey();
+      if (url === 'none') { applyWallpaperCss('none'); localStorage.removeItem(key); localStorage.removeItem('wallpaper'); }
+      else { applyWallpaperCss(url); localStorage.setItem(key, url); localStorage.removeItem('wallpaper'); }
     }
 
     var QA = {
@@ -2284,8 +2283,15 @@
       else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         setTheme('aqua');
       }
-      var savedWp = localStorage.getItem('wallpaper');
-      if (savedWp) setWallpaper(savedWp);
+      var activeOs = document.documentElement.dataset.os || 'mac7';
+      var themeWp = localStorage.getItem('wallpaper-' + activeOs);
+      if (themeWp) applyWallpaperCss(themeWp);
+      /* one-shot migration: old global 'wallpaper' key moves to the active-theme slot, then dies */
+      var legacyWp = localStorage.getItem('wallpaper');
+      if (legacyWp) {
+        if (!themeWp) { applyWallpaperCss(legacyWp); localStorage.setItem('wallpaper-' + activeOs, legacyWp); }
+        localStorage.removeItem('wallpaper');
+      }
       if (localStorage.getItem('crt')) toggleCRT();
       updateClock();
       if (window.innerWidth <= 640) {
