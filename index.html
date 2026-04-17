@@ -818,6 +818,8 @@
     .boot-overlay.fade { opacity: 0; pointer-events: none; }
     .boot-logo { font-size: 48px; margin-bottom: 16px; }
     .boot-logo svg { height: 96px; width: auto; image-rendering: pixelated; }
+    .boot-logo .big-icon { display: inline-block; }
+    .boot-logo .big-icon svg { height: 100%; width: 100%; }
     .boot-bar { width: 200px; height: 6px; background: #333; border-radius: 3px; overflow: hidden; }
     .boot-fill { height: 100%; width: 0; background: #fff; border-radius: 3px; transition: width 0.8s ease-out; }
 
@@ -1616,8 +1618,8 @@
       mac7: { bg: '#c0c0c0', fg: '#000', bar: '#888',
         logo: happyMac, sub: '' },
       mac9: { bg: '#d8d8d8', fg: '#000', bar: '#666',
-        logo: '<div style="font-family:Geneva,\'Lucida Grande\',Helvetica,sans-serif;font-weight:300;display:flex;align-items:baseline;gap:10px;font-size:52px;letter-spacing:-2px;line-height:1"><span style="color:#444">Mac OS</span><span style="color:#0066cc;font-weight:500">9</span></div>',
-        sub: '<div style="font-family:Geneva,\'Lucida Grande\',sans-serif;font-size:11px;margin-top:10px;color:#666;letter-spacing:1px">Starting up\u2026</div>' },
+        logo: '<div class="big-icon" style="width:192px;height:192px">' + happyMac + '</div>',
+        sub: '<div style="font-family:Geneva,\'Lucida Grande\',sans-serif;font-size:14px;margin-top:14px;color:#333;letter-spacing:0.5px">Welcome to Mac OS 9</div>' },
       win31: { bg: '#000', fg: '#aaa', bar: '#666',
         logo: '<div style="font-family:Courier New,monospace;font-size:14px;text-align:left;line-height:2;max-width:320px"><div style="color:#ccc">Microsoft(R) Windows</div><div style="color:#ccc">Version 3.1</div><div style="color:#666;margin-top:6px">(C) Copyright Microsoft Corp. 1985-1992</div></div>',
         sub: '' },
