@@ -2289,16 +2289,7 @@
     }
 
     /* ===== CONTEXT MENU ===== */
-    document.getElementById('desktop').addEventListener('contextmenu', function(e) {
-      if (e.target.closest('.window') || e.target.closest('.icon-column') || e.target.closest('#menubar')) return;
-      e.preventDefault();
-      var menu = document.getElementById('context-menu');
-      menu.style.left = Math.min(e.clientX, window.innerWidth - 200) + 'px';
-      menu.style.top = Math.min(e.clientY, window.innerHeight - 120) + 'px';
-      menu.classList.add('visible');
-    });
-    document.addEventListener('click', function() { hideCtx(); });
-    function hideCtx() { var m = document.getElementById('context-menu'); if (m) m.classList.remove('visible'); }
+    /* Removed old context menu handler - superseded by Task 7's dynamic ctx-menu below */
 
     /* ===== EASTER EGGS ===== */
     function showEasterEgg() { openWin('easter'); }
@@ -2815,8 +2806,8 @@ const EasterEggEngine = (() => {
 // Right-click opens a context menu. Ancient power. Like 1995.
 // ============================================================
 
-document.addEventListener('contextmenu', (e) => {
-  // Only intercept on desktop background, not on windows/icons
+document.getElementById('desktop').addEventListener('contextmenu', (e) => {
+  // Intercept right-click on desktop background, not on windows or icons
   if (e.target.closest('.window') || e.target.closest('.icon')) return;
   e.preventDefault();
 
