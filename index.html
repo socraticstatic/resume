@@ -2687,6 +2687,7 @@ const EasterEggEngine = (() => {
     iddqd:  ['i','d','d','q','d'],
     contra: ['c','o','n','t','r','a'],
     dnukem: ['d','n','u','k','e','m'],
+    afterdark: ['a','f','t','e','r','d','a','r','k'],
   };
 
   const IDLE_TIMEOUT_MS = 90000; // 90 seconds
@@ -2733,6 +2734,10 @@ const EasterEggEngine = (() => {
         break;
       case 'dnukem':
         showToast('Hail to the king, baby. — Duke Nukem 3D, 1996', '#f80', 4000);
+        break;
+      case 'afterdark':
+        // "Everybody have fun tonight" - Wang Chung, 1986
+        EasterEggEngine.launchScreensaver(Math.random() > 0.5 ? 'toasters' : 'cyberhacker');
         break;
     }
   }
@@ -2803,6 +2808,55 @@ const EasterEggEngine = (() => {
 
   return { init, launchScreensaver, dismissScreensaver, showToast };
 })();
+
+// ============================================================
+// RIGHT-CLICK CONTEXT MENU
+// "You spin me right round" - Dead or Alive, 1985
+// Right-click opens a context menu. Ancient power. Like 1995.
+// ============================================================
+
+document.addEventListener('contextmenu', (e) => {
+  // Only intercept on desktop background, not on windows/icons
+  if (e.target.closest('.window') || e.target.closest('.icon')) return;
+  e.preventDefault();
+
+  document.querySelector('.ctx-menu')?.remove();
+
+  const menu = document.createElement('div');
+  menu.className = 'ctx-menu';
+  menu.style.cssText = `
+    position:fixed; left:${e.clientX}px; top:${e.clientY}px;
+    background:#c0c0c0; border:2px solid #fff;
+    border-right-color:#000; border-bottom-color:#000;
+    font-family:monospace; font-size:12px; z-index:99997;
+    min-width:180px; box-shadow:2px 2px 0 #000;
+  `;
+
+  const items = [
+    { label: '🍞 Flying Toasters', action: () => EasterEggEngine.launchScreensaver('toasters') },
+    { label: '💻 Cyberhacker', action: () => EasterEggEngine.launchScreensaver('cyberhacker') },
+    { label: '─────────────────', action: null },
+    { label: 'Get Info...', action: () => alert('resume-os v2.0\nA retro OS theme resume.\n\nEnter IDDQD for godmode.') },
+  ];
+
+  items.forEach(({ label, action }) => {
+    const item = document.createElement('div');
+    item.textContent = label;
+    item.style.cssText = `
+      padding:4px 12px; cursor:${action ? 'pointer' : 'default'};
+      color:${label.startsWith('─') ? '#999' : '#000'};
+    `;
+    if (action) {
+      item.addEventListener('mouseenter', () => { item.style.background = '#000080'; item.style.color = '#fff'; });
+      item.addEventListener('mouseleave', () => { item.style.background = ''; item.style.color = '#000'; });
+      item.addEventListener('click', () => { menu.remove(); action(); });
+    }
+    menu.appendChild(item);
+  });
+
+  document.body.appendChild(menu);
+  setTimeout(() => document.addEventListener('click', () => menu.remove(), { once: true }), 0);
+});
 
 // "Start me up" - Rolling Stones, 1981 / Boot the easter egg engine
 document.addEventListener('DOMContentLoaded', () => {
