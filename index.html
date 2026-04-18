@@ -14,6 +14,9 @@
   <link href="https://fonts.cdnfonts.com/css/tahoma" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/lucida-grande" rel="stylesheet">
   <style>
+    /* ============================================================
+       BASE RESET - "Don't you forget about me" - Simple Minds, 1985
+       ============================================================ */
     /* ===== RESET ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -21,6 +24,9 @@
     @font-face { font-family: 'Charcoal'; src: url('assets/fonts/Charcoal.ttf') format('truetype'); font-display: swap; }
     @font-face { font-family: 'Monaco-OS9'; src: url('assets/fonts/Monaco.ttf') format('truetype'); font-display: swap; }
 
+    /* ============================================================
+       CSS VARIABLES - "Everybody wants to rule the world" - Tears for Fears, 1985
+       ============================================================ */
     /* ===== SHARED VARIABLES ===== */
     :root {
       --divider: #000;
@@ -34,6 +40,9 @@
       --link-color: #0066cc;
     }
 
+    /* ============================================================
+       THEME: MAC OS 7 - "Take on me" - a-ha, 1985
+       ============================================================ */
     /* =========================================================================
        THEME: Mac OS 7 (System 7)
        Bitmap icons, Chicago font, dithered purple desktop, black/white chrome
@@ -102,6 +111,9 @@
     [data-os="mac7"] .win-body::-webkit-scrollbar-thumb { background: #fff; border: 1px solid #000; }
     [data-os="mac7"] .win-body::-webkit-scrollbar-button { height: 16px; background: #fff; border: 1px solid #000; }
 
+    /* ============================================================
+       THEME: MAC OS 9 - "You unlock this door with the key of imagination..." - Twilight Zone intro, 1959
+       ============================================================ */
     /* =========================================================================
        THEME: Mac OS 9 (Platinum)
        Subtle pinstripes, refined gray, Geneva, NOT Windows-style bevels
@@ -205,6 +217,9 @@
     /* Note: Platinum button PNGs (16x16) don't 9-slice well at small pill sizes.
        Mac 9 pills use the --pill-bg gradient from the theme vars above. */
 
+    /* ============================================================
+       THEME: WINDOWS 3.1 - "Wang Chung tonight. Everybody Wang Chung tonight." - Wang Chung, 1986
+       ============================================================ */
     /* =========================================================================
        THEME: Windows 3.1 (Program Manager)
        Navy title bar, silver chrome, outset bevels, teal desktop
@@ -273,6 +288,9 @@
     }
     [data-os="win31"] .career-role { border-bottom-color: #808080; }
 
+    /* ============================================================
+       THEME: WINDOWS XP - "It's the end of the world as we know it" - R.E.M., 1987
+       ============================================================ */
     /* =========================================================================
        THEME: Windows XP (Luna Blue)
        Blue gradient title bar, red close button, cream window body, Tahoma font
@@ -352,6 +370,9 @@
     }
     [data-os="winxp"] .icon-graphic svg { filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.3)); }
 
+    /* ============================================================
+       THEME: AQUA - "She blinded me with science" - Thomas Dolby, 1982
+       ============================================================ */
     /* =========================================================================
        THEME: Mac OS X Aqua (10.0-10.4)
        Pinstriped title bar, traffic light buttons, blue gel scrollbar, Lucida Grande
@@ -473,6 +494,9 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 1px 1px rgba(0,0,0,0.1);
     }
 
+    /* ============================================================
+       THEME: BEOS - "We're not gonna take it" - Twisted Sister, 1984
+       ============================================================ */
     /* =========================================================================
        THEME: BeOS R5
        Yellow title TAB (not full width), navy deskbar, minimal chrome, steel blue desktop
@@ -558,6 +582,9 @@
     [data-os="beos"] .win-body::-webkit-scrollbar-track { background: #e0e0e0; border-left: 1px solid #a0a0a0; }
     [data-os="beos"] .win-body::-webkit-scrollbar-button { background: #c0c0c0; border: 1px solid #808080; height: 12px; }
 
+    /* ============================================================
+       BASE LAYOUT - "Take on me" - a-ha, 1985
+       ============================================================ */
     /* ===== BASE LAYOUT ===== */
     html, body {
       width: 100%; height: 100%; overflow: hidden;
@@ -569,6 +596,9 @@
       position: relative; user-select: none;
     }
 
+    /* ============================================================
+       MENU BAR - "She drives me crazy" - Fine Young Cannibals, 1988
+       ============================================================ */
     /* ===== MENU BAR ===== */
     #menubar {
       position: fixed; top: 0; left: 0; right: 0; height: 20px;
@@ -588,6 +618,9 @@
     .menu-item { padding: 2px 10px; cursor: default; font-weight: bold; line-height: 16px; }
     .menu-item:hover { background: var(--selection-bg); color: var(--selection-text); }
 
+    /* ============================================================
+       MENU DROPDOWNS - "I'm still standing" - Elton John, 1983
+       ============================================================ */
     /* ===== MENU DROPDOWNS ===== */
     .menu-item { position: relative; }
     .menu-dropdown {
@@ -614,6 +647,9 @@
     [data-os="beos"] .menu-dd-item { color: #000; }
     [data-os="aqua"] .menu-dd-item { color: #000; }
 
+    /* ============================================================
+       MENU BRAND ICON - "Safety Dance" - Men Without Hats, 1982
+       ============================================================ */
     /* ===== MENU BRAND ICON per OS ===== */
     .menu-apple { width: 18px; height: 14px; display: flex; align-items: center; justify-content: center; margin-right: 12px; cursor: default; }
     /* Hide Apple logo on non-Mac themes, show OS-appropriate text */
@@ -625,6 +661,9 @@
     [data-os="beos"] .menu-apple { display: none; }
     [data-os="beos"] .menu-os-label { display: flex; color: #fff; }
 
+    /* ============================================================
+       DESKTOP ICONS - "Come on Eileen" - Dexys Midnight Runners, 1982
+       ============================================================ */
     /* ===== DESKTOP ICONS ===== */
     .icon-column {
       position: absolute; top: 36px; right: 20px; bottom: 20px;
@@ -683,6 +722,9 @@
       filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
     }
 
+    /* ============================================================
+       WINDOW CHROME - "Video Killed the Radio Star" - The Buggles, 1979
+       ============================================================ */
     /* ===== WINDOW SYSTEM ===== */
     .window {
       position: absolute; background-color: var(--win-bg); background-image: none;
@@ -722,6 +764,9 @@
     .win-body::-webkit-scrollbar-thumb { background: #fff; border: 1px solid #000; }
     .win-body::-webkit-scrollbar-button { height: 16px; background: #fff; border: 1px solid #000; display: block; }
 
+    /* ============================================================
+       CONTENT - "Hold on Loosely" - .38 Special, 1981
+       ============================================================ */
     /* ===== CONTENT: uses theme variables for dividers, pills, caps ===== */
     .about-header { text-align: center; padding-bottom: 10px; border-bottom: 1px solid var(--divider); margin-bottom: 10px; }
     .about-name { font-size: 24px; font-weight: bold; margin-bottom: 4px; letter-spacing: -0.5px; }
@@ -791,6 +836,9 @@
     }
     .ask-answer:not(:empty) { display: block; }
 
+    /* ============================================================
+       THEME PICKER & WALLPAPER - "Sunglasses at Night" - Corey Hart, 1984
+       ============================================================ */
     /* ===== THEME PICKER ===== */
     .theme-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 8px; }
     .theme-box {
@@ -818,6 +866,9 @@
     }
     .wp-box:hover { opacity: 0.85; }
 
+    /* ============================================================
+       INTERACTIONS & SELECTIONS - "Rewind" - Eurythmics, 1987
+       ============================================================ */
     /* ===== ACCORDION INDICATORS ===== */
     .career-head::after, .project-head::after {
       content: '\25B6'; font-size: 9px; margin-left: 8px; opacity: 0.5;
@@ -832,12 +883,18 @@
     .desktop-icon.selected .icon-graphic { outline: 1px dotted var(--icon-text); outline-offset: 2px; }
     .desktop-icon.selected .icon-label { background: var(--selection-bg); color: var(--selection-text); }
 
+    /* ============================================================
+       MENU CLOCK - "Time After Time" - Cyndi Lauper, 1984
+       ============================================================ */
     /* ===== MENU BAR CLOCK ===== */
     .menu-clock {
       margin-left: auto; font-size: 12px; padding: 0 8px; cursor: default;
       font-variant-numeric: tabular-nums;
     }
 
+    /* ============================================================
+       BOOT ANIMATION - "Start Me Up" - The Rolling Stones, 1981
+       ============================================================ */
     /* ===== BOOT ANIMATION ===== */
     .boot-overlay {
       position: fixed; inset: 0; z-index: 99999; display: flex;
@@ -1014,6 +1071,10 @@
   [data-os="beos"] .window { margin-top: 0; }
   [data-os="beos"] .titlebar { width: 100%; margin: 0; }
 }
+
+    /* ============================================================
+       SCREENSAVER OVERLAY - It was dark. You are likely to be eaten by a grue. (Zork, 1980)
+       ============================================================ */
 
     /* ===== PRINT STYLESHEET ===== */
     @media print {
