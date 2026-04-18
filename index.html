@@ -2782,8 +2782,9 @@ const EasterEggEngine = (() => {
 
   function init() {
     document.addEventListener('keydown', (e) => {
+      const wasActive = !!activeScreensaver;
       checkSequences(e.key);
-      if (activeScreensaver) { dismissScreensaver(); return; }
+      if (wasActive) { dismissScreensaver(); return; }
       resetIdle();
     });
 
@@ -2813,7 +2814,9 @@ const EasterEggEngine = (() => {
 // ============================================================
 
 function triggerRebuild() {
+  document.querySelector('.rebuild-win')?.remove();
   const win = document.createElement('div');
+  win.className = 'rebuild-win';
   win.style.cssText = `
     position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
     width:480px; background:#000; border:2px solid #0f0;
@@ -2824,7 +2827,7 @@ function triggerRebuild() {
 
   const titleBar = document.createElement('div');
   titleBar.style.cssText = 'background:#0f0; color:#000; padding:2px 8px; font-weight:bold; cursor:move; display:flex; justify-content:space-between; align-items:center;';
-  titleBar.innerHTML = '<span>Terminal — rebuild.sh</span><span style="cursor:pointer" id="rebuild-close">✕</span>';
+  titleBar.innerHTML = '<span>Terminal — rebuild.sh</span><span style="cursor:pointer" class="rebuild-close">✕</span>';
   win.appendChild(titleBar);
 
   const output = document.createElement('div');
@@ -2833,7 +2836,7 @@ function triggerRebuild() {
 
   document.body.appendChild(win);
 
-  document.getElementById('rebuild-close').addEventListener('click', () => win.remove());
+  win.querySelector('.rebuild-close').addEventListener('click', () => win.remove());
 
   const lines = [
     '> ./rebuild.sh',
