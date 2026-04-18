@@ -2409,6 +2409,109 @@
     })();
 
 // ============================================================
+// AFTER DARK: CYBERHACKER
+// Green-on-black falling code. Phosphor CRT. Hacker aesthetic.
+// "Mr. Roboto" - Styx, 1983
+// "I am the keymaster." - Ghostbusters, 1984
+// "Shall we play a game?" - WarGames, 1983
+// Roll for INT check to understand this code. DC: 8. You got this.
+// Returns a tick() function for requestAnimationFrame loop.
+// ============================================================
+
+function renderCyberhacker(canvas) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width;
+  const H = canvas.height;
+
+  const FONT_SIZE = 14;
+  const COLS = Math.floor(W / FONT_SIZE);
+
+  const drops = Array.from({ length: COLS }, () => Math.random() * -H / FONT_SIZE);
+
+  // Character set: ASCII, digits, katakana, D&D symbols for flavor
+  const CHARS = 'アイウエオカキクケコサシスセソタチツテト0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*()_+-=[]{}|;:,./<>?!~`\\d20⚔☯∞±√∫≈≠≡∑∏∂∇';
+
+  const speeds = Array.from({ length: COLS }, () => 0.5 + Math.random() * 1.5);
+
+  const TRAIL_LENGTH = 20;
+
+  // Flash messages: all unique, no duplicates with other layers
+  const FLASH_MESSAGES = [
+    'ACCESSING MAINFRAME...',
+    'DECRYPTING...',
+    '>_ WHO ARE YOU, STRANGER?',
+    'ROLL FOR INITIATIVE',
+    'NATURAL 20',
+    'LOADING MICAH BOSWELL...',
+    'IT IS PITCH BLACK',
+    'IDDQD ENGAGED',
+    '↑↑↓↓←→←→BA',
+    'RESUME LOADED. BEGIN.',
+    'WANG CHUNG TONIGHT',
+    'YOU HAVE DIED OF DYSENTERY',
+    'PRESS F TO PAY RESPECTS',
+    '>GET LAMP',
+  ];
+
+  let frame = 0;
+
+  function tick() {
+    if (document.getElementById('screensaver-overlay').style.display === 'none') return;
+
+    // Phosphor persistence: partial clear leaves trail
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, W, H);
+
+    frame++;
+
+    for (let col = 0; col < COLS; col++) {
+      const x = col * FONT_SIZE;
+      const drop = drops[col];
+
+      for (let t = 0; t < TRAIL_LENGTH; t++) {
+        const y = (drop - t) * FONT_SIZE;
+        if (y < 0 || y > H) continue;
+
+        const alpha = 1 - t / TRAIL_LENGTH;
+        if (t === 0) {
+          ctx.fillStyle = `rgba(180, 255, 180, ${alpha})`;
+        } else if (t < 3) {
+          ctx.fillStyle = `rgba(0, 255, 70, ${alpha})`;
+        } else {
+          ctx.fillStyle = `rgba(0, 180, 40, ${alpha * 0.7})`;
+        }
+
+        ctx.font = `${FONT_SIZE}px monospace`;
+        const char = CHARS[Math.floor(Math.random() * CHARS.length)];
+        ctx.fillText(char, x, y);
+      }
+
+      drops[col] += speeds[col];
+
+      if (drops[col] * FONT_SIZE > H + TRAIL_LENGTH * FONT_SIZE) {
+        if (Math.random() > 0.975) {
+          drops[col] = 0;
+        }
+      }
+    }
+
+    // Flash message every ~600 frames (~10 seconds at 60fps)
+    if (frame % 600 === 0) {
+      const msg = FLASH_MESSAGES[Math.floor(Math.random() * FLASH_MESSAGES.length)];
+      ctx.font = 'bold 24px monospace';
+      ctx.fillStyle = 'rgba(0, 255, 70, 0.9)';
+      ctx.textAlign = 'center';
+      ctx.fillText(msg, W / 2, H / 2);
+      ctx.textAlign = 'left';
+    }
+
+    return requestAnimationFrame(tick);
+  }
+
+  return tick;
+}
+
+// ============================================================
 // AFTER DARK: FLYING TOASTERS
 // Berkeley Systems, 1989. One of the most iconic screensavers ever.
 // "Heaven is a place on earth" - Belinda Carlisle, 1987
