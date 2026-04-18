@@ -2407,6 +2407,142 @@
       }
       // "You have died of dysentery." - Oregon Trail, 1971 (just checking if you're reading)
     })();
+
+// ============================================================
+// EASTER EGG ENGINE
+// "Shout, shout, let it all out" - Tears for Fears, 1985
+// "You are in a maze of twisty little passages, all alike." - Zork, 1980
+// Sequences: Konami | "zork" | "iddqd" | "contra" | "dnukem"
+// ============================================================
+
+const EasterEggEngine = (() => {
+  const SEQUENCES = {
+    konami: ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'],
+    zork:   ['z','o','r','k'],
+    iddqd:  ['i','d','d','q','d'],
+    contra: ['c','o','n','t','r','a'],
+    dnukem: ['d','n','u','k','e','m'],
+  };
+
+  const IDLE_TIMEOUT_MS = 90000; // 90 seconds
+
+  let buffer = [];
+  let idleTimer = null;
+  let activeScreensaver = null;
+  let animFrame = null;
+
+  function resetIdle() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => launchScreensaver('toasters'), IDLE_TIMEOUT_MS);
+  }
+
+  function checkSequences(key) {
+    buffer.push(key);
+    if (buffer.length > 12) buffer.shift();
+
+    for (const [name, seq] of Object.entries(SEQUENCES)) {
+      if (buffer.length >= seq.length) {
+        const tail = buffer.slice(-seq.length);
+        if (tail.every((k, i) => k === seq[i])) {
+          buffer = [];
+          handleSequence(name);
+          return;
+        }
+      }
+    }
+  }
+
+  function handleSequence(name) {
+    switch (name) {
+      case 'konami':
+        showToast('↑↑↓↓←→←→BA — +30 LIVES GRANTED', '#ff0', 4000);
+        break;
+      case 'zork':
+        showToast('It is pitch black. You are likely to be eaten by a grue.', '#0f0', 5000);
+        break;
+      case 'iddqd':
+        showToast('IDDQD — Degreelessness mode on.', '#f00', 4000);
+        break;
+      case 'contra':
+        showToast('CONTRA CODE ACCEPTED — Bill and Lance approve.', '#0ff', 4000);
+        break;
+      case 'dnukem':
+        showToast('Hail to the king, baby. — Duke Nukem 3D, 1996', '#f80', 4000);
+        break;
+    }
+  }
+
+  function showToast(msg, color, duration) {
+    const el = document.createElement('div');
+    el.textContent = msg;
+    el.style.cssText = `
+      position:fixed; bottom:40px; left:50%; transform:translateX(-50%);
+      background:#111; color:${color}; border:1px solid ${color};
+      padding:10px 20px; font-family:monospace; font-size:13px;
+      z-index:99998; pointer-events:none; border-radius:3px;
+      box-shadow: 0 0 12px ${color}44;
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), duration);
+  }
+
+  function launchScreensaver(type) {
+    activeScreensaver = type;
+    const overlay = document.getElementById('screensaver-overlay');
+    const canvas = document.getElementById('screensaver-canvas');
+    const label = document.getElementById('screensaver-label');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    overlay.style.display = 'block';
+
+    if (type === 'toasters') {
+      label.textContent = 'After Dark: Flying Toasters — Berkeley Systems, 1989';
+      animFrame = requestAnimationFrame(renderToasters(canvas));
+    } else if (type === 'cyberhacker') {
+      label.textContent = 'After Dark: Cyberhacker — Green means go.';
+      animFrame = requestAnimationFrame(renderCyberhacker(canvas));
+    }
+  }
+
+  function dismissScreensaver() {
+    if (!activeScreensaver) return;
+    cancelAnimationFrame(animFrame);
+    activeScreensaver = null;
+    animFrame = null;
+    const overlay = document.getElementById('screensaver-overlay');
+    overlay.style.display = 'none';
+    resetIdle();
+  }
+
+  function init() {
+    document.addEventListener('keydown', (e) => {
+      checkSequences(e.key);
+      if (activeScreensaver) { dismissScreensaver(); return; }
+      resetIdle();
+    });
+
+    document.addEventListener('mousemove', () => {
+      if (activeScreensaver) dismissScreensaver();
+      else resetIdle();
+    });
+    document.addEventListener('click', () => {
+      if (activeScreensaver) dismissScreensaver();
+    });
+    document.addEventListener('touchstart', () => {
+      if (activeScreensaver) dismissScreensaver();
+      else resetIdle();
+    });
+
+    resetIdle();
+  }
+
+  return { init, launchScreensaver, dismissScreensaver, showToast };
+})();
+
+// "Start me up" - Rolling Stones, 1981 / Boot the easter egg engine
+document.addEventListener('DOMContentLoaded', () => {
+  EasterEggEngine.init();
+});
   </script>
 
   <!-- After Dark tribute screensaver overlay -->
