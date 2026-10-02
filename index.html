@@ -119,7 +119,7 @@
        Subtle pinstripes, refined gray, Geneva, NOT Windows-style bevels
        ========================================================================= */
     [data-os="mac9"] {
-      --desktop-bg: #336666;
+      --desktop-bg: #336666 url(assets/wallpapers/mac9/mac-os-background.jpg) center/cover;
       --win-bg: #ebebeb;
       --win-border: #999;
       --win-radius: 0px;
@@ -225,7 +225,7 @@
        Navy title bar, silver chrome, outset bevels, teal desktop
        ========================================================================= */
     [data-os="win31"] {
-      --desktop-bg: #008080;
+      --desktop-bg: #c0c0c0;
       --win-bg: #c0c0c0;
       --win-border: #808080;
       --win-radius: 0px;
@@ -237,7 +237,7 @@
       --body-size: 13px;
       --menubar-bg: #c0c0c0;
       --menubar-border: #808080;
-      --icon-text: #fff;
+      --icon-text: #000;
       --selection-bg: #000080;
       --selection-text: #fff;
       --divider: #808080;
@@ -259,11 +259,17 @@
     [data-os="win31"] .window {
       border: 2px outset #dfdfdf; box-shadow: 1px 1px 0 #000;
     }
-    [data-os="win31"] .titlebar { padding-left: 4px; }
+    [data-os="win31"] .titlebar { padding: 0 44px 0 24px; }
     [data-os="win31"] .titlebar-lines { display: none; }
-    /* Close button on RIGHT side, horizontal dash (Win 3.1 style) */
+    /* Minimize and maximize arrows on the right, as Program Manager drew them */
+    [data-os="win31"] .titlebar::after {
+      content: '\25BC\00a0\25B2'; position: absolute; right: 3px; top: 50%; transform: translateY(-50%);
+      height: 14px; line-height: 10px; padding: 0 3px; font-size: 8px; letter-spacing: 2px; color: #000;
+      background: #c0c0c0; border: 2px outset #dfdfdf;
+    }
+    /* Control-menu box on the LEFT with a horizontal dash (Win 3.1 style) */
     [data-os="win31"] .closebox {
-      left: auto; right: 3px; position: absolute;
+      left: 3px; right: auto; position: absolute;
       width: 17px; height: 14px; border: 2px outset #dfdfdf;
       background: #c0c0c0; border-radius: 0; top: 50%; transform: translateY(-50%);
     }
@@ -273,9 +279,7 @@
       content: ''; position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%); width: 8px; height: 2px; background: #000;
     }
-    [data-os="win31"] .titlebar-title {
-      background: transparent; left: 8px; transform: none; font-size: 12px;
-    }
+    [data-os="win31"] .titlebar-title { background: transparent; font-size: 12px; }
     [data-os="win31"] .win-body::-webkit-scrollbar-thumb { background: #c0c0c0; border: 2px outset #dfdfdf; }
     [data-os="win31"] .win-body::-webkit-scrollbar-track {
       background: repeating-conic-gradient(#c0c0c0 0% 25%, #fff 0% 50%) 50% / 2px 2px;
@@ -327,7 +331,17 @@
       --ic-bubble: #e8f0ff; --ic-bubble-stroke: #2255aa; --ic-bubble-q: #0054e3;
       --ic-monitor: #d8e8f8; --ic-monitor-stroke: #2255aa; --ic-monitor-screen: #0054e3;
     }
-    [data-os="winxp"] #menubar { height: 28px; color: #fff; font-size: 11px; font-family: Tahoma, 'Segoe UI', sans-serif; }
+    /* Luna taskbar: the bar lives at the bottom, with the green start button and the blue clock tray */
+    [data-os="winxp"] #menubar {
+      top: auto; bottom: 0; height: 30px; padding: 0; color: #fff; font-size: 11px; font-family: Tahoma, 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #3168d5 0%, #4993e6 3%, #2b63d3 6%, #245edb 10%, #245edb 88%, #1941a5 100%);
+      border-top: 1px solid #0831d9; border-bottom: none;
+    }
+    [data-os="winxp"] .menu-clock {
+      height: 30px; display: flex; align-items: center; padding: 0 14px; color: #fff;
+      background: linear-gradient(to bottom, #0f9ff6 0%, #1192f3 50%, #0a7ad2 100%);
+      border-left: 1px solid #0c57b4; box-shadow: inset 1px 0 0 rgba(255,255,255,0.3);
+    }
     [data-os="winxp"] .menu-item:hover { background: #2456b8; }
     [data-os="winxp"] .menu-apple-icon::before { background: #fff; }
     [data-os="winxp"] .menu-apple-icon::after { border-right-color: #fff; border-top-color: #fff; }
@@ -378,7 +392,7 @@
        Pinstriped title bar, traffic light buttons, blue gel scrollbar, Lucida Grande
        ========================================================================= */
     [data-os="aqua"] {
-      --desktop-bg: linear-gradient(135deg, #001a4d 0%, #1a3a66 15%, #2d5a8c 30%, #4a7cb8 50%, #2d5a8c 70%, #1a3a66 85%, #001a4d 100%);
+      --desktop-bg: radial-gradient(ellipse at 25% 25%, rgba(150,200,255,0.5) 0%, transparent 45%), radial-gradient(ellipse at 75% 70%, rgba(30,80,190,0.55) 0%, transparent 50%), linear-gradient(165deg, #4b8de3 0%, #2d67c4 50%, #1f4fa6 100%);
       --win-bg: #f5f5f5;
       --win-border: #bbb;
       --win-radius: 5px 5px 0 0;
@@ -418,13 +432,13 @@
     [data-os="aqua"] .window {
       border: 1px solid #999; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       background-color: #e0e0e0;
-      background-image: repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(255,255,255,0.5) 1px, rgba(255,255,255,0.5) 2px);
+      background-image: repeating-linear-gradient(to bottom, #f6f6f6 0px, #f6f6f6 1px, #ebebeb 1px, #ebebeb 2px);
     }
-    /* Aqua title bar: brushed metal with hard gradient stop */
+    /* Aqua title bar: horizontal pinstripes (10.0 to 10.3). Brushed metal was iTunes and Finder, not windows. */
     [data-os="aqua"] .titlebar {
-      border-radius: 5px 5px 0 0; border-bottom: 1px solid #555;
-      background: linear-gradient(to bottom, #ebebeb 0%, #d1d1d1 50%, #b4b4b4 51%, #c4c4c4 100%);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8); padding: 0 8px;
+      border-radius: 5px 5px 0 0; border-bottom: 1px solid #9a9a9a;
+      background: repeating-linear-gradient(to bottom, #f4f4f4 0px, #f4f4f4 1px, #e2e2e2 1px, #e2e2e2 2px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9); padding: 0 8px;
     }
     [data-os="aqua"] .titlebar-lines { display: none; }
     /* Traffic light: red close, yellow minimize, green zoom */
@@ -512,8 +526,8 @@
       --titlebar-height: 19px;
       --body-font: Helvetica, Arial, sans-serif;
       --body-size: 12px;
-      --menubar-bg: #336699;
-      --menubar-border: #1a4d80;
+      --menubar-bg: #d8d8d8;
+      --menubar-border: #888;
       --icon-text: #fff;
       --selection-bg: #336699;
       --selection-text: #fff;
@@ -569,10 +583,17 @@
     }
     [data-os="beos"] .closebox:hover::before { background: #000; transform: translate(-50%, -50%) rotate(45deg); }
     [data-os="beos"] .closebox:hover::after { background: #000; transform: translate(-50%, -50%) rotate(-45deg); }
-    /* Deskbar-style menu bar: navy blue */
+    /* The Deskbar: a small gray panel in the top-right corner, Be logo and clock on the first row, menus below */
     [data-os="beos"] #menubar {
-      color: #fff; font-family: Helvetica, Arial, sans-serif; font-size: 12px;
+      left: auto; right: 0; top: 0; width: 220px; height: auto; flex-wrap: wrap; align-items: center; padding: 3px 6px;
+      color: #000; font-family: Helvetica, Arial, sans-serif; font-size: 12px;
+      background: #d8d8d8; border: 1px solid #888; border-top: none; border-right: none; border-radius: 0 0 0 4px;
+      box-shadow: inset 1px 1px 0 #fff, 2px 2px 4px rgba(0,0,0,0.25);
     }
+    [data-os="beos"] .menu-clock { order: 1; margin-left: auto; font-size: 11px; padding: 0 2px; }
+    [data-os="beos"] #menubar::after { content: ''; order: 2; flex-basis: 100%; height: 1px; margin: 3px 0; background: #999; box-shadow: 0 1px 0 #fff; }
+    [data-os="beos"] .menu-item { order: 3; padding: 2px 8px; }
+    [data-os="beos"] .icon-column { right: auto; left: 20px; top: 20px; }
     [data-os="beos"] .menu-item:hover { background: #1a558f; }
     [data-os="beos"] .menu-apple-icon::before { background: #fff; }
     [data-os="beos"] .menu-apple-icon::after { border-right-color: #fff; border-top-color: #fff; }
@@ -636,9 +657,9 @@
     .menu-dd-sep { border-top: 1px solid var(--divider, #ccc); margin: 2px 0; }
     /* Win themes: dropdown matches silver/cream */
     [data-os="win31"] .menu-dropdown { background: #c0c0c0; border: 2px outset #dfdfdf; }
-    [data-os="winxp"] .menu-dropdown { background: #ece9d8; border: 1px solid #aca899; }
+    [data-os="winxp"] .menu-dropdown { top: auto; bottom: 100%; background: #ece9d8; border: 1px solid #aca899; box-shadow: 2px -2px 4px rgba(0,0,0,0.25); }
     [data-os="aqua"] .menu-dropdown { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border: 1px solid #ccc; border-radius: 4px; }
-    [data-os="beos"] .menu-dropdown { background: #d8d8d8; border: 1px solid #808080; }
+    [data-os="beos"] .menu-dropdown { left: auto; right: 0; background: #d8d8d8; border: 1px solid #808080; }
     /* Fix dropdown text visibility */
     .menu-dd-item { color: #000; }
     [data-os="win31"] .menu-dd-item { color: #000; }
@@ -655,11 +676,17 @@
     /* Hide Apple logo on non-Mac themes, show OS-appropriate text */
     .menu-os-label { display: none; font-weight: bold; margin-right: 12px; font-size: 11px; cursor: default; }
     [data-os="win31"] .menu-apple { display: none; }
-    [data-os="win31"] .menu-os-label { display: flex; color: #000; }
+    [data-os="win31"] .menu-os-label { display: none; }
     [data-os="winxp"] .menu-apple { display: none; }
-    [data-os="winxp"] .menu-os-label { display: flex; color: #fff; }
+    [data-os="winxp"] .menu-os-label {
+      display: flex; align-items: center; gap: 6px; height: 30px; margin: 0 10px 0 0; padding: 0 24px 0 10px; color: #fff;
+      font: italic bold 17px 'Franklin Gothic Medium', 'Trebuchet MS', Tahoma, sans-serif; letter-spacing: -0.5px;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
+      background: linear-gradient(to bottom, #3c9b3c 0%, #5bc55b 8%, #3a9a3a 50%, #2e8a2e 100%);
+      border-radius: 0 12px 12px 0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 2px 0 3px rgba(0,0,0,0.3); cursor: default;
+    }
     [data-os="beos"] .menu-apple { display: none; }
-    [data-os="beos"] .menu-os-label { display: flex; color: #fff; }
+    [data-os="beos"] .menu-os-label { display: flex; order: 0; margin-right: 6px; }
 
     /* ============================================================
        ICON GRID - "Safety Dance" - Men Without Hats, 1982
@@ -669,8 +696,8 @@
       display: flex; flex-direction: column; gap: 12px; align-items: center;
     }
     /* Windows: icons on LEFT side of desktop */
-    [data-os="win31"] .icon-column,
-    [data-os="winxp"] .icon-column { right: auto; left: 20px; }
+    [data-os="win31"] .icon-column { right: auto; left: 20px; }
+    [data-os="winxp"] .icon-column { right: auto; left: 20px; top: 20px; bottom: 54px; }
     /* BeOS: icons on right (Tracker default) */
     .desktop-icon {
       width: 76px; display: flex; flex-direction: column; align-items: center;
@@ -685,7 +712,7 @@
       text-shadow: 0 1px 2px rgba(0,0,0,0.6), 0 0 4px rgba(0,0,0,0.3);
     }
     [data-os="mac7"] .icon-label { text-shadow: 1px 1px 0 #000; }
-    [data-os="win31"] .icon-label { text-shadow: 1px 1px 0 rgba(0,0,0,0.7); }
+    [data-os="win31"] .icon-label { text-shadow: none; }
     /* Themes icon dots adapt per theme */
     .ic-dot1 { fill: var(--ic-monitor-screen); }
     .ic-dot2 { fill: var(--ic-folder); }
@@ -1150,7 +1177,7 @@
           <div class="menu-dd-item" onclick="switchTheme('mac9')">Mac OS 9<span class="menu-dd-shortcut">Cmd+2</span></div>
           <div class="menu-dd-item" onclick="switchTheme('win31')">Windows 3.1<span class="menu-dd-shortcut">Cmd+3</span></div>
           <div class="menu-dd-item" onclick="switchTheme('winxp')">Windows XP<span class="menu-dd-shortcut">Cmd+4</span></div>
-          <div class="menu-dd-item" onclick="switchTheme('aqua')">Mac OS X Aqua<span class="menu-dd-shortcut">Cmd+5</span></div>
+          <div class="menu-dd-item" onclick="switchTheme('aqua')">Mac OS X<span class="menu-dd-shortcut">Cmd+5</span></div>
           <div class="menu-dd-item" onclick="switchTheme('beos')">BeOS<span class="menu-dd-shortcut">Cmd+6</span></div>
           <div class="menu-dd-sep"></div>
           <div class="menu-dd-item" onclick="randomWallpaper()">Random Wallpaper</div>
@@ -1924,6 +1951,10 @@
         trash: '<img src="data:image/png;base64,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" style="width:48px;height:48px">'
       }
     };
+    /* The Apple mark the menu bar wore in each era: 1-bit for System 7, six-color for Platinum, blue gel for Aqua */
+    var applePath = 'M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105.2-57.8-155.9-122.2C115 672.6 51 566 51 459.4c0-181.7 120.5-277.4 238.4-277.4 64 0 117.2 43.8 157.6 43.8 38.5 0 98.6-46.7 168.8-46.7 27.2 0 108.2 2.6 165.9 98.3zm-254.4-181.3c31.8-37.7 54.2-90.1 54.2-142.5 0-7.7-.7-15.4-2-22.4-51.6 2-112.3 34.5-149.2 77-29.2 33.1-55.9 85.5-55.9 138.6 0 8.4 1.3 16.8 2 19.4 3.2.6 8.4 1.3 13.6 1.3 46.7 0 102.1-30.5 137.3-71.4z';
+    var aquaApple = '<svg viewBox="0 0 814 1000" width="12" height="14"><defs><linearGradient id="aquaAppleG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd0ff"/><stop offset="0.5" stop-color="#2f7fe0"/><stop offset="1" stop-color="#1a58b8"/></linearGradient></defs><path fill="url(#aquaAppleG)" d="' + applePath + '"/></svg>';
+    var rainbowApple = '<svg viewBox="0 0 814 1000" width="12" height="14"><defs><linearGradient id="rainbowAppleG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#61bb46"/><stop offset="0.1667" stop-color="#61bb46"/><stop offset="0.1667" stop-color="#fdb827"/><stop offset="0.3333" stop-color="#fdb827"/><stop offset="0.3333" stop-color="#f5821f"/><stop offset="0.5" stop-color="#f5821f"/><stop offset="0.5" stop-color="#e03a3e"/><stop offset="0.6667" stop-color="#e03a3e"/><stop offset="0.6667" stop-color="#963d97"/><stop offset="0.8333" stop-color="#963d97"/><stop offset="0.8333" stop-color="#009ddc"/><stop offset="1" stop-color="#009ddc"/></linearGradient></defs><path fill="url(#rainbowAppleG)" d="' + applePath + '"/></svg>';
     var classicApple = '<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --> <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 9 11" style="enable-background:new 0 0 9 11;" xml:space="preserve"> <g> <polygon points="5,0 5,1 4,1 4,2 4,3 5,3 5,2 6,2 6,1 7,1 7,0 	"/> <polygon points="7,5 9,5 9,4 8,4 8,3 5,3 5,4 4,4 4,3 1,3 1,4 0,4 0,5 0,6 0,7 0,8 0,9 1,9 1,10 2,10 2,11 4,11 4,10 5,10 5,11  7,11 7,10 8,10 8,9 9,9 9,8 9,7 7,7 7,6 	"/> </g> </svg>';
     var defaultIconHTML = {};
 
@@ -1970,11 +2001,11 @@
       if (logoEl) {
         var isMac = /^(mac7|mac9|aqua)$/.test(os);
         logoEl.style.display = isMac ? 'flex' : 'none';
-        if (isMac) logoEl.innerHTML = '<div style="width:12px;height:14px">' + classicApple + '</div>';
+        if (isMac) logoEl.innerHTML = '<div style="width:12px;height:14px">' + (os === 'aqua' ? aquaApple : os === 'mac9' ? rainbowApple : classicApple) + '</div>';
         if (osLbl) {
-          if (os === 'win31') { osLbl.innerHTML = '<span style="font-family:serif;font-weight:bold;font-size:13px">W</span>'; osLbl.style.display = 'flex'; }
-          else if (os === 'winxp') { osLbl.innerHTML = '<svg width="14" height="14" viewBox="0 0 64 64"><path d="M2 2l28 4v24H2z" fill="#f22"/><path d="M34 2l28 4v24H34z" fill="#2a2"/><path d="M2 34l28 0v20L2 58z" fill="#24f"/><path d="M34 34l28 0v20L34 58z" fill="#fd2"/></svg>'; osLbl.style.display = 'flex'; }
-          else if (os === 'beos') { osLbl.innerHTML = '<span style="font-weight:900;font-size:12px;letter-spacing:-1px"><span style="color:#e44">B</span><span style="color:#4c4">e</span></span>'; osLbl.style.display = 'flex'; }
+          if (os === 'win31') { osLbl.innerHTML = ''; osLbl.style.display = 'none'; }
+          else if (os === 'winxp') { osLbl.innerHTML = '<svg width="18" height="18" viewBox="0 0 64 64"><path d="M4 12 C14 6 22 10 30 8 L30 30 C22 32 14 28 4 34 Z" fill="#f35325"/><path d="M34 7 C44 4 52 8 60 4 L60 26 C52 30 44 26 34 29 Z" fill="#81bc06"/><path d="M4 38 C14 32 22 36 30 34 L30 56 C22 58 14 54 4 60 Z" fill="#05a6f0"/><path d="M34 33 C44 30 52 34 60 30 L60 52 C52 56 44 52 34 55 Z" fill="#ffba08"/></svg><span class="start-label">start</span>'; osLbl.style.display = 'flex'; }
+          else if (os === 'beos') { osLbl.innerHTML = '<svg width="30" height="14" viewBox="0 0 60 28"><rect x="1" y="1" width="26" height="26" rx="5" fill="#d8201c"/><path d="M14 6c-5 2-7 7-4 11 2 3 6 3 8 1-3 0-5-2-5-5 0-3 2-5 5-6-1-1-2-1-4-1z" fill="#fff"/><text x="31" y="22" font-family="Georgia, serif" font-weight="bold" font-size="22" fill="#2244aa">Be</text></svg>'; osLbl.style.display = 'flex'; }
           else { osLbl.style.display = 'none'; }
         }
       }
@@ -2110,7 +2141,7 @@
     function applyWallpaperCss(url) {
       var d = document.getElementById('desktop');
       if (!d) return;
-      if (!url || url === 'none') { d.style.backgroundImage = 'none'; return; }
+      if (!url || url === 'none') { d.style.backgroundImage = ''; d.style.backgroundSize = ''; d.style.backgroundPosition = ''; return; }
       d.style.backgroundImage = 'url(' + url + ')';
       d.style.backgroundSize = 'cover';
       d.style.backgroundPosition = 'center';
@@ -2209,11 +2240,11 @@
     /* Theme-era dates: each OS shows a plausible calendar date from its release window */
     var themeEra = {
       mac7:  { year: 1993, monAbbr: 'Mar' },  // Mac OS 7.1 era
-      mac9:  { year: 1999, monAbbr: 'Dec' },  // Mac OS 9.0 shipped Oct 1999
-      win31: { year: 1993, monAbbr: 'Aug' },  // Win 3.1 peak
+      mac9:  { year: 2001, monAbbr: 'Jan' },  // Mac OS 9.1 shipped January 9, 2001
+      win31: { year: 1992, monAbbr: 'Apr' },  // Windows 3.1 shipped April 6, 1992
       winxp: { year: 2002, monAbbr: 'Jul' },  // XP service pack era
-      aqua:  { year: 2001, monAbbr: 'Apr' },  // Mac OS X 10.0 Cheetah
-      beos:  { year: 2000, monAbbr: 'Jun' }   // BeOS R5 release
+      aqua:  { year: 2002, monAbbr: 'Aug' },  // Mac OS X 10.2 Jaguar shipped August 24, 2002
+      beos:  { year: 2000, monAbbr: 'Jun' }   // BeOS R5 shipped March 28, 2000
     };
 
     // ============================================================
