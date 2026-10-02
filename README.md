@@ -15,7 +15,7 @@ Live: https://socraticstatic.github.io/resume/
 | Mac OS X 10.1 | 2001 | The blue splash with the Aqua apple and the pinstripe panel. Pinstriped windows, traffic lights, gel scrollbars. |
 | BeOS R5 | 2000 | The purple wordmark and seven icons lighting up in order. Yellow title tabs, the Deskbar in the corner. |
 
-The boot screens were rebuilt from GUIdebook startup screenshots, not from memory. Where the old version had a silver Apple on dark gray, a Be logo in colors Be never used, and a DOS prompt standing in for the Windows 3.1 splash, each system now boots the way it did.
+The boot screens are the GUIdebook startup screenshots themselves, scaled on a 640x480 stage, with only the moving parts (progress bars, the crawling XP blocks, the BeOS icons lighting up, the extension parade) layered on top. Where the old version had a silver Apple on dark gray, a Be logo in colors Be never used, and a DOS prompt standing in for the Windows 3.1 splash, each system now boots the way it did.
 
 ## Using it
 
@@ -49,7 +49,7 @@ After Dark tributes: Flying Toasters (Berkeley Systems, 1989) and Cyberhacker, b
 
 **The theme engine.** `<html data-os="mac9">` is the whole switch. Each system defines a block of CSS custom properties (desktop, window, title bar, fonts, selection colors, pill shapes) and a handful of scoped overrides for the things variables cannot express: the Platinum pinstripes, the XP taskbar moving to the bottom, the BeOS Deskbar folding into the corner, the Windows 3.1 control-menu box. Icon sets are swapped in JavaScript from a per-system map. The menu bar wears the Apple mark of its era: 1-bit, six-color, or blue gel.
 
-**The boot engine.** `BootEngine` renders every startup on a 640x480 stage scaled to the viewport, so the proportions match the machines. Each system is a timeline of steps; the engine fast-forwards unfired steps when a throttled tab reaches the end, honors `prefers-reduced-motion` by capping at 700ms, boots once per tab on first load, and lets any click or key skip. The Mac OS 9 parade uses the real desktop icons.
+**The boot engine.** `BootEngine` renders every startup on a 640x480 stage scaled to the viewport, so the proportions match the machines. The base of each screen is the real period bitmap; the engine only animates what moved. Each system is a timeline of steps; the engine fast-forwards unfired steps when a throttled tab reaches the end, honors `prefers-reduced-motion` by capping at 700ms, boots once per tab on first load, and lets any click or key skip. The Mac OS 9 parade uses the real desktop icons.
 
 **Windows.** Absolutely positioned divs with drag, resize, and z-order in about sixty lines. Nothing is a library.
 
@@ -73,7 +73,7 @@ Node 20 or newer. The tests are static checks on `index.html`.
 
 ## Credits
 
-- Startup screen references: [GUIdebook Gallery](https://guidebookgallery.org).
+- Startup screens: the period bitmaps in `assets/boot/` are the [GUIdebook Gallery](https://guidebookgallery.org) startup screenshots of System 7.0, Mac OS 9.0, Windows 3.1, Windows XP Professional, Mac OS X 10.1, and BeOS R5, used as the base of each boot; only the moving parts are drawn on top.
 - Charcoal and Monaco fonts, the Mac OS 9 desktop pictures, and the Platinum scroll slider: [grassmunk/Platinum9](https://github.com/grassmunk/Platinum9).
 - System 7 and Mac OS 9 desktop icons: the SevenIcons and NineIcons sets. Other systems use period icon sets.
 - ChicagoFLF, Geneva, Tahoma, and Lucida Grande served by cdnfonts.

@@ -942,90 +942,35 @@
     .boot-happy { position: absolute; left: 50%; top: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; }
     .boot-happy svg { width: 100%; height: 100%; image-rendering: pixelated; }
 
-    /* ---- Mac OS 7: Happy Mac on 50% halftone, then "Welcome to Macintosh." ---- */
-    .boot-mac7 { background: #808080; }
-    .boot-mac7 .boot-stage { font-family: Charcoal, Geneva, sans-serif; color: #000;
-      background-color: #fff; background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%), linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%); background-size: 2px 2px; background-position: 0 0, 1px 1px; }
-    .b7-welcome { position: absolute; left: 97px; top: 90px; width: 446px; height: 122px; background: #fff; border: 2px solid #000; box-shadow: 0 0 0 1px #fff, 0 0 0 2px #000; }
-    .b7-welcome .b7-icon { position: absolute; left: 18px; top: 14px; width: 42px; height: 38px; }
-    .b7-welcome .b7-text { position: absolute; left: 0; right: 0; top: 30px; text-align: center; font-size: 13px; font-weight: bold; letter-spacing: .2px; }
-    .b7-welcome .b7-extoff { position: absolute; left: 0; right: 0; top: 62px; text-align: center; font-size: 12px; }
-
-    /* ---- Mac OS 9: Happy Mac, then the gray panel with the two-face logo ---- */
-    .boot-mac9 { background: #888; }
-    .boot-mac9 .boot-stage { background: #888; color: #000; }
-    .b9-frame { position: absolute; left: 105px; top: 44px; width: 430px; height: 330px; background: #ddd; border: 1px solid #000; }
-    .b9-white { position: absolute; left: 40px; top: 30px; width: 350px; height: 225px; background: #fff; border: 1px solid #000; }
-    .b9-logo { position: absolute; left: 50%; top: 30px; width: 110px; height: 88px; margin-left: -55px; }
-    .b9-word { position: absolute; left: 0; right: 0; top: 128px; text-align: center; font: 400 54px/1 'Apple Garamond', Garamond, 'Times New Roman', Times, serif; letter-spacing: -1px; color: #000; }
-    .b9-welcome { position: absolute; left: 0; right: 0; top: 272px; text-align: center; font: bold 12px Charcoal, Geneva, sans-serif; }
-    .b9-starting { position: absolute; left: 60px; right: 60px; top: 296px; font: 11px Charcoal, Geneva, sans-serif; opacity: 0; transition: opacity .2s; }
-    .b9-starting.on { opacity: 1; }
-    .b9-bar { margin-top: 3px; height: 10px; background: #fff; border: 1px solid #000; box-shadow: inset 1px 1px 0 #aaa; overflow: hidden; }
-    .b9-fill { height: 100%; width: 0; background: linear-gradient(to bottom, #9999ff, #6666cc 50%, #333399); transition: width 1.6s linear; }
-    .b9-extoff { position: absolute; right: 60px; top: 296px; font: 11px Charcoal, Geneva, sans-serif; }
-
-    /* ---- Windows 3.1: DOS prompt, then the turquoise splash ---- */
-    .boot-win31 { background: #000; }
-    .boot-win31 .boot-stage { background: #000; }
+    /* ---- Every screen is the period bitmap (GUIdebook startup screenshots, 640x480) with only the moving parts layered on top ---- */
+    .boot-bitmap { position: absolute; left: 0; top: 0; width: 640px; height: 480px; image-rendering: pixelated; display: block; }
+    .boot-overlay.boot-mac7 { background: #808080; }
+    .boot-overlay.boot-mac9 { background: #888; }
+    .boot-overlay.boot-win31, .boot-overlay.boot-winxp, .boot-overlay.boot-beos { background: #000; }
+    .boot-overlay.boot-aqua { background: #426bad; }
+    .boot-stage { font-family: ChicagoFLF, Chicago, Charcoal, Geneva, sans-serif; color: #000; }
+    /* System 7: "Extensions Off" sits inside the Welcome box when Shift is held */
+    .b7-extoff { position: absolute; left: 97px; width: 446px; top: 172px; text-align: center; font-size: 12px; font-weight: bold; }
+    /* Mac OS 9: the Welcome line gives way to Starting up... and the bar, exactly where 7.5.3 through 9 drew them */
+    .b9-cover { position: absolute; left: 160px; top: 310px; width: 320px; height: 22px; background: #ddd; }
+    .b9-starting { position: absolute; left: 160px; width: 320px; top: 315px; text-align: center; font-size: 12px; font-weight: bold; }
+    .b9-bar { position: absolute; left: 241px; top: 339px; width: 158px; height: 10px; background: #ccf; overflow: hidden; }
+    .b9-fill { height: 100%; width: 0; background: #444; transition: width 1.6s linear; }
+    /* Windows 3.1: the DOS prompt before the splash */
     .w31-dos { position: absolute; left: 8px; top: 6px; font: 16px/1.25 'Courier New', Courier, monospace; color: #aaa; white-space: pre; }
     .w31-cursor { animation: w31blink 0.53s steps(1) infinite; }
     @keyframes w31blink { 50% { opacity: 0; } }
-    .w31-box { position: absolute; left: 135px; top: 22px; width: 355px; height: 428px; background: #3ca2c7; border: 2px solid #8fd6ef; box-shadow: inset 0 0 0 2px #3ca2c7, inset 0 0 0 3px #1f6f8a; text-align: center; color: #000; }
-    .w31-logo { position: absolute; left: 60px; top: 36px; width: 240px; height: 170px; }
-    .w31-ms { position: absolute; left: 0; right: 0; top: 206px; font: bold 32px/1 'Times New Roman', Times, serif; letter-spacing: 1px; }
-    .w31-ms small, .w31-win small { font-size: 10px; vertical-align: top; }
-    .w31-win { position: absolute; left: 0; right: 0; top: 246px; font: bold 44px/1 'Times New Roman', Times, serif; letter-spacing: 1px; }
-    .w31-ver { position: absolute; left: 0; right: 0; top: 314px; font: 24px/1 'Times New Roman', Times, serif; }
-    .w31-copy { position: absolute; left: 0; right: 0; top: 366px; font: 11px/1.3 'Times New Roman', Times, serif; }
-
-    /* ---- Windows XP Professional: flag, wordmark, the crawling blocks ---- */
-    .boot-winxp { background: #000; }
-    .boot-winxp .boot-stage { background: #000; color: #fff; font-family: 'Franklin Gothic Medium', 'Trebuchet MS', Tahoma, sans-serif; }
-    .xp-flag { position: absolute; left: 300px; top: 122px; width: 130px; height: 110px; filter: drop-shadow(0 0 10px rgba(255,255,255,.18)); }
-    .xp-ms { position: absolute; left: 212px; top: 212px; font: 15px Tahoma, 'Segoe UI', sans-serif; color: #fff; }
-    .xp-ms sup, .xp-word sup { font-size: 8px; vertical-align: top; position: relative; top: 2px; }
-    .xp-word { position: absolute; left: 210px; top: 226px; font-size: 48px; line-height: 1; letter-spacing: -1px; white-space: nowrap; }
-    .xp-word .xp { color: #eb651c; font-size: 28px; position: relative; top: -14px; margin-left: 1px; letter-spacing: 0; }
-    .xp-pro { position: absolute; left: 216px; top: 270px; font-size: 30px; line-height: 1; letter-spacing: -.3px; }
-    .xp-track { position: absolute; left: 255px; top: 350px; width: 128px; height: 16px; border: 1px solid #bdbdbd; border-radius: 5px; overflow: hidden; }
-    .xp-blocks { position: absolute; top: 3px; left: 0; display: flex; gap: 2px; animation: xpSlide 1.5s linear infinite; }
-    .xp-blocks i { display: block; width: 8px; height: 8px; border-radius: 1px; background: linear-gradient(to bottom, #a9bbf7, #5979ef 55%, #3b57d6); }
-    @keyframes xpSlide { from { transform: translateX(-32px); } to { transform: translateX(132px); } }
-    .xp-copy { position: absolute; left: 24px; top: 432px; font: 12px/1.3 Tahoma, 'Segoe UI', sans-serif; color: #efefef; }
-    .xp-brand { position: absolute; right: 26px; top: 444px; font: italic bold 15px 'Franklin Gothic Medium', 'Trebuchet MS', Tahoma, sans-serif; letter-spacing: -.3px; }
-    .xp-brand sup { font-size: 7px; vertical-align: top; }
-
-    /* ---- Mac OS X 10.1: Happy Mac, then the pinstripe panel on blue ---- */
-    .boot-aqua { background: #4a6cb0; }
-    .boot-aqua .boot-stage { background: #4a6cb0; color: #000; }
-    .aq-panel { position: absolute; left: 170px; top: 128px; width: 300px; height: 225px; border: 1px solid #2f4d8a;
-      background-color: #f4f4f4; background-image: repeating-linear-gradient(to bottom, #ffffff 0 2px, #e9e9e9 2px 4px); text-align: center; }
-    .aq-apple { position: absolute; left: 50%; top: 22px; width: 50px; height: 60px; margin-left: -25px; }
-    .aq-word { position: absolute; left: 0; right: 0; top: 86px; font: 400 32px/1 'Apple Garamond', Garamond, 'Times New Roman', Times, serif; letter-spacing: -.5px; }
-    .aq-bar { position: absolute; left: 80px; top: 158px; width: 140px; height: 10px; border: 1px solid #8e8e8e; border-radius: 2px; background: #ededed; box-shadow: inset 0 1px 2px rgba(0,0,0,.25); overflow: hidden; }
-    .aq-fill { height: 100%; width: 0; background: linear-gradient(to bottom, #c9c9c9, #9c9c9c); transition: width 1.9s linear; }
-    .aq-welcome { position: absolute; left: 0; right: 0; top: 182px; font: 11px 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif; color: #111; }
-
-    /* ---- BeOS R5: purple wordmark, seven icons that light in turn, the Be mark ---- */
-    .boot-beos { background: #000; }
-    .boot-beos .boot-stage { background: #000; color: #fff; font-family: Helvetica, Arial, sans-serif; }
-    .be-word { position: absolute; left: 44px; top: 20px; font: 900 64px/1 'Arial Black', Impact, Helvetica, sans-serif; letter-spacing: -2px; color: #8f55d8;
-      text-shadow: 1px 1px 0 #65309a, 2px 2px 0 #5a2a8a, 3px 3px 0 #4f247a, 4px 4px 0 #44206a, 5px 5px 0 #300065; transform: skewX(-6deg); }
-    .be-word .bar { display: inline-block; width: 2px; height: 56px; background: #c9a6ff; vertical-align: middle; margin: 0 6px 6px; }
-    .be-sub { position: absolute; left: 272px; top: 32px; font: 600 15px/1.25 Helvetica, Arial, sans-serif; letter-spacing: 3px; color: #8d8d8d; text-transform: uppercase; }
-    .be-icons { position: absolute; left: 157px; top: 104px; display: flex; gap: 10px; }
-    .be-ic { width: 54px; height: 54px; border-radius: 50%; background: #120524; border: 3px solid #3a1a66; box-sizing: border-box; display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s, box-shadow .2s; }
-    .be-ic svg { width: 30px; height: 30px; opacity: .35; transition: opacity .2s; }
-    .be-ic.lit { border-color: #a86bff; background: #300065; box-shadow: 0 0 10px #65309a; }
-    .be-ic.lit svg { opacity: 1; }
-    .be-five { position: absolute; left: 522px; top: 160px; font: 900 54px/1 'Arial Black', Impact, Helvetica, sans-serif; color: #65309a; transform: skewX(-6deg); }
-    .be-mark { position: absolute; left: 279px; top: 434px; display: flex; align-items: center; gap: 4px; }
-    .be-mark .sq { width: 32px; height: 32px; border-radius: 6px; background: #e0453a; display: flex; align-items: center; justify-content: center; }
-    .be-mark .sq svg { width: 22px; height: 22px; }
-    .be-mark .be { font: italic 400 34px/1 'Times New Roman', Times, serif; color: #2a4d9c; }
-    .be-mark .be sup { font-size: 8px; }
-
+    /* Windows XP: the trough interior is repainted black and three blocks crawl through it */
+    .xp-track { position: absolute; left: 257px; top: 353px; width: 122px; height: 11px; background: #000; overflow: hidden; }
+    .xp-blocks { position: absolute; top: 1px; left: 0; display: flex; gap: 1px; animation: xpSlide 1.6s linear infinite; }
+    .xp-blocks i { display: block; width: 7px; height: 9px; background: linear-gradient(to bottom, #869ef3, #5979ef 50%, #2838c7); }
+    @keyframes xpSlide { from { transform: translateX(-24px); } to { transform: translateX(122px); } }
+    /* Mac OS X 10.1: the bar fills inside the bitmap's empty trough */
+    .aq-bar { position: absolute; left: 254px; top: 286px; width: 132px; height: 8px; overflow: hidden; }
+    .aq-fill { width: 0; height: 100%; background: linear-gradient(to bottom, #c9c9c9, #9c9c9c); transition: width 1.9s linear; }
+    /* BeOS: the seven icons start dimmed and light in order */
+    .be-dim { position: absolute; width: 62px; height: 62px; border-radius: 50%; background: rgba(0,0,0,0.74); transition: opacity 0.25s; }
+    .be-dim.lit { opacity: 0; }
     @media (prefers-reduced-motion: reduce) { .boot-overlay, .boot-overlay * { animation: none !important; transition: none !important; } }
 
     /* ============================================================
@@ -2355,53 +2300,6 @@
       window.addEventListener('blur', function () { shiftHeld = false; });
       function reduced() { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
 
-      var happyMac = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges"><polygon fill="#fff" points="26.5 2 26.5 1 5.5 1 5.5 2 4.5 2 4.5 27 27.5 27 27.5 2 26.5 2"/><rect x="11.5" y="7" width="1" height="2"/><rect x="3.5" y="2" width="1" height="25"/><rect x="5.5" width="21" height="1"/><rect x="18.5" y="22" width="6" height="1"/><rect x="4.5" y="1" width="1" height="1"/><rect x="26.5" y="1" width="1" height="1"/><rect x="27.5" y="2" width="1" height="25"/><path d="M4.5,27v5h23v-5H4.5ZM26.5,31H5.5v-3h21v3Z"/><rect x="6.5" y="23" width="2" height="1"/><rect x="19.5" y="7" width="1" height="2"/><rect x="18.5" y="13" width="1" height="1"/><rect x="13.5" y="13" width="1" height="1"/><rect x="14.5" y="14" width="4" height="1"/><rect x="7.5" y="3" width="17" height="1"/><rect x="6.5" y="4" width="1" height="13"/><rect x="24.5" y="4" width="1" height="13"/><rect x="7.5" y="17" width="17" height="1"/><polygon points="16 7 16 11 15 11 15 12 16 12 17 12 17 7 16 7"/><rect fill="#fff" x="5.5" y="28" width="21" height="3"/></svg>';
-      /* Mac OS 8.5+ Happy Mac: light gray body, lavender screen (sampled from the GUIdebook Mac OS 9.0 splash, #ccc / #ccf) */
-      var happyMacColor = happyMac.replace('<polygon fill="#fff" points="26.5 2', '<polygon fill="#ccc" points="26.5 2')
-        .replace('<rect x="11.5" y="7" width="1" height="2"/>', '<rect x="7.5" y="4" width="17" height="13" fill="#ccf"/><rect x="11.5" y="7" width="1" height="2"/>');
-      /* System 7 welcome icon, traced from the GUIdebook 7.0 and 7.5.3 splashes: Mac with a yellow screen glyph, Apple mark with a green leaf, red mouse cable, blue keyboard */
-      var macMouse = '<svg viewBox="0 0 54 48" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">' +
-        '<rect x="21" y="11" width="13" height="15" fill="#fff" stroke="#000" stroke-width="2"/>' +
-        '<path d="M25 13h6v1h-5v6h5v1h-6z" fill="#cc0"/><rect x="27" y="23" width="4" height="1" fill="#000"/>' +
-        '<path d="M9.5 17.5h1v-1h2v1h1v-1h2v1h1v4h-1v2h-1v1h-3v-1h-1v-2h-1z" fill="none" stroke="#000" stroke-width="1"/><rect x="12" y="14" width="1" height="2" fill="#080"/>' +
-        '<path d="M14 26.5h6M14.5 26.5v1M12.5 27.5v2M12.5 29.5h2M14.5 29.5v2M14.5 31.5h2M16.5 31.5v2M16.5 33.5h2M18.5 33.5v2M18.5 35.5h3M21.5 35.5v2" fill="none" stroke="#d00" stroke-width="1"/>' +
-        '<rect x="22.5" y="37.5" width="6" height="4" fill="#fff" stroke="#000" stroke-width="1"/>' +
-        '<path d="M24.5 28.5h16l3 5h-19z" fill="#fff" stroke="#000" stroke-width="1"/><path d="M28 29.5h9v1h-9zM29 31.5h9v1h-9z" fill="#00f"/></svg>';
-      /* Mac OS 9 two-face logo (#3366cc / #6699ff from the 1999 splash) */
-      var macOsLogo = '<svg viewBox="0 0 110 88" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="55" height="88" fill="#3366cc"/><rect x="55" y="0" width="55" height="88" fill="#6699ff"/><path d="M58 2 q-18 28 2 44 q-20 10 -4 40" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round"/><rect x="28" y="22" width="7" height="12" fill="#000"/><rect x="72" y="22" width="7" height="12" fill="#000"/><path d="M22 58 q16 14 32 2" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round"/><path d="M64 60 q10 8 24 -2" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>';
-      /* Mac OS X 10.1 Aqua apple */
-      var aquaApple = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 814 1000"><defs><linearGradient id="aqA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ed0ff"/><stop offset=".45" stop-color="#2f84e6"/><stop offset="1" stop-color="#0b57c2"/></linearGradient><linearGradient id="aqH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><path fill="url(#aqA)" stroke="#0a3f8f" stroke-width="12" d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105.2-57.8-155.9-122.2C115 672.6 51 566 51 459.4c0-181.7 120.5-277.4 238.4-277.4 64 0 117.2 43.8 157.6 43.8 38.5 0 98.6-46.7 168.8-46.7 27.2 0 108.2 2.6 165.9 98.3zm-254.4-181.3c31.8-37.7 54.2-90.1 54.2-142.5 0-7.7-.7-15.4-2-22.4-51.6 2-112.3 34.5-149.2 77-29.2 33.1-55.9 85.5-55.9 138.6 0 8.4 1.3 16.8 2 19.4 3.2.6 8.4 1.3 13.6 1.3 46.7 0 102.1-30.5 137.3-71.4z"/><path fill="url(#aqH)" d="M140 380 q260 -120 560 20 q-40 110 -280 120 q-250 -10 -280 -140z"/></svg>';
-      /* Windows 3.1 flag with the pixel trail, built from the 1992 splash geometry */
-      function win31Logo() {
-        var s = '<svg viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">';
-        var cols = [['#ff0000', '#0000ff'], ['#ff0000', '#0000ff'], ['#ff0000', '#0000ff'], ['#000', '#000'], ['#000', '#000'], ['#000', '#000']];
-        for (var c = 0; c < 6; c++) for (var r = 0; r < 8; r++) {
-          var x = 6 + c * 14, y = 18 + r * 15 + (5 - c) * 2, sz = 6 + c, half = r < 4 ? 0 : 1;
-          var fill = c >= 3 ? '#000' : cols[c][half]; if (c < 3 && (c + r) % 2) fill = half ? '#00c000' : '#ffff00';
-          s += '<rect x="' + x + '" y="' + y + '" width="' + sz + '" height="' + sz + '" fill="' + fill + '"/>';
-        }
-        s += '<g transform="translate(96 6)"><path d="M0 24 q35 -22 70 -8 q35 14 70 -8 v120 q-35 22 -70 8 q-35 -14 -70 8z" fill="#000"/>' +
-          '<path d="M8 30 q28 -16 56 -6 v52 q-28 -10 -56 6z" fill="#ff0000"/><path d="M76 24 q28 10 56 -8 v52 q-28 18 -56 8z" fill="#00a000"/>' +
-          '<path d="M8 92 q28 -16 56 -6 v52 q-28 -10 -56 6z" fill="#0000ff"/><path d="M76 86 q28 10 56 -8 v52 q-28 18 -56 8z" fill="#ffff00"/></g></svg>';
-        return s;
-      }
-      var xpFlag = '<svg viewBox="0 0 130 110" xmlns="http://www.w3.org/2000/svg"><defs>' +
-        '<linearGradient id="xr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a4c"/><stop offset="1" stop-color="#e0491a"/></linearGradient>' +
-        '<linearGradient id="xg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b6ef4a"/><stop offset="1" stop-color="#6fb800"/></linearGradient>' +
-        '<linearGradient id="xb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb0ff"/><stop offset="1" stop-color="#2d5be0"/></linearGradient>' +
-        '<linearGradient id="xy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe066"/><stop offset="1" stop-color="#e3a800"/></linearGradient></defs>' +
-        '<path d="M10 22 q24 -14 48 -2 v40 q-24 -12 -48 2z" fill="url(#xr)"/><path d="M66 18 q26 10 54 -8 v40 q-28 18 -54 8z" fill="url(#xg)"/>' +
-        '<path d="M10 68 q24 -14 48 -2 v38 q-24 -12 -48 2z" fill="url(#xb)"/><path d="M66 64 q26 10 54 -8 v38 q-28 18 -54 8z" fill="url(#xy)"/></svg>';
-      var beGlyphs = [
-        '<svg viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="12" ry="5" fill="none" stroke="#e9d8ff" stroke-width="1.5"/><ellipse cx="15" cy="15" rx="12" ry="5" fill="none" stroke="#e9d8ff" stroke-width="1.5" transform="rotate(60 15 15)"/><ellipse cx="15" cy="15" rx="12" ry="5" fill="none" stroke="#e9d8ff" stroke-width="1.5" transform="rotate(120 15 15)"/><circle cx="15" cy="15" r="2.5" fill="#e9d8ff"/></svg>',
-        '<svg viewBox="0 0 30 30"><rect x="4" y="7" width="22" height="14" rx="1" fill="#e9d8ff"/><rect x="7" y="10" width="6" height="5" fill="#300065"/><rect x="16" y="10" width="7" height="3" fill="#300065"/><g fill="#e9d8ff"><rect x="6" y="21" width="2" height="4"/><rect x="10" y="21" width="2" height="4"/><rect x="14" y="21" width="2" height="4"/><rect x="18" y="21" width="2" height="4"/><rect x="22" y="21" width="2" height="4"/></g></svg>',
-        '<svg viewBox="0 0 30 30"><path d="M17 2 L7 17 h7 l-3 11 L23 12 h-7z" fill="#e9d8ff"/></svg>',
-        '<svg viewBox="0 0 30 30"><rect x="3" y="6" width="24" height="18" rx="2" fill="none" stroke="#e9d8ff" stroke-width="1.5"/><path d="M5 15 q3 -8 6 0 t6 0 t6 0 t4 0" fill="none" stroke="#e9d8ff" stroke-width="1.5"/></svg>',
-        '<svg viewBox="0 0 30 30"><ellipse cx="15" cy="9" rx="10" ry="3.5" fill="#e9d8ff"/><path d="M5 9v6a10 3.5 0 0 0 20 0V9" fill="#b89aec"/><path d="M5 15v6a10 3.5 0 0 0 20 0v-6" fill="#8f6fd0"/></svg>',
-        '<svg viewBox="0 0 30 30"><circle cx="12" cy="12" r="7.5" fill="none" stroke="#e9d8ff" stroke-width="2.2"/><path d="M17.5 17.5 L26 26" stroke="#e9d8ff" stroke-width="3" stroke-linecap="round"/></svg>',
-        '<svg viewBox="0 0 30 30"><rect x="8" y="3" width="14" height="24" rx="1" fill="#e9d8ff"/><rect x="11" y="6" width="8" height="3" fill="#300065"/><rect x="11" y="11" width="8" height="3" fill="#300065"/><circle cx="15" cy="21" r="2" fill="#300065"/></svg>'
-      ];
-      var beMark = '<svg viewBox="0 0 22 22"><path d="M6 3 h7 a4.5 4.5 0 0 1 1.5 8.8 A5 5 0 0 1 13 21 H6z M9.5 6.5 v4 h3 a2 2 0 0 0 0 -4z M9.5 13.5 v4.2 h3.2 a2.1 2.1 0 0 0 0 -4.2z" fill="#fff"/></svg>';
       /* puzzle-piece extension glyph, tinted per index: the classic extension icon family */
       function puzzle(i) {
         var tints = ['#5c7cfa', '#f08c3c', '#4caf50', '#9c6bd6', '#e05454', '#2bb3c0', '#c8a83c'];
@@ -2427,67 +2325,64 @@
         requestAnimationFrame(function () { requestAnimationFrame(function () { fill.style.width = '100%'; }); });
       }
 
+      function bitmap(name, extra) { return '<img class="boot-bitmap' + (extra ? ' ' + extra : '') + '" src="assets/boot/' + name + '.png" alt="">'; }
+      function swapTo(ctx, hideSel, showSel) {
+        var a = ctx.stage.querySelector(hideSel), b = ctx.stage.querySelector(showSel);
+        if (a) a.classList.add('boot-hidden'); if (b) b.classList.remove('boot-hidden');
+      }
       var THEMES = {
         mac7: { duration: 2400,
           html: function (ctx) {
-            return '<div class="boot-happy">' + happyMac + '</div>' +
-              '<div class="b7-welcome boot-hidden"><div class="b7-icon">' + macMouse + '</div><div class="b7-text">Welcome to Macintosh.</div>' +
-              (ctx.shift ? '<div class="b7-extoff">Extensions Off</div>' : '') + '</div><div class="boot-ext-strip"></div>';
+            return bitmap('mac7-happy', 'b-prelude') + bitmap('mac7-welcome', 'b-main boot-hidden') +
+              (ctx.shift ? '<div class="b7-extoff boot-hidden">Extensions Off</div>' : '') + '<div class="boot-ext-strip"></div>';
           },
           start: function (ctx) {
-            ctx.at(800, function () { ctx.stage.querySelector('.boot-happy').classList.add('boot-hidden'); ctx.stage.querySelector('.b7-welcome').classList.remove('boot-hidden'); });
+            ctx.at(800, function () { swapTo(ctx, '.b-prelude', '.b-main'); var e = ctx.stage.querySelector('.b7-extoff'); if (e) e.classList.remove('boot-hidden'); });
             parade(ctx, 1000, 120, 10);
           } },
         mac9: { duration: 3200,
           html: function (ctx) {
-            return '<div class="boot-happy">' + happyMacColor + '</div>' +
-              '<div class="b9-frame boot-hidden"><div class="b9-white"><div class="b9-logo">' + macOsLogo + '</div><div class="b9-word">Mac OS 9</div></div>' +
-              '<div class="b9-welcome">Welcome to Mac OS</div>' +
-              (ctx.shift ? '<div class="b9-extoff">Extensions Off</div>' : '<div class="b9-starting">Starting up...<div class="b9-bar"><div class="b9-fill"></div></div></div>') +
-              '</div><div class="boot-ext-strip"></div>';
+            return bitmap('mac9-happy', 'b-prelude') + bitmap('mac9-welcome', 'b-main boot-hidden') +
+              '<div class="b9-cover boot-hidden"></div><div class="b9-starting boot-hidden">' + (ctx.shift ? 'Extensions Off' : 'Starting up...') + '</div>' +
+              (ctx.shift ? '' : '<div class="b9-bar boot-hidden"><div class="b9-fill"></div></div>') + '<div class="boot-ext-strip"></div>';
           },
           start: function (ctx) {
-            ctx.at(700, function () { ctx.stage.querySelector('.boot-happy').classList.add('boot-hidden'); ctx.stage.querySelector('.b9-frame').classList.remove('boot-hidden'); });
-            ctx.at(1100, function () { var s = ctx.stage.querySelector('.b9-starting'); if (s) { s.classList.add('on'); startFill(ctx, '.b9-fill', 1300); } });
+            ctx.at(700, function () { swapTo(ctx, '.b-prelude', '.b-main'); });
+            ctx.at(1300, function () {
+              ['.b9-cover', '.b9-starting', '.b9-bar'].forEach(function (sel) { var e = ctx.stage.querySelector(sel); if (e) e.classList.remove('boot-hidden'); });
+              startFill(ctx, '.b9-fill', 1500);
+            });
             parade(ctx, 1200, 110, 12);
           } },
         win31: { duration: 2800,
           html: function () {
-            return '<div class="w31-dos">Starting MS-DOS...\n\nC:\\&gt;<span class="w31-typed"></span><span class="w31-cursor">_</span></div>' +
-              '<div class="w31-box boot-hidden"><div class="w31-logo">' + win31Logo() + '</div>' +
-              '<div class="w31-ms">MICROSOFT<small>®</small></div><div class="w31-win">WINDOWS<small>™</small></div>' +
-              '<div class="w31-ver">Version 3.1</div><div class="w31-copy">Copyright © Microsoft Corporation 1985-1992.<br>All Rights Reserved.</div></div>';
+            return '<div class="w31-dos">Starting MS-DOS...\n\nC:\\&gt;<span class="w31-typed"></span><span class="w31-cursor">_</span></div>' + bitmap('win31-splash', 'b-main boot-hidden');
           },
           start: function (ctx) {
             var typed = ctx.stage.querySelector('.w31-typed');
-            ['w', 'wi', 'win'].forEach(function (s, i) { ctx.at(420 + i * 150, function () { typed.textContent = s; }); });
-            ctx.at(1150, function () { ctx.stage.querySelector('.w31-dos').classList.add('boot-hidden'); ctx.stage.querySelector('.w31-box').classList.remove('boot-hidden'); });
+            ['w', 'wi', 'win'].forEach(function (t, i) { ctx.at(420 + i * 150, function () { typed.textContent = t; }); });
+            ctx.at(1150, function () { swapTo(ctx, '.w31-dos', '.b-main'); });
           } },
         winxp: { duration: 3200,
           html: function () {
-            return '<div class="xp-flag">' + xpFlag + '</div><div class="xp-ms">Microsoft<sup>®</sup></div>' +
-              '<div class="xp-word">Windows<sup>®</sup><span class="xp">xp</span></div><div class="xp-pro">Professional</div>' +
-              '<div class="xp-track"><div class="xp-blocks"><i></i><i></i><i></i></div></div>' +
-              '<div class="xp-copy">Copyright © 1985-2001<br>Microsoft Corporation</div><div class="xp-brand">Microsoft<sup>®</sup></div>';
+            return bitmap('winxp-splash') + '<div class="xp-track"><div class="xp-blocks"><i></i><i></i><i></i></div></div>';
           } },
         aqua: { duration: 3000,
           html: function () {
-            return '<div class="boot-happy">' + happyMacColor + '</div>' +
-              '<div class="aq-panel boot-hidden"><div class="aq-apple">' + aquaApple + '</div><div class="aq-word">Mac OS X</div>' +
-              '<div class="aq-bar"><div class="aq-fill"></div></div><div class="aq-welcome">Welcome to Macintosh.</div></div>';
+            return bitmap('aqua-happy', 'b-prelude') + bitmap('aqua-splash', 'b-main boot-hidden') + '<div class="aq-bar boot-hidden"><div class="aq-fill"></div></div>';
           },
           start: function (ctx) {
-            ctx.at(700, function () { ctx.stage.querySelector('.boot-happy').classList.add('boot-hidden'); ctx.stage.querySelector('.aq-panel').classList.remove('boot-hidden'); startFill(ctx, '.aq-fill', 1100); });
+            ctx.at(700, function () { swapTo(ctx, '.b-prelude', '.b-main'); var b = ctx.stage.querySelector('.aq-bar'); if (b) b.classList.remove('boot-hidden'); startFill(ctx, '.aq-fill', 1100); });
           } },
         beos: { duration: 3000,
           html: function () {
-            return '<div class="be-word">Be<span class="bar"></span>OS</div><div class="be-sub">Be<br>Operating<br>System</div>' +
-              '<div class="be-icons">' + beGlyphs.map(function (g) { return '<div class="be-ic">' + g + '</div>'; }).join('') + '</div>' +
-              '<div class="be-five">5</div><div class="be-mark"><div class="sq">' + beMark + '</div><div class="be">Be<sup>®</sup></div></div>';
+            var dims = '';
+            for (var i = 0; i < 7; i++) dims += '<div class="be-dim" style="left:' + (184 + i * 64 - 31) + 'px;top:' + (134 - 31) + 'px"></div>';
+            return bitmap('beos-splash') + dims;
           },
           start: function (ctx) {
-            var icons = ctx.stage.querySelectorAll('.be-ic');
-            icons.forEach(function (ic, i) { ctx.at(350 + i * 300, function () { ic.classList.add('lit'); }); });
+            var dims = ctx.stage.querySelectorAll('.be-dim');
+            dims.forEach(function (d, i) { ctx.at(350 + i * 300, function () { d.classList.add('lit'); }); });
           } }
       };
 

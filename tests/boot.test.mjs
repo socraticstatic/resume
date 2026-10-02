@@ -54,16 +54,16 @@ test('the extension parade uses each system\'s own icon set', () => {
   assert.match(html, /var map = iconMap && iconMap\[ctx\.os\];/);
 });
 
-test('the color Happy Mac has a gray body and a lavender screen, as Mac OS 9 drew it', () => {
-  assert.match(html, /var happyMacColor = happyMac[\s\S]*?'<polygon fill="#ccc" points="26\.5 2'/);
-  assert.match(html, /<rect x="7\.5" y="4" width="17" height="13" fill="#ccf"\/>/);
-});
 
-test('the Welcome to Macintosh icon is the Mac, Apple mark, red mouse cable, and blue keyboard', () => {
-  const m = html.match(/var macMouse = ([\s\S]*?<\/svg>';)/);
-  assert.ok(m, 'macMouse defined');
-  for (const part of ['stroke="#d00"', 'fill="#cc0"', 'fill="#00f"', 'fill="#080"', 'viewBox="0 0 54 48"']) {
-    assert.ok(m[1].includes(part), `macMouse lacks ${part}`);
+
+test('every boot screen is built from its period screenshot bitmap, not a hand-drawn logo', () => {
+  const engine = html.slice(html.indexOf('var BootEngine = (function () {'), html.indexOf('function switchTheme(os)'));
+  for (const f of ['mac7-happy', 'mac7-welcome', 'mac9-happy', 'mac9-welcome', 'win31-splash', 'winxp-splash', 'aqua-happy', 'aqua-splash', 'beos-splash']) {
+    assert.ok(engine.includes(`bitmap('${f}'`), `boot bitmap ${f} referenced`);
+  }
+  for (const sym of ['function win31Logo', 'var xpFlag', 'var macOsLogo', 'var beGlyphs', 'var beMark', 'var happyMac =', 'var macMouse']) {
+    // every hand-drawn mark is gone; the bitmaps carry the art
+    assert.ok(!engine.includes(sym), `${sym} still present`);
   }
 });
 
