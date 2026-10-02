@@ -25,6 +25,7 @@ The boot screens are the GUIdebook startup screenshots themselves, scaled on a 6
 - Right-click the desktop for wallpaper, appearance, screensavers, and Save as PDF.
 - File menu: the Chooser picks which Micah you are hiring. Save as Resume.sit runs a StuffIt dialog, then prints.
 - Right-click a project for its Get Info dialog.
+- The About window is each system's own About box: About This Macintosh, About This Computer, About Program Manager, About Windows, About This Mac, About BeOS. The marks come from the real dialogs; the memory rows carry the headline numbers. Read Me holds the long sections.
 - Theme menu: wallpapers, CRT scanlines, English or Spanish.
 
 ## Easter eggs
@@ -52,6 +53,8 @@ After Dark tributes: Flying Toasters (Berkeley Systems, 1989) and Cyberhacker, b
 **The boot engine.** `BootEngine` renders every startup on a 640x480 stage scaled to the viewport, so the proportions match the machines. The base of each screen is the real period bitmap; the engine only animates what moved. Each system is a timeline of steps; the engine fast-forwards unfired steps when a throttled tab reaches the end, honors `prefers-reduced-motion` by capping at 700ms, boots once per tab on first load, and lets any click or key skip. The Mac OS 9 parade uses the real desktop icons.
 
 **Windows.** Absolutely positioned divs with drag, resize, and z-order in about sixty lines. Nothing is a library.
+
+**About boxes.** One dialog structure (mark, key/value lines, thesis, memory-allocation rows, contact, OK and Read Me buttons) styled six ways after the GUIdebook About dialogs, with the marks cropped from those dialogs into `assets/about/`.
 
 **Facts.** The Career and Projects windows are kept in step with a shared registry in a sibling repo (`job-hunter/data`: a claims bank, the master resume, and a project registry). `npm test` fails if a date, a project, or a forbidden claim drifts from that source, and skips those checks when the sibling is absent so a stranger's clone still passes.
 

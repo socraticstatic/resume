@@ -814,6 +814,101 @@
       padding: 2px 6px; background: var(--content-bg); border-radius: var(--pill-radius);
     }
 
+
+    /* ============================================================
+       ABOUT THIS COMPUTER - "Computer Love" - Kraftwerk, 1981
+       The About window is each system's own About box: mark, key/value lines, the thesis,
+       the headline numbers as memory-allocation rows. Layouts follow the GUIdebook About dialogs.
+       ============================================================ */
+    .about-dialog { padding: 12px 14px 10px; }
+    .ab-head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+    .ab-mark { display: none; image-rendering: pixelated; flex-shrink: 0; }
+    .ab-ident { flex: 1; min-width: 0; }
+    .about-name { font-size: 20px; font-weight: bold; letter-spacing: -0.3px; }
+    .about-title { font-size: 13px; opacity: 0.75; margin-top: 2px; }
+    .ab-ok, .ab-readme { font: inherit; font-size: 12px; padding: 2px 14px; cursor: default; }
+    .ab-ok { display: none; }
+    .ab-kv { font-size: 12px; line-height: 1.6; margin-bottom: 10px; }
+    .ab-kv b { font-weight: bold; margin-right: 4px; }
+    .about-thesis { font-size: 12px; line-height: 1.55; margin-bottom: 10px; }
+    .ab-rows { border-top: 1px solid var(--divider); margin-bottom: 10px; }
+    .ab-row { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto 150px; align-items: center; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--divider); font-size: 12px; }
+    .ab-row-icon { width: 12px; height: 12px; border: 1px solid var(--content-border); background: var(--content-bg); }
+    .ab-row-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ab-row-val { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .ab-bar { height: 10px; border: 1px solid var(--content-border); background: #fff; overflow: hidden; }
+    .ab-bar i { display: block; height: 100%; background: var(--selection-bg); }
+    .ab-contact { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; margin-bottom: 10px; }
+    .ab-contact-label { font-weight: bold; }
+    .ab-foot { display: flex; justify-content: space-between; align-items: center; font-size: 11px; opacity: 0.85; }
+
+    /* System 7: About This Macintosh. Machine icon at left, 1-bit bars, Chicago. */
+    [data-os="mac7"] .about-dialog { font-family: 'Geneva', 'Helvetica', sans-serif; }
+    [data-os="mac7"] .ab-mark-mac7 { display: block; }
+    [data-os="mac7"] .about-name, [data-os="mac7"] .ab-kv b, [data-os="mac7"] .ab-contact-label { font-family: 'ChicagoFLF', 'Chicago', 'Geneva', sans-serif; font-weight: normal; }
+    [data-os="mac7"] .ab-bar { border-color: #000; }
+    [data-os="mac7"] .ab-bar i { background: #000; }
+    [data-os="mac7"] .ab-row-icon { border-color: #000; }
+    [data-os="mac7"] .ab-ok, [data-os="mac7"] .ab-readme { border: 1px solid #000; border-radius: 6px; background: #fff; box-shadow: 1px 1px 0 #000; }
+
+    /* Mac OS 9: About This Computer. The wordmark across the top, bold Charcoal labels, the blue striped bar. */
+    [data-os="mac9"] .about-dialog { font-family: Geneva, Helvetica, sans-serif; }
+    [data-os="mac9"] .ab-mark-mac9 { display: block; margin: 0 auto; }
+    [data-os="mac9"] .ab-head { flex-direction: column; align-items: center; gap: 6px; }
+    [data-os="mac9"] .ab-ident { text-align: center; }
+    [data-os="mac9"] .ab-kv b, [data-os="mac9"] .ab-contact-label { font-family: Charcoal, Geneva, sans-serif; }
+    [data-os="mac9"] .ab-rows { border-top: 2px solid #999; }
+    [data-os="mac9"] .ab-bar { border-color: #555; background: #eee; }
+    [data-os="mac9"] .ab-bar i { background: repeating-linear-gradient(to bottom, #6c8cd8 0 1px, #9fb6ec 1px 2px); }
+    [data-os="mac9"] .ab-ok, [data-os="mac9"] .ab-readme { border: 1px solid #666; border-radius: 4px; background: linear-gradient(to bottom, #f4f4f4, #d4d4d4); }
+
+    /* Windows 3.1: About Program Manager. Flag at left, OK at right, double-line separators, licensed-to block. */
+    [data-os="win31"] .about-dialog { font-family: 'MS Sans Serif', Tahoma, 'Segoe UI', sans-serif; }
+    [data-os="win31"] .ab-mark-win31 { display: block; align-self: flex-start; }
+    [data-os="win31"] .ab-ok { display: inline-block; align-self: flex-start; border: 2px outset #dfdfdf; background: #c0c0c0; padding: 3px 18px; font-weight: bold; }
+    [data-os="win31"] .ab-readme { border: 2px outset #dfdfdf; background: #c0c0c0; }
+    [data-os="win31"] .ab-rows, [data-os="win31"] .ab-row { border-color: #808080; box-shadow: 0 1px 0 #fff; }
+    [data-os="win31"] .ab-bar { border: 1px solid #808080; background: #fff; }
+    [data-os="win31"] .ab-bar i { background: #000080; }
+    [data-os="win31"] .ab-row-icon { border-color: #000; background: #fff; }
+
+    /* Windows XP: About Windows. The banner band across the top, then the text block and an OK button. */
+    [data-os="winxp"] .about-dialog { padding-top: 0; }
+    [data-os="winxp"] .ab-head { flex-wrap: wrap; margin: 0 -14px 10px; }
+    [data-os="winxp"] .ab-mark-winxp { display: block; width: 100%; height: auto; }
+    [data-os="winxp"] .ab-ident { padding: 6px 14px 0; }
+    [data-os="winxp"] .ab-ok { display: inline-block; margin: 6px 14px 0 0; border: 1px solid #003c74; border-radius: 3px; background: linear-gradient(to bottom, #fff, #ece9d8); padding: 3px 20px; }
+    [data-os="winxp"] .ab-readme { border: 1px solid #003c74; border-radius: 3px; background: linear-gradient(to bottom, #fff, #ece9d8); }
+    [data-os="winxp"] .ab-bar { border-color: #7f9db9; border-radius: 2px; background: #fff; }
+    [data-os="winxp"] .ab-bar i { background: linear-gradient(to bottom, #8fb8f0, #2b63d3); }
+
+    /* Mac OS X 10.1: About This Mac. Everything centered under the big X, Lucida Grande. */
+    [data-os="aqua"] .about-dialog { font-family: 'Lucida Grande', -apple-system, sans-serif; }
+    [data-os="aqua"] .ab-head { flex-direction: column; gap: 4px; }
+    [data-os="aqua"] .ab-mark-aqua { display: block; width: 120px; height: 120px; image-rendering: auto; }
+    [data-os="aqua"] .ab-ident { text-align: center; }
+    [data-os="aqua"] .ab-kv { text-align: center; }
+    [data-os="aqua"] .about-thesis { text-align: center; }
+    [data-os="aqua"] .ab-contact { justify-content: center; }
+    [data-os="aqua"] .ab-rows { border-top: 1px solid #ccc; }
+    [data-os="aqua"] .ab-row { border-bottom-color: #ddd; }
+    [data-os="aqua"] .ab-bar { border-color: #8fa8c8; border-radius: 6px; background: #e9eef6; }
+    [data-os="aqua"] .ab-bar i { background: linear-gradient(to bottom, #9ec3ff, #3f80f6 55%, #2a62c9); border-radius: 6px; }
+    [data-os="aqua"] .ab-readme { border: 1px solid #777; border-radius: 12px; padding: 3px 14px; background: linear-gradient(to bottom, #fff 0%, #dde8f8 100%); }
+
+    /* BeOS: About BeOS. Logo plus labeled lines on the left, the list on the right. */
+    [data-os="beos"] .about-dialog { display: grid; grid-template-columns: 180px 1fr; gap: 0 14px; font-family: Helvetica, Arial, sans-serif; }
+    [data-os="beos"] .ab-head { grid-column: 1; flex-direction: column; align-items: flex-start; gap: 8px; }
+    [data-os="beos"] .ab-mark-beos { display: block; width: 180px; height: auto; image-rendering: auto; }
+    [data-os="beos"] .ab-kv { grid-column: 1; }
+    [data-os="beos"] .ab-kv div { margin-bottom: 6px; }
+    [data-os="beos"] .ab-kv b { display: block; }
+    [data-os="beos"] .about-thesis { grid-column: 2; grid-row: 1 / span 2; border-left: 1px solid #a0a0a0; padding-left: 14px; }
+    [data-os="beos"] .ab-rows, [data-os="beos"] .ab-contact, [data-os="beos"] .ab-foot { grid-column: 1 / -1; }
+    [data-os="beos"] .ab-bar { border-color: #808080; background: #fff; }
+    [data-os="beos"] .ab-bar i { background: #336699; }
+    [data-os="beos"] .ab-readme { border: 1px solid #808080; background: #d8d8d8; }
+
     /* Career */
     .career-role { border-bottom: 1px solid var(--divider); padding: 8px 0; cursor: pointer; }
     .career-role:hover { background: rgba(0,0,0,0.03); }
@@ -1116,6 +1211,10 @@
   .titlebar-title { position: static; transform: none; background: transparent !important; }
   [data-os="beos"] .window { margin-top: 0; }
   [data-os="beos"] .titlebar { width: 100%; margin: 0; }
+  /* the About box flows as one column on a phone */
+  .about-dialog { display: block !important; }
+  .ab-row { grid-template-columns: 14px minmax(0, 1fr) auto 80px; }
+  [data-os="beos"] .about-thesis { border-left: none; padding-left: 0; }
   /* the XP taskbar and the BeOS Deskbar are sticky top bars on a phone; menus open downward and inside the screen */
   [data-os="winxp"] #menubar { top: 0; bottom: auto; }
   [data-os="winxp"] .menu-dropdown { top: 100%; bottom: auto; }
@@ -1182,6 +1281,7 @@
       <div class="menu-item">File
         <div class="menu-dropdown">
           <div class="menu-dd-item" onclick="openWin('about')">Open About</div>
+          <div class="menu-dd-item" onclick="openWin('readme')">Open Read Me</div>
           <div class="menu-dd-item" onclick="openWin('career')">Open Career</div>
           <div class="menu-dd-item" onclick="openWin('projects')">Open Projects</div>
           <div class="menu-dd-item" onclick="openWin('contact')">Open Contact</div>
@@ -1242,69 +1342,54 @@
 
     <!-- WINDOWS -->
 
-    <!-- About Micah -->
-    <div class="window" id="win-about" style="width:540px; height:auto; max-height:90vh;">
+    <!-- About Micah: each system's own About This Computer box -->
+    <div class="window" id="win-about" style="width:500px; height:auto; max-height:90vh;">
       <div class="titlebar" onmousedown="startDrag(event, 'about')">
         <div class="closebox" onclick="closeWin('about')"></div>
         <div class="titlebar-lines"></div>
         <div class="titlebar-title">About Micah</div>
       </div>
-      <div class="win-body">
-        <div class="about-header">
-          <div class="about-name">Micah Boswell</div>
-          <div class="about-title">Lead Product Designer</div>
-          <div class="about-thesis">I turn complex systems into things people can actually use. At AT&amp;T I introduced AI design processes to our product design group, I prototype AI agents that show their evidence and ask before they act, and I built an agentic pipeline that produces on-brand product-demo films. Before that I designed for work where mistakes are expensive: role-based dashboards for GE Nuclear under federal compliance, and grid dashboards used in the Hurricane Harvey response at Treverity, with field apps that worked offline. Thirty years of enterprise product design. Fluent in Spanish.</div>
-        </div>
-        <div class="about-metrics">
-          <div class="about-metric"><div class="about-metric-num">$300K+</div><div class="about-metric-label">Hardware Savings</div></div>
-          <div class="about-metric"><div class="about-metric-num">48%</div><div class="about-metric-label">Error Drop</div></div>
-          <div class="about-metric"><div class="about-metric-num">47</div><div class="about-metric-label">Designers Mentored</div></div>
-        </div>
-        <div class="about-section">
-          <div class="about-section-title">Contact</div>
-          <p>214-543-2098</p>
-          <p><a class="contact-link" href="mailto:micah@conscious-shell.com">micah@conscious-shell.com</a></p>
-          <p><a class="contact-link" href="https://conscious-shell.com" target="_blank">conscious-shell.com</a></p>
-          <p><a class="contact-link" href="https://github.com/socraticstatic" target="_blank">github/socraticstatic</a></p>
-          <p><a class="contact-link" href="https://linkedin.com/in/micahboswell" target="_blank">linkedin/micahboswell</a></p>
-        </div>
-        <div class="about-section">
-          <div class="about-section-title">Capabilities</div>
-          <div class="about-caps">
-            <span class="about-cap">Agentic AI</span>
-            <span class="about-cap">LLM Tooling</span>
-            <span class="about-cap">MCP</span>
-            <span class="about-cap">Design Systems</span>
-            <span class="about-cap">Design Ops</span>
-            <span class="about-cap">API Design</span>
-            <span class="about-cap">Cloud Platforms</span>
-            <span class="about-cap">Figma</span>
-            <span class="about-cap">Axure</span>
+      <div class="win-body about-dialog">
+        <div class="ab-head">
+          <img class="ab-mark ab-mark-mac7" src="assets/about/mac7-machine.png" alt="">
+          <img class="ab-mark ab-mark-mac9" src="assets/about/mac9-wordmark.png" alt="">
+          <img class="ab-mark ab-mark-win31" src="assets/about/win31-flag.png" alt="">
+          <img class="ab-mark ab-mark-winxp" src="assets/about/winxp-banner.png" alt="">
+          <img class="ab-mark ab-mark-aqua" src="assets/about/aqua-x.png" alt="">
+          <img class="ab-mark ab-mark-beos" src="assets/about/beos-logo.png" alt="">
+          <div class="ab-ident">
+            <div class="about-name">Micah Boswell</div>
+            <div class="about-title">Lead Product Designer</div>
           </div>
+          <button class="ab-ok" onclick="closeWin('about')">OK</button>
         </div>
-        <div class="about-section">
-          <div class="about-section-title">Background</div>
-          <p>Spanish fluent. Raised in Lima, Peru.</p>
-          <p>13 years independent consulting between full-time roles.</p>
-          <p>Author of Data-Driven Design. 47 designers mentored.</p>
-          <p>Portfolio site conscious-shell.com online since 2000.</p>
-          <p>Tools: Adobe Creative Suite, Figma, Sketch, Axure, DaVinci Resolve.</p>
-          <p>Education: BA Hardin-Simmons (Abilene, TX). Freshman year at Samford University (Birmingham, AL).</p>
-          <p>eCornell AI certifications 2025-2026: Artificial Intelligence Strategy, AI for Business Productivity, AI Applications and Value Creation.</p>
+        <div class="ab-kv">
+          <div><b>Version:</b> <span>30 years of enterprise product design</span></div>
+          <div><b>Built-in Memory:</b> <span>AT&amp;T, Lead Product Designer, 2021 to present</span></div>
+          <div><b>Virtual Memory:</b> <span>Thirteen independent years between full-time roles</span></div>
+          <div><b>Location:</b> <span>Dallas, TX. English and Spanish.</span></div>
         </div>
-        <div class="about-section">
-          <div class="about-section-title">Awards</div>
-          <p>AT&amp;T Connection Award (2022, 2023, 2024, 2025).</p>
-          <p>Brand Overhaul of the Year (2010).</p>
-          <p>Best Speaker - Ignite (2012).</p>
-          <p>Girl Clown (producer): Best Narrative Short + Best Actress, Williamsburg IFF; 13 U.S. festivals; worldwide distribution by IndieFlix; Stephen Simon's Gaiam Cinema Circle pick.</p>
+        <div class="about-thesis">I turn complex systems into things people can actually use. At AT&amp;T I introduced AI design processes to our product design group, I prototype AI agents that show their evidence and ask before they act, and I built an agentic pipeline that produces on-brand product-demo films. Before that I designed for work where mistakes are expensive: role-based dashboards for GE Nuclear under federal compliance, and grid dashboards used in the Hurricane Harvey response at Treverity, with field apps that worked offline. Thirty years of enterprise product design. Fluent in Spanish.</div>
+        <div class="ab-rows">
+          <div class="ab-row"><span class="ab-row-icon"></span><span class="ab-row-name">DNI Portal diagnostics, AT&amp;T</span><span class="ab-row-val">$300K+ saved</span><span class="ab-bar"><i style="width:100%"></i></span></div>
+          <div class="ab-row"><span class="ab-row-icon"></span><span class="ab-row-name">Fortran unification, GE Nuclear</span><span class="ab-row-val">48% fewer errors</span><span class="ab-bar"><i style="width:48%"></i></span></div>
+          <div class="ab-row"><span class="ab-row-icon"></span><span class="ab-row-name">Tap-to-pay workflows, Citi</span><span class="ab-row-val">68 redesigned</span><span class="ab-bar"><i style="width:68%"></i></span></div>
+          <div class="ab-row"><span class="ab-row-icon"></span><span class="ab-row-name">Designers mentored, CareerFoundry</span><span class="ab-row-val">47</span><span class="ab-bar"><i style="width:47%"></i></span></div>
+          <div class="ab-row"><span class="ab-row-icon"></span><span class="ab-row-name">Cart abandonment, U.S. Mint</span><span class="ab-row-val">31% lower</span><span class="ab-bar"><i style="width:31%"></i></span></div>
+          <div class="ab-row"><span class="ab-row-icon"></span><span class="ab-row-name">Products branded, Broadlane</span><span class="ab-row-val">21</span><span class="ab-bar"><i style="width:21%"></i></span></div>
         </div>
-        <div class="about-section">
-          <div class="about-section-title">Publications</div>
-          <p>A Guide to Data-Driven Design.</p>
-          <p>50 COVID Haiku Epiphanies.</p>
+        <div class="ab-contact">
+          <span class="ab-contact-label" data-i18n="contact">Contact</span>
+          <span>214-543-2098</span>
+          <a class="contact-link" href="mailto:micah@conscious-shell.com">micah@conscious-shell.com</a>
+          <a class="contact-link" href="https://conscious-shell.com" target="_blank">conscious-shell.com</a>
+          <a class="contact-link" href="https://github.com/socraticstatic" target="_blank">github/socraticstatic</a>
+          <a class="contact-link" href="https://linkedin.com/in/micahboswell" target="_blank">linkedin/micahboswell</a>
         </div>
-        <p id="site-version-footer" style="font-size:10px;color:#666;margin-top:16px;font-family:monospace"></p>
+        <div class="ab-foot">
+          <span>&copy; Micah Boswell 1996-2026</span>
+          <button class="ab-readme" onclick="openWin('readme')">Read Me&hellip;</button>
+        </div>
       </div>
       <div class="win-resize" onmousedown="startResize(event, 'about')"></div>
     </div>
@@ -1640,6 +1725,55 @@
       </div>
       <div class="win-status" data-count="project-item"></div>
       <div class="win-resize" onmousedown="startResize(event, 'projects')"></div>
+    </div>
+
+    <!-- Read Me: the long-form sections -->
+    <div class="window" id="win-readme" style="width:460px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'readme')">
+        <div class="closebox" onclick="closeWin('readme')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Read Me</div>
+      </div>
+      <div class="win-body">
+        <div class="about-section">
+          <div class="about-section-title" data-i18n="capabilities">Capabilities</div>
+          <div class="about-caps">
+            <span class="about-cap">Agentic AI</span>
+            <span class="about-cap">LLM Tooling</span>
+            <span class="about-cap">MCP</span>
+            <span class="about-cap">Design Systems</span>
+            <span class="about-cap">Design Ops</span>
+            <span class="about-cap">API Design</span>
+            <span class="about-cap">Cloud Platforms</span>
+            <span class="about-cap">Figma</span>
+            <span class="about-cap">Axure</span>
+          </div>
+        </div>
+        <div class="about-section" id="readme-background">
+          <div class="about-section-title" data-i18n="background">Background</div>
+          <p>Spanish fluent. Raised in Lima, Peru.</p>
+          <p>13 years independent consulting between full-time roles.</p>
+          <p>Author of Data-Driven Design. 47 designers mentored.</p>
+          <p>Portfolio site conscious-shell.com online since 2000.</p>
+          <p>Tools: Adobe Creative Suite, Figma, Sketch, Axure, DaVinci Resolve.</p>
+          <p>Education: BA Hardin-Simmons (Abilene, TX). Freshman year at Samford University (Birmingham, AL).</p>
+          <p>eCornell AI certifications 2025-2026: Artificial Intelligence Strategy, AI for Business Productivity, AI Applications and Value Creation.</p>
+        </div>
+        <div class="about-section">
+          <div class="about-section-title">Awards</div>
+          <p>AT&amp;T Connection Award (2022, 2023, 2024, 2025).</p>
+          <p>Brand Overhaul of the Year (2010).</p>
+          <p>Best Speaker - Ignite (2012).</p>
+          <p>Girl Clown (producer): Best Narrative Short + Best Actress, Williamsburg IFF; 13 U.S. festivals; worldwide distribution by IndieFlix; Stephen Simon's Gaiam Cinema Circle pick.</p>
+        </div>
+        <div class="about-section">
+          <div class="about-section-title">Publications</div>
+          <p>A Guide to Data-Driven Design.</p>
+          <p>50 COVID Haiku Epiphanies.</p>
+        </div>
+        <p id="site-version-footer" style="font-size:10px;color:#666;margin-top:16px;font-family:monospace"></p>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'readme')"></div>
     </div>
 
     <!-- Contact -->
@@ -2518,7 +2652,7 @@
 
     /* ===== PDF EXPORT ===== */
     function exportPDF() {
-      ['about','career','projects','contact'].forEach(function(id) {
+      ['about','readme','career','projects','contact'].forEach(function(id) {
         document.getElementById('win-' + id).classList.add('open');
       });
       setTimeout(function() { window.print(); }, 100);
@@ -2527,11 +2661,11 @@
     /* ===== SPANISH TOGGLE ===== */
     var translations = {
       en: { title: 'Lead Product Designer', thesis: 'I turn complex systems into things people can actually use. Right now that means the AI agents I prototype for AT&T\'s network operations and the agents that run my own sites every day.',
-        sec: ['CONTACT','CAPABILITIES','BACKGROUND'],
-        bg: ['Spanish fluent (raised in Lima, Peru).','Mentored 47 designers.','Author of Data-Driven Design.','Education: Hardin-Simmons BA (transferred from Samford).'] },
-      es: { title: 'Dise\u00f1ador Principal de Producto', thesis: 'Convierto sistemas complejos en herramientas que la gente puede usar. Ahora mismo eso significa los agentes de IA que prototipo para las operaciones de red de AT&T y los agentes que operan mis propios sitios cada d\u00eda.',
-        sec: ['CONTACTO','COMPETENCIAS','FORMACION'],
-        bg: ['Espa\u00f1ol fluido (criado en Lima, Peru).','47 disenadores mentoreados.','Autor de Data-Driven Design.','Educacion: Hardin-Simmons BA (transferido de Samford).'] }
+        sec: { contact: 'Contact', capabilities: 'Capabilities', background: 'Background' },
+        bg: ['Spanish fluent. Raised in Lima, Peru.','13 years independent consulting between full-time roles.','Author of Data-Driven Design. 47 designers mentored.','Portfolio site conscious-shell.com online since 2000.','Tools: Adobe Creative Suite, Figma, Sketch, Axure, DaVinci Resolve.','Education: BA Hardin-Simmons (Abilene, TX). Freshman year at Samford University (Birmingham, AL).','eCornell AI certifications 2025-2026: Artificial Intelligence Strategy, AI for Business Productivity, AI Applications and Value Creation.'] },
+      es: { title: 'Diseñador Principal de Producto', thesis: 'Convierto sistemas complejos en herramientas que la gente puede usar. Ahora mismo eso significa los agentes de IA que prototipo para las operaciones de red de AT&T y los agentes que operan mis propios sitios cada día.',
+        sec: { contact: 'Contacto', capabilities: 'Competencias', background: 'Formación' },
+        bg: ['Español fluido. Criado en Lima, Perú.','13 años de consultoría independiente entre puestos de tiempo completo.','Autor de Data-Driven Design. 47 diseñadores mentoreados.','Portafolio conscious-shell.com en línea desde 2000.','Herramientas: Adobe Creative Suite, Figma, Sketch, Axure, DaVinci Resolve.','Educación: BA Hardin-Simmons (Abilene, TX). Primer año en Samford University (Birmingham, AL).','Certificaciones eCornell en IA 2025-2026: Estrategia de IA, IA para la productividad empresarial, Aplicaciones de IA y creación de valor.'] }
     };
     var currentLang = 'en';
     function toggleLang() {
@@ -2541,10 +2675,9 @@
       if (titleEl) titleEl.textContent = t.title;
       var thesisEl = document.querySelector('.about-thesis');
       if (thesisEl) thesisEl.textContent = t.thesis;
-      var secs = document.querySelectorAll('#win-about .about-section-title');
-      t.sec.forEach(function(s, i) { if (secs[i]) secs[i].textContent = s; });
-      var bgPs = document.querySelectorAll('#win-about .about-section:last-child p');
-      t.bg.forEach(function(s, i) { if (bgPs[i]) bgPs[i].textContent = s; });
+      document.querySelectorAll('[data-i18n]').forEach(function(el) { var k = el.getAttribute('data-i18n'); if (t.sec[k]) el.textContent = t.sec[k]; });
+      var bgPs = document.querySelectorAll('#readme-background p');
+      t.bg.forEach(function(line, i) { if (bgPs[i]) bgPs[i].textContent = line; });
       var btn = document.getElementById('lang-toggle');
       if (btn) btn.textContent = currentLang === 'en' ? 'ES' : 'EN';
     }
@@ -2600,7 +2733,7 @@
       var ev = document.getElementById('easter-version');
       if (ev) ev.textContent = 'Version ' + SITE_VERSION;
       if (window.innerWidth <= 640) {
-        ['about','career','projects','contact','ask'].forEach(function(id) {
+        ['about','readme','career','projects','contact','ask'].forEach(function(id) {
           document.getElementById('win-' + id).classList.add('open');
         });
       } else {
