@@ -19,7 +19,8 @@ See `~/CLAUDE.md` for full career history, professional context, and AT&T role d
 - Current: Experience Lead, DNI at AT&T (cloud management platforms, API portals, network dashboards)
 - Prior: CareerFoundry (mentor/advisory board), Wells Fargo (via Granite Solutions), Treverity (VP Experience Design), Citi, GE Nuclear, U.S. Mint, Hitachi Vantara, The Richards Group, Dell, Broadlane (Creative Director), Perot Systems, IMC2/NCH/GSK
 - Pier 1, Home Depot, Chuck E. Cheese were Richards Group *clients*, not employers. Never worked at Toyota, Myspace, or TubeMogul.
-- `index.html` in this repo is the source of truth for career facts. Do not assert an employer not listed there.
+- Source of truth for career and project facts: `~/Developer/job-hunter/data/` (`facts.md` claims bank, `resume.json` master resume, `projects.json` project registry). `index.html` is derived from it and `npm test` fails on drift (dates, project names, forbidden claims). Do not assert an employer or a project that is not in those files.
+- The same data feeds conscious-shell.com (`scripts/sync-projects-from-registry.mjs` there generates the portfolio_projects migration) and the job-hunter pipeline. Change the data, then regenerate; never edit a surface by hand.
 - Founded Sportsgunner. 13 years independent consulting between full-time roles.
 - Portfolio: conscious-shell.com
 - GitHub: socraticstatic
