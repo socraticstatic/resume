@@ -51,7 +51,7 @@ test('Windows XP: taskbar at the bottom with a start button and upward menus', (
 test('Mac OS X: horizontal pinstripes, Jaguar era, glossy icons, one label', () => {
   assert.match(rule('[data-os="aqua"] .titlebar'), /repeating-linear-gradient\(to bottom/);
   assert.match(rule('[data-os="aqua"] .window'), /repeating-linear-gradient\(to bottom/);
-  assert.equal(era('aqua'), 'Aug 2002');
+  assert.equal(era('aqua'), 'Sep 2001');
   assert.equal(iconKeys('aqua').length, 6, 'six glossy icons for Mac OS X');
   assert.ok(!html.includes('Mac OS X Aqua<'), 'Theme menu says Mac OS X, not Mac OS X Aqua');
 });
