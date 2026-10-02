@@ -17,8 +17,10 @@ See `~/CLAUDE.md` for full career history, professional context, and AT&T role d
 
 - 30+ years UX/product design
 - Current: Experience Lead, DNI at AT&T (cloud management platforms, API portals, network dashboards)
-- Prior: Citi, GE, Hitachi Vantara, Treverity (VP Experience Design), U.S. Mint, Pier 1, Toyota, TubeMogul, Myspace
-- Founded Sportsgunner. 13+ year independent consultant.
+- Prior: CareerFoundry (mentor/advisory board), Wells Fargo (via Granite Solutions), Treverity (VP Experience Design), Citi, GE Nuclear, U.S. Mint, Hitachi Vantara, The Richards Group, Dell, Broadlane (Creative Director), Perot Systems, IMC2/NCH/GSK
+- Pier 1, Home Depot, Chuck E. Cheese were Richards Group *clients*, not employers. Never worked at Toyota, Myspace, or TubeMogul.
+- `index.html` in this repo is the source of truth for career facts. Do not assert an employer not listed there.
+- Founded Sportsgunner. 13 years independent consulting between full-time roles.
 - Portfolio: conscious-shell.com
 - GitHub: socraticstatic
 - Tools: Adobe Creative Suite, DaVinci Resolve, Cinema 4D, Figma, Sketch, Axure
