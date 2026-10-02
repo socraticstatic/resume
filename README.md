@@ -21,7 +21,7 @@ The boot screens were rebuilt from GUIdebook startup screenshots, not from memor
 
 - Double-click an icon to open a window. Drag the title bar. Resize from the bottom-right corner.
 - `Cmd/Ctrl+1` to `6` switches systems and reboots. `Cmd/Ctrl+W` or `Esc` closes the front window.
-- Click, `Esc`, `Space`, or `Enter` skips a boot. Hold `Shift` as a Mac boots for Extensions Off.
+- Click, `Esc`, `Space`, or `Enter` skips a boot. Hold `Shift` while switching to a Mac for Extensions Off.
 - Right-click the desktop for wallpaper, appearance, screensavers, and Save as PDF.
 - File menu: the Chooser picks which Micah you are hiring. Save as Resume.sit runs a StuffIt dialog, then prints.
 - Right-click a project for its Get Info dialog.
@@ -53,7 +53,7 @@ After Dark tributes: Flying Toasters (Berkeley Systems, 1989) and Cyberhacker, b
 
 **Windows.** Absolutely positioned divs with drag, resize, and z-order in about sixty lines. Nothing is a library.
 
-**Facts.** The Career and Projects windows are generated from a shared registry in a sibling repo (`job-hunter/data`: a claims bank, the master resume, and a project registry). `npm test` fails if a date, a project, or a forbidden claim drifts from that source, and skips those checks when the sibling is absent so a stranger's clone still passes.
+**Facts.** The Career and Projects windows are kept in step with a shared registry in a sibling repo (`job-hunter/data`: a claims bank, the master resume, and a project registry). `npm test` fails if a date, a project, or a forbidden claim drifts from that source, and skips those checks when the sibling is absent so a stranger's clone still passes.
 
 **Pairing.** Built in Claude Code with me directing. The sessions researched each startup screen against GUIdebook, drew the SVG marks, wrote the tests, and argued with me about what Windows 3.1's desktop color actually was. It was gray.
 

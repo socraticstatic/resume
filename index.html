@@ -1171,6 +1171,11 @@
   .titlebar-title { position: static; transform: none; background: transparent !important; }
   [data-os="beos"] .window { margin-top: 0; }
   [data-os="beos"] .titlebar { width: 100%; margin: 0; }
+  /* the XP taskbar and the BeOS Deskbar are sticky top bars on a phone; menus open downward and inside the screen */
+  [data-os="winxp"] #menubar { top: 0; bottom: auto; }
+  [data-os="winxp"] .menu-dropdown { top: 100%; bottom: auto; }
+  [data-os="beos"] #menubar { width: 100%; }
+  [data-os="beos"] .menu-dropdown { left: 0; right: auto; }
 }
 
     /* ============================================================
@@ -2225,7 +2230,7 @@
       att: [
         {a:'A prototype, not a product. I framed an agentic model for network operations: agents that provision, diagnose, optimize, and decommission, coordinating through a shared context layer. Then I prototyped the NetBond agent. It shows its evidence, proposes a fix, and waits for the customer. Auto-resolve is off by default, and every action gets reported.'},
         {a:'I redesigned the DNI Portal with diagnostics that identified underutilized hardware across the network. Equipment running but serving no traffic became visible for the first time. The savings came from targeted removal rather than blanket audits.'},
-        {a:'I led the first enterprise adoption of Lovable AI within product design at AT&T. Created reusable templates, playbooks, and best-practice frameworks. It went from my experiment to an adopted practice across multiple teams.'},
+        {a:'I led the enterprise Lovable AI pilot within product design at AT&T. Built its templates and playbooks, and ran UX education for teams bringing AI into their work.'},
         {a:'I work across multiple internal platform teams - DNI, NetBond, Cloud Designer, VLAN tools. I partner directly with API engineering and global marketing on productization strategy.'}
       ],
       wells: [
@@ -2290,9 +2295,9 @@
 
     var askAnswers = [
       "Most designers either make things pretty or they ship products. I do both, and I write the code too. Thirty years across nuclear, finance, telecom, government, and energy. I don't need a translator between design and engineering - I am the translator.",
-      "Because I've already made every expensive mistake a designer can make, and I know which corners you can cut and which ones will cost you six months. I've watched three companies get acquired partly on the strength of work I led. Experience compounds. You're not hiring my age, you're hiring my pattern library.",
+      "Because I've already made every expensive mistake a designer can make, and I know which corners you can cut and which ones will cost you six months. I've watched two companies get acquired partly on the strength of work I led. Experience compounds. You're not hiring my age, you're hiring my pattern library.",
       "Complexity is the enemy. Every system I touch gets simpler for the person using it, even if the underlying problem is harder. I start with the human workflow, not the data model. If a field worker in a flood zone can't use it with wet hands, the design failed.",
-      "At AT&T I prototype agents for network operations: they provision, diagnose, optimize, and decommission, and they show their evidence and wait for a person before they act. I also led the first enterprise adoption of AI-assisted design tooling there. On my own sites the agents are live every day: a family historian on Claude, a bilingual curation agent, a job-application agent, all behind human gates. I'm not theorizing about AI. I run it, and I know where the gates go.",
+      "At AT&T I prototype agents for network operations: they provision, diagnose, optimize, and decommission, and they show their evidence and wait for a person before they act. I also led the enterprise Lovable AI pilot there. On my own sites the agents are live every day: a family historian on Claude, a bilingual curation agent, a job-application agent, all behind human gates. I'm not theorizing about AI. I run it, and I know where the gates go.",
       "GE Nuclear. Hundreds of separate Fortran applications built over decades, each with its own data silo. Errors from manual data transfer between systems. I proposed unifying everything into one database with role-based dashboards. Everyone said it couldn't be done inside federal nuclear compliance requirements. I did it. 48% error reduction.",
       "Because design without implementation knowledge is decoration. I write production code because it makes my designs honest. I know what's expensive to build and what's cheap. That saves months of back-and-forth. My GitHub is active. I ship every week.",
       "A team that's solving hard problems and needs someone who can own the full arc - from user research through design system through shipped product. I want to work where design is a strategic function, not a service desk. Ideally somewhere building AI tools, cloud infrastructure, or developer experience."
@@ -2501,7 +2506,7 @@
           ctx.timers.forEach(clearTimeout);
           if (!skipped) ctx.steps.filter(function (s) { return !s.fired && s.ms < ctx.duration; }).sort(function (a, b) { return a.ms - b.ms; })
             .forEach(function (s) { s.fired = true; try { s.fn(); } catch (e) {} });
-          window.removeEventListener('resize', fit); overlay.removeEventListener('click', skip); document.removeEventListener('keydown', skipKey);
+          window.removeEventListener('resize', fit); overlay.removeEventListener('click', skip); document.removeEventListener('keydown', skipKey, { capture: true });
           if (done) done(skipped);
           current = null;
           if (opts.hold) return;
@@ -2509,8 +2514,8 @@
           setTimeout(function () { overlay.remove(); }, 400);
         }
         function skip() { finish(true); }
-        function skipKey(e) { if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); finish(true); } }
-        overlay.addEventListener('click', skip); document.addEventListener('keydown', skipKey);
+        function skipKey(e) { if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopImmediatePropagation(); finish(true); } }
+        overlay.addEventListener('click', skip); document.addEventListener('keydown', skipKey, { capture: true });
         requestAnimationFrame(function () { if (t.start) t.start(ctx); });
         var endTimer = setTimeout(function () { finish(false); }, ctx.duration); ctx.timers.push(endTimer);
         current = { finish: finish, ctx: ctx };
@@ -2668,11 +2673,9 @@
     // "Start me up" - Rolling Stones, 1981 / If you start me up, I'll never stop
     (function() {
       var saved = localStorage.getItem('os-theme');
-      if (saved) { setTheme(saved); }
-      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        setTheme('aqua');
-      }
-      var activeOs = document.documentElement.dataset.os || 'mac7';
+      var prefersDark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      var activeOs = saved || (prefersDark ? 'aqua' : 'mac7');
+      setTheme(activeOs);
       var themeWp = localStorage.getItem('wallpaper-' + activeOs);
       if (themeWp) applyWallpaperCss(themeWp);
       /* one-shot migration: old global 'wallpaper' key moves to the active-theme slot, then dies */

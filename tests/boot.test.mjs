@@ -36,3 +36,16 @@ test('every theme has a boot sequence and reduced motion is honored', () => {
   assert.match(html, /@media \(prefers-reduced-motion: reduce\) \{ \.boot-overlay/);
   assert.ok(!/\n\s*\.boot-overlay \{ display: none !important; \}/.test(html), 'phones boot too; the stage scales down (print may still hide it)');
 });
+
+test('a key pressed to skip a boot never reaches the window and easter-egg handlers', () => {
+  assert.match(html, /document\.addEventListener\('keydown', skipKey, \{ capture: true \}\)/);
+  assert.match(html, /function skipKey\(e\) \{[^}]*stopImmediatePropagation\(\)/);
+  assert.match(html, /document\.removeEventListener\('keydown', skipKey, \{ capture: true \}\)/);
+});
+
+test('INIT applies the theme on every first visit, light mode included', () => {
+  const init = html.slice(html.indexOf('/* ===== INIT ===== */'), html.indexOf('// AFTER DARK: CYBERHACKER'));
+  assert.match(init, /var activeOs = saved \|\| \(prefersDark \? 'aqua' : 'mac7'\);\s*setTheme\(activeOs\);/);
+  assert.ok(!/if \(saved\) \{ setTheme\(saved\); \}/.test(init), 'conditional setTheme is gone');
+});
+

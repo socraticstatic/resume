@@ -68,3 +68,11 @@ test('Mac OS 9: shipped desktop picture by default, 9.1 era; Mac OS 7 era unchan
   assert.equal(era('mac7'), 'Mar 1993');
   assert.match(html, /d\.style\.backgroundImage = '';/, "'none' wallpaper clears the inline image so the theme default shows");
 });
+
+test('phones keep the XP and BeOS menus reachable', () => {
+  const mobile = html.slice(html.indexOf('@media (max-width: 640px) {'), html.indexOf('SCREENSAVER OVERLAY'));
+  assert.match(mobile, /\[data-os="winxp"\] \.menu-dropdown \{ top: 100%; bottom: auto; \}/);
+  assert.match(mobile, /\[data-os="beos"\] #menubar \{ width: 100%; \}/);
+  assert.match(mobile, /\[data-os="beos"\] \.menu-dropdown \{ left: 0; right: auto; \}/);
+});
+
