@@ -24,7 +24,6 @@ test('switchTheme delegates to BootEngine and ends in setTheme', () => {
 
 test('INIT gives the parade real icons and boots once per tab', () => {
   const init = html.slice(html.indexOf('/* ===== INIT ===== */'), html.indexOf('// AFTER DARK: CYBERHACKER'));
-  assert.match(init, /BootEngine\.setIcons\(osIcons\.mac9\)/);
   assert.match(init, /BootEngine\.bootOnLoad\(activeOs\)/);
   assert.match(html, /sessionStorage\.getItem\('booted'\)/);
 });
@@ -47,5 +46,24 @@ test('INIT applies the theme on every first visit, light mode included', () => {
   const init = html.slice(html.indexOf('/* ===== INIT ===== */'), html.indexOf('// AFTER DARK: CYBERHACKER'));
   assert.match(init, /var activeOs = saved \|\| \(prefersDark \? 'aqua' : 'mac7'\);\s*setTheme\(activeOs\);/);
   assert.ok(!/if \(saved\) \{ setTheme\(saved\); \}/.test(init), 'conditional setTheme is gone');
+});
+
+test('the extension parade uses each system\'s own icon set', () => {
+  const init = html.slice(html.indexOf('/* ===== INIT ===== */'), html.indexOf('// AFTER DARK: CYBERHACKER'));
+  assert.match(init, /BootEngine\.setIcons\(\{ mac7: osIcons\.mac7, mac9: osIcons\.mac9 \}\)/);
+  assert.match(html, /var map = iconMap && iconMap\[ctx\.os\];/);
+});
+
+test('the color Happy Mac has a gray body and a lavender screen, as Mac OS 9 drew it', () => {
+  assert.match(html, /var happyMacColor = happyMac[\s\S]*?'<polygon fill="#ccc" points="26\.5 2'/);
+  assert.match(html, /<rect x="7\.5" y="4" width="17" height="13" fill="#ccf"\/>/);
+});
+
+test('the Welcome to Macintosh icon is the Mac, Apple mark, red mouse cable, and blue keyboard', () => {
+  const m = html.match(/var macMouse = ([\s\S]*?<\/svg>';)/);
+  assert.ok(m, 'macMouse defined');
+  for (const part of ['stroke="#d00"', 'fill="#cc0"', 'fill="#00f"', 'fill="#080"', 'viewBox="0 0 54 48"']) {
+    assert.ok(m[1].includes(part), `macMouse lacks ${part}`);
+  }
 });
 

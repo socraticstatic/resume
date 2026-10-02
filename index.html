@@ -947,7 +947,7 @@
     .boot-mac7 .boot-stage { font-family: Charcoal, Geneva, sans-serif; color: #000;
       background-color: #fff; background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%), linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%); background-size: 2px 2px; background-position: 0 0, 1px 1px; }
     .b7-welcome { position: absolute; left: 97px; top: 90px; width: 446px; height: 122px; background: #fff; border: 2px solid #000; box-shadow: 0 0 0 1px #fff, 0 0 0 2px #000; }
-    .b7-welcome .b7-icon { position: absolute; left: 20px; top: 16px; width: 36px; height: 36px; }
+    .b7-welcome .b7-icon { position: absolute; left: 18px; top: 14px; width: 42px; height: 38px; }
     .b7-welcome .b7-text { position: absolute; left: 0; right: 0; top: 30px; text-align: center; font-size: 13px; font-weight: bold; letter-spacing: .2px; }
     .b7-welcome .b7-extoff { position: absolute; left: 0; right: 0; top: 62px; text-align: center; font-size: 12px; }
 
@@ -2356,9 +2356,17 @@
       function reduced() { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
 
       var happyMac = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges"><polygon fill="#fff" points="26.5 2 26.5 1 5.5 1 5.5 2 4.5 2 4.5 27 27.5 27 27.5 2 26.5 2"/><rect x="11.5" y="7" width="1" height="2"/><rect x="3.5" y="2" width="1" height="25"/><rect x="5.5" width="21" height="1"/><rect x="18.5" y="22" width="6" height="1"/><rect x="4.5" y="1" width="1" height="1"/><rect x="26.5" y="1" width="1" height="1"/><rect x="27.5" y="2" width="1" height="25"/><path d="M4.5,27v5h23v-5H4.5ZM26.5,31H5.5v-3h21v3Z"/><rect x="6.5" y="23" width="2" height="1"/><rect x="19.5" y="7" width="1" height="2"/><rect x="18.5" y="13" width="1" height="1"/><rect x="13.5" y="13" width="1" height="1"/><rect x="14.5" y="14" width="4" height="1"/><rect x="7.5" y="3" width="17" height="1"/><rect x="6.5" y="4" width="1" height="13"/><rect x="24.5" y="4" width="1" height="13"/><rect x="7.5" y="17" width="17" height="1"/><polygon points="16 7 16 11 15 11 15 12 16 12 17 12 17 7 16 7"/><rect fill="#fff" x="5.5" y="28" width="21" height="3"/></svg>';
-      var happyMacColor = happyMac.replace('<polygon fill="#fff" points="26.5 2', '<polygon fill="#d8d8ff" points="26.5 2');
-      /* System 7 welcome icon: a compact Mac with a mouse, 1-bit */
-      var macMouse = '<svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="12" y="2" width="18" height="22" fill="#fff" stroke="#000" stroke-width="2"/><rect x="15" y="5" width="12" height="9" fill="#fff" stroke="#000"/><rect x="17" y="7" width="2" height="2"/><rect x="23" y="7" width="2" height="2"/><rect x="18" y="11" width="6" height="1"/><rect x="16" y="17" width="4" height="1"/><rect x="12" y="24" width="18" height="5" fill="#fff" stroke="#000" stroke-width="2"/><path d="M11 20 q-6 2 -5 9" fill="none" stroke="#000" stroke-width="1.5"/><rect x="2" y="27" width="7" height="7" rx="1" fill="#fff" stroke="#000" stroke-width="1.5"/></svg>';
+      /* Mac OS 8.5+ Happy Mac: light gray body, lavender screen (sampled from the GUIdebook Mac OS 9.0 splash, #ccc / #ccf) */
+      var happyMacColor = happyMac.replace('<polygon fill="#fff" points="26.5 2', '<polygon fill="#ccc" points="26.5 2')
+        .replace('<rect x="11.5" y="7" width="1" height="2"/>', '<rect x="7.5" y="4" width="17" height="13" fill="#ccf"/><rect x="11.5" y="7" width="1" height="2"/>');
+      /* System 7 welcome icon, traced from the GUIdebook 7.0 and 7.5.3 splashes: Mac with a yellow screen glyph, Apple mark with a green leaf, red mouse cable, blue keyboard */
+      var macMouse = '<svg viewBox="0 0 54 48" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">' +
+        '<rect x="21" y="11" width="13" height="15" fill="#fff" stroke="#000" stroke-width="2"/>' +
+        '<path d="M25 13h6v1h-5v6h5v1h-6z" fill="#cc0"/><rect x="27" y="23" width="4" height="1" fill="#000"/>' +
+        '<path d="M9.5 17.5h1v-1h2v1h1v-1h2v1h1v4h-1v2h-1v1h-3v-1h-1v-2h-1z" fill="none" stroke="#000" stroke-width="1"/><rect x="12" y="14" width="1" height="2" fill="#080"/>' +
+        '<path d="M14 26.5h6M14.5 26.5v1M12.5 27.5v2M12.5 29.5h2M14.5 29.5v2M14.5 31.5h2M16.5 31.5v2M16.5 33.5h2M18.5 33.5v2M18.5 35.5h3M21.5 35.5v2" fill="none" stroke="#d00" stroke-width="1"/>' +
+        '<rect x="22.5" y="37.5" width="6" height="4" fill="#fff" stroke="#000" stroke-width="1"/>' +
+        '<path d="M24.5 28.5h16l3 5h-19z" fill="#fff" stroke="#000" stroke-width="1"/><path d="M28 29.5h9v1h-9zM29 31.5h9v1h-9z" fill="#00f"/></svg>';
       /* Mac OS 9 two-face logo (#3366cc / #6699ff from the 1999 splash) */
       var macOsLogo = '<svg viewBox="0 0 110 88" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="55" height="88" fill="#3366cc"/><rect x="55" y="0" width="55" height="88" fill="#6699ff"/><path d="M58 2 q-18 28 2 44 q-20 10 -4 40" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round"/><rect x="28" y="22" width="7" height="12" fill="#000"/><rect x="72" y="22" width="7" height="12" fill="#000"/><path d="M22 58 q16 14 32 2" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round"/><path d="M64 60 q10 8 24 -2" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>';
       /* Mac OS X 10.1 Aqua apple */
@@ -2407,7 +2415,8 @@
           ctx.at(from + i * every, function () {
             var chip = document.createElement('div'); chip.className = 'boot-ext-chip';
             var key = sections[i];
-            chip.innerHTML = (iconMap && key && iconMap[key]) ? iconMap[key] : puzzle(i);
+            var map = iconMap && iconMap[ctx.os];
+        chip.innerHTML = (map && key && map[key]) ? map[key] : puzzle(i);
             strip.appendChild(chip);
           });
         })(i);
@@ -2525,7 +2534,7 @@
         try { if (sessionStorage.getItem('booted')) { if (done) done(); return null; } sessionStorage.setItem('booted', '1'); } catch (e) {}
         return run(os, done);
       }
-      function setIcons(map) { iconMap = map || null; }
+      function setIcons(map) { iconMap = map || null; } /* { mac7: {...}, mac9: {...} }: each system marches its own icons */
       return { run: run, bootOnLoad: bootOnLoad, setIcons: setIcons, themes: THEMES };
     })();
     function switchTheme(os) { BootEngine.run(os, function () { setTheme(os); }); }
@@ -2702,7 +2711,7 @@
       } else {
         openWin('about');
       }
-      BootEngine.setIcons(osIcons.mac9);
+      BootEngine.setIcons({ mac7: osIcons.mac7, mac9: osIcons.mac9 });
       BootEngine.bootOnLoad(activeOs);
       // "You have died of dysentery." - Oregon Trail, 1971 (just checking if you're reading)
     })();
