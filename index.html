@@ -826,7 +826,7 @@
     .ab-ident { flex: 1; min-width: 0; }
     .about-name { font-size: 20px; font-weight: bold; letter-spacing: -0.3px; }
     .about-title { font-size: 13px; opacity: 0.75; margin-top: 2px; }
-    .ab-ok, .ab-readme { font: inherit; font-size: 12px; padding: 2px 14px; cursor: default; }
+    .ab-ok, .ab-readme, .ab-pdf { font: inherit; font-size: 12px; padding: 2px 14px; cursor: default; }
     .ab-ok { display: none; }
     .ab-kv { font-size: 12px; line-height: 1.6; margin-bottom: 10px; }
     .ab-kv b { font-weight: bold; margin-right: 4px; }
@@ -849,7 +849,7 @@
     [data-os="mac7"] .ab-bar { border-color: #000; }
     [data-os="mac7"] .ab-bar i { background: #000; }
     [data-os="mac7"] .ab-row-icon { border-color: #000; }
-    [data-os="mac7"] .ab-ok, [data-os="mac7"] .ab-readme { border: 1px solid #000; border-radius: 6px; background: #fff; box-shadow: 1px 1px 0 #000; }
+    [data-os="mac7"] .ab-ok, [data-os="mac7"] .ab-readme, [data-os="mac7"] .ab-pdf { border: 1px solid #000; border-radius: 6px; background: #fff; box-shadow: 1px 1px 0 #000; }
 
     /* Mac OS 9: About This Computer. The wordmark across the top, bold Charcoal labels, the blue striped bar. */
     [data-os="mac9"] .about-dialog { font-family: Geneva, Helvetica, sans-serif; }
@@ -860,13 +860,13 @@
     [data-os="mac9"] .ab-rows { border-top: 2px solid #999; }
     [data-os="mac9"] .ab-bar { border-color: #555; background: #eee; }
     [data-os="mac9"] .ab-bar i { background: repeating-linear-gradient(to bottom, #6c8cd8 0 1px, #9fb6ec 1px 2px); }
-    [data-os="mac9"] .ab-ok, [data-os="mac9"] .ab-readme { border: 1px solid #666; border-radius: 4px; background: linear-gradient(to bottom, #f4f4f4, #d4d4d4); }
+    [data-os="mac9"] .ab-ok, [data-os="mac9"] .ab-readme, [data-os="mac9"] .ab-pdf { border: 1px solid #666; border-radius: 4px; background: linear-gradient(to bottom, #f4f4f4, #d4d4d4); }
 
     /* Windows 3.1: About Program Manager. Flag at left, OK at right, double-line separators, licensed-to block. */
     [data-os="win31"] .about-dialog { font-family: 'MS Sans Serif', Tahoma, 'Segoe UI', sans-serif; }
     [data-os="win31"] .ab-mark-win31 { display: block; align-self: flex-start; }
     [data-os="win31"] .ab-ok { display: inline-block; align-self: flex-start; border: 2px outset #dfdfdf; background: #c0c0c0; padding: 3px 18px; font-weight: bold; }
-    [data-os="win31"] .ab-readme { border: 2px outset #dfdfdf; background: #c0c0c0; }
+    [data-os="win31"] .ab-readme, [data-os="win31"] .ab-pdf { border: 2px outset #dfdfdf; background: #c0c0c0; }
     [data-os="win31"] .ab-rows, [data-os="win31"] .ab-row { border-color: #808080; box-shadow: 0 1px 0 #fff; }
     [data-os="win31"] .ab-bar { border: 1px solid #808080; background: #fff; }
     [data-os="win31"] .ab-bar i { background: #000080; }
@@ -878,7 +878,7 @@
     [data-os="winxp"] .ab-mark-winxp { display: block; width: 100%; height: auto; }
     [data-os="winxp"] .ab-ident { padding: 6px 14px 0; }
     [data-os="winxp"] .ab-ok { display: inline-block; margin: 6px 14px 0 0; border: 1px solid #003c74; border-radius: 3px; background: linear-gradient(to bottom, #fff, #ece9d8); padding: 3px 20px; }
-    [data-os="winxp"] .ab-readme { border: 1px solid #003c74; border-radius: 3px; background: linear-gradient(to bottom, #fff, #ece9d8); }
+    [data-os="winxp"] .ab-readme, [data-os="winxp"] .ab-pdf { border: 1px solid #003c74; border-radius: 3px; background: linear-gradient(to bottom, #fff, #ece9d8); }
     [data-os="winxp"] .ab-bar { border-color: #7f9db9; border-radius: 2px; background: #fff; }
     [data-os="winxp"] .ab-bar i { background: linear-gradient(to bottom, #8fb8f0, #2b63d3); }
 
@@ -894,7 +894,7 @@
     [data-os="aqua"] .ab-row { border-bottom-color: #ddd; }
     [data-os="aqua"] .ab-bar { border-color: #8fa8c8; border-radius: 6px; background: #e9eef6; }
     [data-os="aqua"] .ab-bar i { background: linear-gradient(to bottom, #9ec3ff, #3f80f6 55%, #2a62c9); border-radius: 6px; }
-    [data-os="aqua"] .ab-readme { border: 1px solid #777; border-radius: 12px; padding: 3px 14px; background: linear-gradient(to bottom, #fff 0%, #dde8f8 100%); }
+    [data-os="aqua"] .ab-readme, [data-os="aqua"] .ab-pdf { border: 1px solid #777; border-radius: 12px; padding: 3px 14px; background: linear-gradient(to bottom, #fff 0%, #dde8f8 100%); }
 
     /* BeOS: About BeOS. Logo plus labeled lines on the left, the list on the right. */
     [data-os="beos"] .about-dialog { display: grid; grid-template-columns: 180px 1fr; gap: 0 14px; font-family: Helvetica, Arial, sans-serif; }
@@ -907,7 +907,7 @@
     [data-os="beos"] .ab-rows, [data-os="beos"] .ab-contact, [data-os="beos"] .ab-foot { grid-column: 1 / -1; }
     [data-os="beos"] .ab-bar { border-color: #808080; background: #fff; }
     [data-os="beos"] .ab-bar i { background: #336699; }
-    [data-os="beos"] .ab-readme { border: 1px solid #808080; background: #d8d8d8; }
+    [data-os="beos"] .ab-readme, [data-os="beos"] .ab-pdf { border: 1px solid #808080; background: #d8d8d8; }
 
     /* Career */
     .career-role { border-bottom: 1px solid var(--divider); padding: 8px 0; cursor: pointer; }
@@ -937,6 +937,15 @@
     .project-head span { font-size: 12px; color: #666; white-space: nowrap; margin-left: 12px; }
     .project-detail { display: none; padding: 8px 0 4px; font-size: 13px; line-height: 1.5; }
     .project-tags { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+
+    /* Project windows: the work, image first */
+    .pw-body { padding: 14px 16px; }
+    .pw-shot { display: block; width: 100%; height: auto; border: 1px solid var(--content-border); margin-bottom: 10px; background: #fff; }
+    .pw-meta { display: flex; gap: 12px; align-items: baseline; font-size: 12px; color: #555; margin-bottom: 8px; }
+    .pw-summary { font-size: 13px; line-height: 1.55; margin-bottom: 10px; }
+    .pw-links { margin-top: 10px; display: flex; gap: 6px; }
+    .pw-links a { text-decoration: none; color: inherit; }
+    .project-item { cursor: pointer; }
 
     /* Contact */
     .contact-card { padding: 4px 0; }
@@ -1197,11 +1206,12 @@
   .icon-column { display: none; }
   #menubar { position: sticky; }
   .window {
-    position: static !important; display: block !important;
+    position: static !important;
     width: 100% !important; max-height: none !important;
     border-radius: 0 !important; margin: 0; box-shadow: none !important;
     border-left: none !important; border-right: none !important;
   }
+  .window.open { display: block !important; }
   .titlebar { cursor: pointer; border-radius: 0 !important; }
   .closebox { display: none; }
   .win-resize { display: none; }
@@ -1287,7 +1297,9 @@
           <div class="menu-dd-item" onclick="openWin('contact')">Open Contact</div>
           <div class="menu-dd-sep"></div>
           <div class="menu-dd-item" onclick="openWin('chooser')">Chooser...</div>
-          <div class="menu-dd-item" onclick="saveAsSit()">Save as Resume.sit...<span class="menu-dd-shortcut">Cmd+P</span></div>
+          <div class="menu-dd-item" onclick="saveAsSit()">Save as Resume.sit...</div>
+          <div class="menu-dd-item" onclick="downloadPDF()">Download Resume (PDF)</div>
+          <div class="menu-dd-item" onclick="exportPDF()">Print...</div>
         </div>
       </div>
       <div class="menu-item">Theme
@@ -1388,7 +1400,7 @@
         </div>
         <div class="ab-foot">
           <span>&copy; Micah Boswell 1996-2026</span>
-          <button class="ab-readme" onclick="openWin('readme')">Read Me&hellip;</button>
+          <span><button class="ab-pdf" onclick="downloadPDF()">Download PDF</button> <button class="ab-readme" onclick="openWin('readme')">Read Me&hellip;</button></span>
         </div>
       </div>
       <div class="win-resize" onmousedown="startResize(event, 'about')"></div>
@@ -1574,152 +1586,65 @@
       </div>
       <div class="win-body">
         <div class="project-list">
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-netbond-sdci')" data-when="AT&amp;T, 2025 - 2026" data-stack="Agentic AI, Cloud Platforms, TypeScript, Prototype" data-notes="React and TypeScript functional-ideation prototype for Software-Defined Cloud Interconnect. Secured roadmap approval with an executive prototype. Framed an agentic model for network operations (agents that provision, diagnose, optimize, and decommission) and prototyped its NetBond agent: it shows its evidence, proposes a fix, and waits for the customer. Auto-resolve is off by default.">
             <div class="project-head"><strong>NetBond SDCI prototype</strong><span>AT&amp;T, 2025 - 2026</span></div>
-            <div class="project-detail">
-              <p>React and TypeScript functional-ideation prototype for Software-Defined Cloud Interconnect. Secured roadmap approval with an executive prototype. Framed an agentic model for network operations (agents that provision, diagnose, optimize, and decommission) and prototyped its NetBond agent: it shows its evidence, proposes a fix, and waits for the customer. Auto-resolve is off by default.</p>
-              <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Cloud Platforms</span> <span class="about-cap">TypeScript</span> <span class="about-cap">Prototype</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-cloud-assistant')" data-when="AT&amp;T, 2026" data-stack="Agentic AI, Conversational UX, Prototype" data-notes="Prototype assistant for a cloud networking portal. It answers from live data, knows the current screen, previews each change with Do it and Cancel buttons, runs the same command a person would, and keeps approvals in a plain-language audit trail. Wrote the design spec for plugging another AT&amp;T team's assistant into every screen.">
             <div class="project-head"><strong>Cloud networking portal assistant</strong><span>AT&amp;T, 2026</span></div>
-            <div class="project-detail">
-              <p>Prototype assistant for a cloud networking portal. It answers from live data, knows the current screen, previews each change with Do it and Cancel buttons, runs the same command a person would, and keeps approvals in a plain-language audit trail. Wrote the design spec for plugging another AT&amp;T team's assistant into every screen.</p>
-              <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Conversational UX</span> <span class="about-cap">Prototype</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-cloud-designer')" data-when="AT&amp;T, 2024 - 2026" data-stack="Cloud Platforms, Visualization, TypeScript, Patent pending" data-notes="Visual network designer unifying Global, Topology, and Circuit views of an enterprise network in one interface, built to replace a patchwork of five to eight separate tools. Drag-and-drop topology canvas, world map with connection arcs, circuit-level device panels, PDF export. Patent pending (AT&amp;T). React and TypeScript.">
             <div class="project-head"><strong>Cloud Network Designer</strong><span>AT&amp;T, 2024 - 2026</span></div>
-            <div class="project-detail">
-              <p>Visual network designer unifying Global, Topology, and Circuit views of an enterprise network in one interface, built to replace a patchwork of five to eight separate tools. Drag-and-drop topology canvas, world map with connection arcs, circuit-level device panels, PDF export. Patent pending (AT&amp;T). React and TypeScript.</p>
-              <div class="project-tags"><span class="about-cap">Cloud Platforms</span> <span class="about-cap">Visualization</span> <span class="about-cap">TypeScript</span> <span class="about-cap">Patent pending</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-film-pipeline')" data-when="AT&amp;T, 2026" data-stack="Agentic AI, Video, Remotion, Claude Code" data-notes="Claude Code skill (film) plus toolkit (filmkit) that scripts, narrates with ElevenLabs, captures, animates with Remotion, scores, and masters narrated product films. AT&amp;T brand standards (Aleck Sans, Flywheel tokens, the approved icon set, the sonic sting) ride as a switchable profile, with automated gates on every cut including a transcript check of narration against the script. Four films delivered in September 2026, including an AT&amp;T executive film.">
             <div class="project-head"><strong>Agentic video pipeline</strong><span>AT&amp;T, 2026</span></div>
-            <div class="project-detail">
-              <p>Claude Code skill (film) plus toolkit (filmkit) that scripts, narrates with ElevenLabs, captures, animates with Remotion, scores, and masters narrated product films. AT&amp;T brand standards (Aleck Sans, Flywheel tokens, the approved icon set, the sonic sting) ride as a switchable profile, with automated gates on every cut including a transcript check of narration against the script. Four films delivered in September 2026, including an AT&amp;T executive film.</p>
-              <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Video</span> <span class="about-cap">Remotion</span> <span class="about-cap">Claude Code</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-insight-engine')" data-when="AT&amp;T (POC on my own stack), May - Jul 2026" data-stack="LLM Tooling, Research Ops, Supabase, Evals" data-notes="Proof of concept that turns a qualitative UX-research archive into something a product manager can ask. Claude extracts candidate findings with a verbatim quote, a citation, a confidence rating with a written reason, and tags. A researcher approves, edits, or rejects every candidate before it becomes a published insight. Questions get a synthesized answer with inline citations, a confidence level, and the gaps it did not cover, and the system says it has no coverage rather than inventing one. Next.js, Supabase with pgvector, Playwright suites, a 26-question eval set. Handed to AT&amp;T's Power Platform team in July 2026.">
             <div class="project-head"><strong>Insight Engine</strong><span>AT&amp;T (POC on my own stack), May - Jul 2026</span></div>
-            <div class="project-detail">
-              <p>Proof of concept that turns a qualitative UX-research archive into something a product manager can ask. Claude extracts candidate findings with a verbatim quote, a citation, a confidence rating with a written reason, and tags. A researcher approves, edits, or rejects every candidate before it becomes a published insight. Questions get a synthesized answer with inline citations, a confidence level, and the gaps it did not cover, and the system says it has no coverage rather than inventing one. Next.js, Supabase with pgvector, Playwright suites, a 26-question eval set. Handed to AT&amp;T's Power Platform team in July 2026.</p>
-              <div class="project-tags"><span class="about-cap">LLM Tooling</span> <span class="about-cap">Research Ops</span> <span class="about-cap">Supabase</span> <span class="about-cap">Evals</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-dni-diagnostics')" data-when="AT&amp;T, 2023" data-stack="Cloud Platforms, Dashboards, Enterprise" data-notes="Redesigned the network infrastructure portal with diagnostics that surfaced underused hardware for the first time, saving $300K+ through targeted decommissioning. VLAN migration and triage tools cut resolution from weeks to minutes.">
             <div class="project-head"><strong>DNI Portal diagnostics</strong><span>AT&amp;T, 2023</span></div>
-            <div class="project-detail">
-              <p>Redesigned the network infrastructure portal with diagnostics that surfaced underused hardware for the first time, saving $300K+ through targeted decommissioning. VLAN migration and triage tools cut resolution from weeks to minutes.</p>
-              <div class="project-tags"><span class="about-cap">Cloud Platforms</span> <span class="about-cap">Dashboards</span> <span class="about-cap">Enterprise</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-helen-vault-daemon')" data-when="Independent, 2025 - present" data-stack="Agentic AI, MCP, TypeScript, Automation" data-notes="My personal operations agent and the identity every Claude session on my machine runs as. A TypeScript MCP server with 71 registered tools, run as a launchd service over HTTP so sessions share it: session memory and open threads, a 1,200-file Obsidian vault searchable by substring, theme, or local embeddings, mail across four IMAP accounts, iMessages, Apple Notes, GitHub, Dropbox, a photo vision index, drafts written to the vault for review, posting to a Facebook Page and X by API. Backs 21 scheduled tasks behind human gates.">
             <div class="project-head"><strong>Helen (vault-daemon)</strong><span>Independent, 2025 - present</span></div>
-            <div class="project-detail">
-              <p>My personal operations agent and the identity every Claude session on my machine runs as. A TypeScript MCP server with 71 registered tools, run as a launchd service over HTTP so sessions share it: session memory and open threads, a 1,200-file Obsidian vault searchable by substring, theme, or local embeddings, mail across four IMAP accounts, iMessages, Apple Notes, GitHub, Dropbox, a photo vision index, drafts written to the vault for review, posting to a Facebook Page and X by API. Backs 21 scheduled tasks behind human gates.</p>
-              <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">MCP</span> <span class="about-cap">TypeScript</span> <span class="about-cap">Automation</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-roots')" data-when="familyroots.center, 2025 - present" data-stack="Agentic AI, Next.js, Genealogy, Stripe" data-notes="Paid family-history product with an AI family historian built on Claude inside a Stripe subscription, with tests for the privacy of the AI's family context, and a 13-agent research workflow (blind researchers by record type, adversarial verification per fact, a judge) that scored 93/100 against a DAR-accepted lineage record.">
             <div class="project-head"><strong>Roots</strong><span>familyroots.center, 2025 - present</span></div>
-            <div class="project-detail">
-              <p>Paid family-history product with an AI family historian built on Claude inside a Stripe subscription, with tests for the privacy of the AI's family context, and a 13-agent research workflow (blind researchers by record type, adversarial verification per fact, a judge) that scored 93/100 against a DAR-accepted lineage record.</p>
-              <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Next.js</span> <span class="about-cap">Genealogy</span> <span class="about-cap">Stripe</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-pen-and-paper')" data-when="penpaperandink.app, 2025 - present" data-stack="Agentic AI, Editorial, Supabase, Japanese" data-notes="Daily autonomous curation agent for a fountain pen, paper, and ink almanac. It verifies stale entries, researches new ones, and publishes in English and Japanese only after gates: every field needs a source URL plus a verbatim quote, performance fields need two independent sources, holds are respected, and a daily digest reports every action. A citation radar tracks how AI assistants answer and cite questions in its niche.">
             <div class="project-head"><strong>Pen &amp; Paper curation agent</strong><span>penpaperandink.app, 2025 - present</span></div>
-            <div class="project-detail">
-              <p>Daily autonomous curation agent for a fountain pen, paper, and ink almanac. It verifies stale entries, researches new ones, and publishes in English and Japanese only after gates: every field needs a source URL plus a verbatim quote, performance fields need two independent sources, holds are respected, and a daily digest reports every action. A citation radar tracks how AI assistants answer and cite questions in its niche.</p>
-              <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Editorial</span> <span class="about-cap">Supabase</span> <span class="about-cap">Japanese</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-chart-color-audit')" data-when="npm and the MCP Registry, 2026" data-stack="Accessibility, Open source, MCP, TypeScript" data-notes="Open-source accessibility audit for chart color palettes: WCAG non-text contrast, Machado 2009 color-vision-deficiency simulation, and OKLab delta-E separation. One engine with four faces: API, CLI, CI gate, and an MCP server listed in the official MCP Registry. TypeScript, on npm.">
             <div class="project-head"><strong>chart-color-audit</strong><span>npm and the MCP Registry, 2026</span></div>
-            <div class="project-detail">
-              <p>Open-source accessibility audit for chart color palettes: WCAG non-text contrast, Machado 2009 color-vision-deficiency simulation, and OKLab delta-E separation. One engine with four faces: API, CLI, CI gate, and an MCP server listed in the official MCP Registry. TypeScript, on npm.</p>
-              <div class="project-tags"><span class="about-cap">Accessibility</span> <span class="about-cap">Open source</span> <span class="about-cap">MCP</span> <span class="about-cap">TypeScript</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-chart-color-system')" data-when="Independent, 2026" data-stack="Data Visualization, Accessibility, MCP, TypeScript" data-notes="Web builder, npm package, and public MCP server for chart color: a solver and audit for categorical, sequential, and diverging palettes, checked against WCAG 2.2 non-text contrast, color-blind simulation, and grayscale, with honest pass and fail badges.">
             <div class="project-head"><strong>Chart Color System</strong><span>Independent, 2026</span></div>
-            <div class="project-detail">
-              <p>Web builder, npm package, and public MCP server for chart color: a solver and audit for categorical, sequential, and diverging palettes, checked against WCAG 2.2 non-text contrast, color-blind simulation, and grayscale, with honest pass and fail badges.</p>
-              <div class="project-tags"><span class="about-cap">Data Visualization</span> <span class="about-cap">Accessibility</span> <span class="about-cap">MCP</span> <span class="about-cap">TypeScript</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-gpsail')" data-when="gpsail.net, 2025 - present" data-stack="Sports data, MCP, React, Automation" data-notes="Season tracker for the F50 foiling catamaran circuit: venues, race-by-race standings, team profiles, and performance data, kept current by scheduled data syncs. A public MCP server at mcp.gpsail.net exposes the schedule and standings to AI assistants, with contract tests against the live endpoint.">
             <div class="project-head"><strong>GP Sailing</strong><span>gpsail.net, 2025 - present</span></div>
-            <div class="project-detail">
-              <p>Season tracker for the F50 foiling catamaran circuit: venues, race-by-race standings, team profiles, and performance data, kept current by scheduled data syncs. A public MCP server at mcp.gpsail.net exposes the schedule and standings to AI assistants, with contract tests against the live endpoint.</p>
-              <div class="project-tags"><span class="about-cap">Sports data</span> <span class="about-cap">MCP</span> <span class="about-cap">React</span> <span class="about-cap">Automation</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
-            <div class="project-head"><strong>Job-application agent</strong><span>Independent, 2026</span></div>
-            <div class="project-detail">
-              <p>Daily job-application pipeline run as an agent with a human gate: discovers roles across boards and aggregators, vets companies, tailors the resume and cover letter from a claims bank where every line must trace to a verified fact, fills application forms in a dedicated browser profile, and parks anything only I may answer. Python and Node with Playwright.</p>
-              <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Automation</span> <span class="about-cap">Playwright</span> <span class="about-cap">Python</span></div>
-            </div>
-          </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-resume-os')" data-when="Independent, 2026" data-stack="Vanilla JS, Retro UI, Resume" data-notes="Interactive resume styled as six classic operating systems (System 7, Mac OS 9, Windows 3.1, Windows XP, Mac OS X, BeOS) in a single HTML file with no framework and no build step. Period boot sequences, draggable windows, After Dark tribute screensavers, and a test that keeps its facts aligned with the shared registry.">
             <div class="project-head"><strong>Retro OS resume</strong><span>Independent, 2026</span></div>
-            <div class="project-detail">
-              <p>Interactive resume styled as six classic operating systems (System 7, Mac OS 9, Windows 3.1, Windows XP, Mac OS X, BeOS) in a single HTML file with no framework and no build step. Period boot sequences, draggable windows, After Dark tribute screensavers, and a test that keeps its facts aligned with the shared registry.</p>
-              <div class="project-tags"><span class="about-cap">Vanilla JS</span> <span class="about-cap">Retro UI</span> <span class="about-cap">Resume</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-product-value-engine')" data-when="Independent prototype, 2024 - 2026" data-stack="LLM Tooling, Sales Enablement, Supabase, Prototype" data-notes="Prototype sales enablement tool built on my own stack with AT&amp;T Business as the modeled catalog: a quick value-prop generator, a product value lab with segment-fit scoring, a personas hub, AI responses to competitor claims, an ROI analyzer, battlecards, and AI roleplay practice against generated buyer personas. React, TypeScript, Supabase, Gemini.">
             <div class="project-head"><strong>Product Value Engine</strong><span>Independent prototype, 2024 - 2026</span></div>
-            <div class="project-detail">
-              <p>Prototype sales enablement tool built on my own stack with AT&amp;T Business as the modeled catalog: a quick value-prop generator, a product value lab with segment-fit scoring, a personas hub, AI responses to competitor claims, an ROI analyzer, battlecards, and AI roleplay practice against generated buyer personas. React, TypeScript, Supabase, Gemini.</p>
-              <div class="project-tags"><span class="about-cap">LLM Tooling</span> <span class="about-cap">Sales Enablement</span> <span class="about-cap">Supabase</span> <span class="about-cap">Prototype</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-ai-concierge')" data-when="Independent prototype, 2025" data-stack="Conversational UX, LLM Tooling, TypeScript, Prototype" data-notes="Prototype chatbot interface for configuring network topology and API settings through conversation, with Azure settings management and JSON configuration export. React, TypeScript, Tailwind.">
             <div class="project-head"><strong>API Concierge</strong><span>Independent prototype, 2025</span></div>
-            <div class="project-detail">
-              <p>Prototype chatbot interface for configuring network topology and API settings through conversation, with Azure settings management and JSON configuration export. React, TypeScript, Tailwind.</p>
-              <div class="project-tags"><span class="about-cap">Conversational UX</span> <span class="about-cap">LLM Tooling</span> <span class="about-cap">TypeScript</span> <span class="about-cap">Prototype</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-service-assurance')" data-when="Independent prototype, 2026" data-stack="Observability, Lovable, TypeScript, Prototype" data-notes="Prototype service assurance console built with Lovable and refined by hand: observability views and incident triage flows for network services. TypeScript.">
             <div class="project-head"><strong>Service Assurance</strong><span>Independent prototype, 2026</span></div>
-            <div class="project-detail">
-              <p>Prototype service assurance console built with Lovable and refined by hand: observability views and incident triage flows for network services. TypeScript.</p>
-              <div class="project-tags"><span class="about-cap">Observability</span> <span class="about-cap">Lovable</span> <span class="about-cap">TypeScript</span> <span class="about-cap">Prototype</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-treverity-harvey')" data-when="Treverity, 2017" data-stack="Dashboards, Field Systems, Energy" data-notes="Control-room dashboards for the Houston grid used in the Hurricane Harvey emergency response: flood levels, road elevation, outage mapping. Field apps worked offline. Every system started with the field worker.">
             <div class="project-head"><strong>Hurricane Harvey grid dashboards</strong><span>Treverity, 2017</span></div>
-            <div class="project-detail">
-              <p>Control-room dashboards for the Houston grid used in the Hurricane Harvey emergency response: flood levels, road elevation, outage mapping. Field apps worked offline. Every system started with the field worker.</p>
-              <div class="project-tags"><span class="about-cap">Dashboards</span> <span class="about-cap">Field Systems</span> <span class="about-cap">Energy</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-ge-fortran')" data-when="GE Nuclear, 2013 - 2016" data-stack="Design Systems, Enterprise, Energy" data-notes="Proposed and led the unification of hundreds of legacy Fortran applications into role-based dashboards. One source of truth. Errors down 48% with federal compliance intact. Created the design system, asset libraries, and rapid-prototyping process.">
             <div class="project-head"><strong>GE Nuclear Fortran unification</strong><span>GE Nuclear, 2013 - 2016</span></div>
-            <div class="project-detail">
-              <p>Proposed and led the unification of hundreds of legacy Fortran applications into role-based dashboards. One source of truth. Errors down 48% with federal compliance intact. Created the design system, asset libraries, and rapid-prototyping process.</p>
-              <div class="project-tags"><span class="about-cap">Design Systems</span> <span class="about-cap">Enterprise</span> <span class="about-cap">Energy</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-mint-ecommerce')" data-when="U.S. Mint (via PFSweb), 2013 - 2014" data-stack="E-commerce, Research, Strategy" data-notes="Interviewed buyers, wrote five personas, and authored the first persona-driven e-commerce strategy for a government retailer. Tailored paths removed friction at each group's drop-off points. Cart abandonment fell 31% and revenue rose 20%.">
             <div class="project-head"><strong>U.S. Mint e-commerce strategy</strong><span>U.S. Mint (via PFSweb), 2013 - 2014</span></div>
-            <div class="project-detail">
-              <p>Interviewed buyers, wrote five personas, and authored the first persona-driven e-commerce strategy for a government retailer. Tailored paths removed friction at each group's drop-off points. Cart abandonment fell 31% and revenue rose 20%.</p>
-              <div class="project-tags"><span class="about-cap">E-commerce</span> <span class="about-cap">Research</span> <span class="about-cap">Strategy</span></div>
-            </div>
           </div>
-          <div class="project-item" onclick="toggleProject(this)">
+          <div class="project-item" onclick="openWin('proj-citi-tap-to-pay')" data-when="Citi, 2016" data-stack="Mobile, Payments, Design Systems" data-notes="Redesigned 68 mobile payment workflows for tap-to-pay across Latin America, Asia, and the U.S., with a pattern library dense enough to preempt most offshore implementation questions.">
             <div class="project-head"><strong>Citi tap-to-pay workflows</strong><span>Citi, 2016</span></div>
-            <div class="project-detail">
-              <p>Redesigned 68 mobile payment workflows for tap-to-pay across Latin America, Asia, and the U.S., with a pattern library dense enough to preempt most offshore implementation questions.</p>
-              <div class="project-tags"><span class="about-cap">Mobile</span> <span class="about-cap">Payments</span> <span class="about-cap">Design Systems</span></div>
-            </div>
           </div>
         </div>
       </div>
@@ -1823,6 +1748,284 @@
       </div>
       <div class="win-resize" onmousedown="startResize(event, 'ask')"></div>
     </div>
+
+    <!-- PROJECT WINDOWS (generated by scripts/sync-projects.mjs from the registry; do not edit by hand) -->
+    <div class="window project-window" id="win-proj-netbond-sdci" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-netbond-sdci')">
+        <div class="closebox" onclick="closeWin('proj-netbond-sdci')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">NetBond SDCI prototype</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>AT&amp;T</span><span>2025 - 2026</span></div>
+        <p class="pw-summary">React and TypeScript functional-ideation prototype for Software-Defined Cloud Interconnect. Secured roadmap approval with an executive prototype. Framed an agentic model for network operations (agents that provision, diagnose, optimize, and decommission) and prototyped its NetBond agent: it shows its evidence, proposes a fix, and waits for the customer. Auto-resolve is off by default.</p>
+        <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Cloud Platforms</span> <span class="about-cap">TypeScript</span> <span class="about-cap">Prototype</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-netbond-sdci')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-cloud-assistant" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-cloud-assistant')">
+        <div class="closebox" onclick="closeWin('proj-cloud-assistant')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Cloud networking portal assistant</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>AT&amp;T</span><span>2026</span></div>
+        <p class="pw-summary">Prototype assistant for a cloud networking portal. It answers from live data, knows the current screen, previews each change with Do it and Cancel buttons, runs the same command a person would, and keeps approvals in a plain-language audit trail. Wrote the design spec for plugging another AT&amp;T team's assistant into every screen.</p>
+        <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Conversational UX</span> <span class="about-cap">Prototype</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-cloud-assistant')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-cloud-designer" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-cloud-designer')">
+        <div class="closebox" onclick="closeWin('proj-cloud-designer')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Cloud Network Designer</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>AT&amp;T</span><span>2024 - 2026</span></div>
+        <p class="pw-summary">Visual network designer unifying Global, Topology, and Circuit views of an enterprise network in one interface, built to replace a patchwork of five to eight separate tools. Drag-and-drop topology canvas, world map with connection arcs, circuit-level device panels, PDF export. Patent pending (AT&amp;T). React and TypeScript.</p>
+        <div class="project-tags"><span class="about-cap">Cloud Platforms</span> <span class="about-cap">Visualization</span> <span class="about-cap">TypeScript</span> <span class="about-cap">Patent pending</span></div>
+        <div class="pw-links"><a class="career-pill" href="https://github.com/socraticstatic/Cloud_Designer" target="_blank" rel="noopener">GitHub</a></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-cloud-designer')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-film-pipeline" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-film-pipeline')">
+        <div class="closebox" onclick="closeWin('proj-film-pipeline')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Agentic video pipeline</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>AT&amp;T</span><span>2026</span></div>
+        <p class="pw-summary">Claude Code skill (film) plus toolkit (filmkit) that scripts, narrates with ElevenLabs, captures, animates with Remotion, scores, and masters narrated product films. AT&amp;T brand standards (Aleck Sans, Flywheel tokens, the approved icon set, the sonic sting) ride as a switchable profile, with automated gates on every cut including a transcript check of narration against the script. Four films delivered in September 2026, including an AT&amp;T executive film.</p>
+        <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Video</span> <span class="about-cap">Remotion</span> <span class="about-cap">Claude Code</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-film-pipeline')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-insight-engine" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-insight-engine')">
+        <div class="closebox" onclick="closeWin('proj-insight-engine')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Insight Engine</div>
+      </div>
+      <div class="win-body pw-body">
+        <img class="pw-shot" src="assets/work/insight-engine.webp" alt="Insight Engine">
+        <div class="pw-meta"><span>AT&amp;T (POC on my own stack)</span><span>May - Jul 2026</span></div>
+        <p class="pw-summary">Proof of concept that turns a qualitative UX-research archive into something a product manager can ask. Claude extracts candidate findings with a verbatim quote, a citation, a confidence rating with a written reason, and tags. A researcher approves, edits, or rejects every candidate before it becomes a published insight. Questions get a synthesized answer with inline citations, a confidence level, and the gaps it did not cover, and the system says it has no coverage rather than inventing one. Next.js, Supabase with pgvector, Playwright suites, a 26-question eval set. Handed to AT&amp;T's Power Platform team in July 2026.</p>
+        <div class="project-tags"><span class="about-cap">LLM Tooling</span> <span class="about-cap">Research Ops</span> <span class="about-cap">Supabase</span> <span class="about-cap">Evals</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-insight-engine')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-dni-diagnostics" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-dni-diagnostics')">
+        <div class="closebox" onclick="closeWin('proj-dni-diagnostics')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">DNI Portal diagnostics</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>AT&amp;T</span><span>2023</span></div>
+        <p class="pw-summary">Redesigned the network infrastructure portal with diagnostics that surfaced underused hardware for the first time, saving $300K+ through targeted decommissioning. VLAN migration and triage tools cut resolution from weeks to minutes.</p>
+        <div class="project-tags"><span class="about-cap">Cloud Platforms</span> <span class="about-cap">Dashboards</span> <span class="about-cap">Enterprise</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-dni-diagnostics')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-helen-vault-daemon" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-helen-vault-daemon')">
+        <div class="closebox" onclick="closeWin('proj-helen-vault-daemon')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Helen (vault-daemon)</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>Independent</span><span>2025 - present</span></div>
+        <p class="pw-summary">My personal operations agent and the identity every Claude session on my machine runs as. A TypeScript MCP server with 71 registered tools, run as a launchd service over HTTP so sessions share it: session memory and open threads, a 1,200-file Obsidian vault searchable by substring, theme, or local embeddings, mail across four IMAP accounts, iMessages, Apple Notes, GitHub, Dropbox, a photo vision index, drafts written to the vault for review, posting to a Facebook Page and X by API. Backs 21 scheduled tasks behind human gates.</p>
+        <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">MCP</span> <span class="about-cap">TypeScript</span> <span class="about-cap">Automation</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-helen-vault-daemon')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-roots" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-roots')">
+        <div class="closebox" onclick="closeWin('proj-roots')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Roots</div>
+      </div>
+      <div class="win-body pw-body">
+        <img class="pw-shot" src="assets/work/roots.webp" alt="Roots">
+        <div class="pw-meta"><span>familyroots.center</span><span>2025 - present</span></div>
+        <p class="pw-summary">Paid family-history product with an AI family historian built on Claude inside a Stripe subscription, with tests for the privacy of the AI's family context, and a 13-agent research workflow (blind researchers by record type, adversarial verification per fact, a judge) that scored 93/100 against a DAR-accepted lineage record.</p>
+        <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Next.js</span> <span class="about-cap">Genealogy</span> <span class="about-cap">Stripe</span></div>
+        <div class="pw-links"><a class="career-pill" href="https://familyroots.center" target="_blank" rel="noopener">Live site</a></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-roots')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-pen-and-paper" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-pen-and-paper')">
+        <div class="closebox" onclick="closeWin('proj-pen-and-paper')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Pen &amp; Paper curation agent</div>
+      </div>
+      <div class="win-body pw-body">
+        <img class="pw-shot" src="assets/work/pen-and-paper.webp" alt="Pen &amp; Paper curation agent">
+        <div class="pw-meta"><span>penpaperandink.app</span><span>2025 - present</span></div>
+        <p class="pw-summary">Daily autonomous curation agent for a fountain pen, paper, and ink almanac. It verifies stale entries, researches new ones, and publishes in English and Japanese only after gates: every field needs a source URL plus a verbatim quote, performance fields need two independent sources, holds are respected, and a daily digest reports every action. A citation radar tracks how AI assistants answer and cite questions in its niche.</p>
+        <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Editorial</span> <span class="about-cap">Supabase</span> <span class="about-cap">Japanese</span></div>
+        <div class="pw-links"><a class="career-pill" href="https://github.com/socraticstatic/PenAndPaperThree" target="_blank" rel="noopener">GitHub</a> <a class="career-pill" href="https://penpaperandink.app" target="_blank" rel="noopener">Live site</a></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-pen-and-paper')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-chart-color-audit" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-chart-color-audit')">
+        <div class="closebox" onclick="closeWin('proj-chart-color-audit')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">chart-color-audit</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>npm and the MCP Registry</span><span>2026</span></div>
+        <p class="pw-summary">Open-source accessibility audit for chart color palettes: WCAG non-text contrast, Machado 2009 color-vision-deficiency simulation, and OKLab delta-E separation. One engine with four faces: API, CLI, CI gate, and an MCP server listed in the official MCP Registry. TypeScript, on npm.</p>
+        <div class="project-tags"><span class="about-cap">Accessibility</span> <span class="about-cap">Open source</span> <span class="about-cap">MCP</span> <span class="about-cap">TypeScript</span></div>
+        <div class="pw-links"><a class="career-pill" href="https://github.com/socraticstatic/chart-color-audit" target="_blank" rel="noopener">GitHub</a></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-chart-color-audit')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-chart-color-system" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-chart-color-system')">
+        <div class="closebox" onclick="closeWin('proj-chart-color-system')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Chart Color System</div>
+      </div>
+      <div class="win-body pw-body">
+        <img class="pw-shot" src="assets/work/chart-color-system.webp" alt="Chart Color System">
+        <div class="pw-meta"><span>Independent</span><span>2026</span></div>
+        <p class="pw-summary">Web builder, npm package, and public MCP server for chart color: a solver and audit for categorical, sequential, and diverging palettes, checked against WCAG 2.2 non-text contrast, color-blind simulation, and grayscale, with honest pass and fail badges.</p>
+        <div class="project-tags"><span class="about-cap">Data Visualization</span> <span class="about-cap">Accessibility</span> <span class="about-cap">MCP</span> <span class="about-cap">TypeScript</span></div>
+        <div class="pw-links"><a class="career-pill" href="https://github.com/socraticstatic/Visualizations" target="_blank" rel="noopener">GitHub</a> <a class="career-pill" href="https://socraticstatic.github.io/Visualizations/" target="_blank" rel="noopener">Live site</a></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-chart-color-system')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-gpsail" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-gpsail')">
+        <div class="closebox" onclick="closeWin('proj-gpsail')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">GP Sailing</div>
+      </div>
+      <div class="win-body pw-body">
+        <img class="pw-shot" src="assets/work/gpsail.webp" alt="GP Sailing">
+        <div class="pw-meta"><span>gpsail.net</span><span>2025 - present</span></div>
+        <p class="pw-summary">Season tracker for the F50 foiling catamaran circuit: venues, race-by-race standings, team profiles, and performance data, kept current by scheduled data syncs. A public MCP server at mcp.gpsail.net exposes the schedule and standings to AI assistants, with contract tests against the live endpoint.</p>
+        <div class="project-tags"><span class="about-cap">Sports data</span> <span class="about-cap">MCP</span> <span class="about-cap">React</span> <span class="about-cap">Automation</span></div>
+        <div class="pw-links"><a class="career-pill" href="https://gpsail.net" target="_blank" rel="noopener">Live site</a></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-gpsail')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-resume-os" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-resume-os')">
+        <div class="closebox" onclick="closeWin('proj-resume-os')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Retro OS resume</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>Independent</span><span>2026</span></div>
+        <p class="pw-summary">Interactive resume styled as six classic operating systems (System 7, Mac OS 9, Windows 3.1, Windows XP, Mac OS X, BeOS) in a single HTML file with no framework and no build step. Period boot sequences, draggable windows, After Dark tribute screensavers, and a test that keeps its facts aligned with the shared registry.</p>
+        <div class="project-tags"><span class="about-cap">Vanilla JS</span> <span class="about-cap">Retro UI</span> <span class="about-cap">Resume</span></div>
+        <div class="pw-links"><a class="career-pill" href="https://github.com/socraticstatic/resume" target="_blank" rel="noopener">GitHub</a> <a class="career-pill" href="https://socraticstatic.github.io/resume/" target="_blank" rel="noopener">Live site</a></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-resume-os')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-product-value-engine" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-product-value-engine')">
+        <div class="closebox" onclick="closeWin('proj-product-value-engine')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Product Value Engine</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>Independent prototype</span><span>2024 - 2026</span></div>
+        <p class="pw-summary">Prototype sales enablement tool built on my own stack with AT&amp;T Business as the modeled catalog: a quick value-prop generator, a product value lab with segment-fit scoring, a personas hub, AI responses to competitor claims, an ROI analyzer, battlecards, and AI roleplay practice against generated buyer personas. React, TypeScript, Supabase, Gemini.</p>
+        <div class="project-tags"><span class="about-cap">LLM Tooling</span> <span class="about-cap">Sales Enablement</span> <span class="about-cap">Supabase</span> <span class="about-cap">Prototype</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-product-value-engine')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-ai-concierge" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-ai-concierge')">
+        <div class="closebox" onclick="closeWin('proj-ai-concierge')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">API Concierge</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>Independent prototype</span><span>2025</span></div>
+        <p class="pw-summary">Prototype chatbot interface for configuring network topology and API settings through conversation, with Azure settings management and JSON configuration export. React, TypeScript, Tailwind.</p>
+        <div class="project-tags"><span class="about-cap">Conversational UX</span> <span class="about-cap">LLM Tooling</span> <span class="about-cap">TypeScript</span> <span class="about-cap">Prototype</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-ai-concierge')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-service-assurance" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-service-assurance')">
+        <div class="closebox" onclick="closeWin('proj-service-assurance')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Service Assurance</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>Independent prototype</span><span>2026</span></div>
+        <p class="pw-summary">Prototype service assurance console built with Lovable and refined by hand: observability views and incident triage flows for network services. TypeScript.</p>
+        <div class="project-tags"><span class="about-cap">Observability</span> <span class="about-cap">Lovable</span> <span class="about-cap">TypeScript</span> <span class="about-cap">Prototype</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-service-assurance')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-treverity-harvey" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-treverity-harvey')">
+        <div class="closebox" onclick="closeWin('proj-treverity-harvey')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Hurricane Harvey grid dashboards</div>
+      </div>
+      <div class="win-body pw-body">
+        <img class="pw-shot" src="assets/work/treverity-harvey.webp" alt="Hurricane Harvey grid dashboards">
+        <div class="pw-meta"><span>Treverity</span><span>2017</span></div>
+        <p class="pw-summary">Control-room dashboards for the Houston grid used in the Hurricane Harvey emergency response: flood levels, road elevation, outage mapping. Field apps worked offline. Every system started with the field worker.</p>
+        <div class="project-tags"><span class="about-cap">Dashboards</span> <span class="about-cap">Field Systems</span> <span class="about-cap">Energy</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-treverity-harvey')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-ge-fortran" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-ge-fortran')">
+        <div class="closebox" onclick="closeWin('proj-ge-fortran')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">GE Nuclear Fortran unification</div>
+      </div>
+      <div class="win-body pw-body">
+        <img class="pw-shot" src="assets/work/ge-fortran.webp" alt="GE Nuclear Fortran unification">
+        <div class="pw-meta"><span>GE Nuclear</span><span>2013 - 2016</span></div>
+        <p class="pw-summary">Proposed and led the unification of hundreds of legacy Fortran applications into role-based dashboards. One source of truth. Errors down 48% with federal compliance intact. Created the design system, asset libraries, and rapid-prototyping process.</p>
+        <div class="project-tags"><span class="about-cap">Design Systems</span> <span class="about-cap">Enterprise</span> <span class="about-cap">Energy</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-ge-fortran')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-mint-ecommerce" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-mint-ecommerce')">
+        <div class="closebox" onclick="closeWin('proj-mint-ecommerce')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">U.S. Mint e-commerce strategy</div>
+      </div>
+      <div class="win-body pw-body">
+        <img class="pw-shot" src="assets/work/mint-ecommerce.webp" alt="U.S. Mint e-commerce strategy">
+        <div class="pw-meta"><span>U.S. Mint (via PFSweb)</span><span>2013 - 2014</span></div>
+        <p class="pw-summary">Interviewed buyers, wrote five personas, and authored the first persona-driven e-commerce strategy for a government retailer. Tailored paths removed friction at each group's drop-off points. Cart abandonment fell 31% and revenue rose 20%.</p>
+        <div class="project-tags"><span class="about-cap">E-commerce</span> <span class="about-cap">Research</span> <span class="about-cap">Strategy</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-mint-ecommerce')"></div>
+    </div>
+    <div class="window project-window" id="win-proj-citi-tap-to-pay" style="width:540px; height:auto; max-height:90vh;">
+      <div class="titlebar" onmousedown="startDrag(event, 'proj-citi-tap-to-pay')">
+        <div class="closebox" onclick="closeWin('proj-citi-tap-to-pay')"></div>
+        <div class="titlebar-lines"></div>
+        <div class="titlebar-title">Citi tap-to-pay workflows</div>
+      </div>
+      <div class="win-body pw-body">
+        <div class="pw-meta"><span>Citi</span><span>2016</span></div>
+        <p class="pw-summary">Redesigned 68 mobile payment workflows for tap-to-pay across Latin America, Asia, and the U.S., with a pattern library dense enough to preempt most offshore implementation questions.</p>
+        <div class="project-tags"><span class="about-cap">Mobile</span> <span class="about-cap">Payments</span> <span class="about-cap">Design Systems</span></div>
+      </div>
+      <div class="win-resize" onmousedown="startResize(event, 'proj-citi-tap-to-pay')"></div>
+    </div>
+    <!-- /PROJECT WINDOWS -->
 
     <!-- Themes -->
     <div class="window" id="win-themes" style="width:400px; height:auto; max-height:90vh;">
@@ -2032,6 +2235,7 @@
       var icon = document.querySelector('.icon-' + id);
       if (icon) icon.classList.add('visited');
       bringToFront(id);
+      if (window.innerWidth <= 640) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // "Don't close your eyes" - Kix, 1988 / Or do. We'll be here.
@@ -2232,10 +2436,10 @@
         if (pct >= 100) clearInterval(tick);
       }, 180);
       setTimeout(function(){
-        ratio.textContent = 'Resume.sit written (38 KB, was 125 KB)';
+        ratio.textContent = 'Resume.sit written (46 KB, was 125 KB)';
         setTimeout(function(){
           sit.remove();
-          exportPDF();
+          downloadPDF();
         }, 350);
       }, 1500);
     }
@@ -2273,13 +2477,11 @@
     function hideGetInfo() { var el = document.getElementById('get-info-dialog'); if (el) el.classList.remove('visible'); }
     function showGetInfo(projEl, x, y) {
       var head = projEl.querySelector('.project-head');
-      var detail = projEl.querySelector('.project-detail p');
-      var tags = Array.from(projEl.querySelectorAll('.project-detail .about-cap')).map(function(t){return t.textContent;});
+      var tags = (projEl.getAttribute('data-stack') || '').split(', ').filter(Boolean);
       var nameEl = head ? head.querySelector('strong') : null;
-      var whenEl = head ? head.querySelector('span') : null;
       var name = nameEl ? nameEl.textContent : 'Project';
-      var when = whenEl ? whenEl.textContent : '-';
-      var notes = detail ? detail.textContent.trim() : '';
+      var when = projEl.getAttribute('data-when') || '-';
+      var notes = projEl.getAttribute('data-notes') || '';
       var sizeKB = Math.max(8, Math.round(notes.length * 1.4));
       var icon = '\uD83D\uDCC1';
       var lower = name.toLowerCase();
@@ -2412,12 +2614,6 @@
       setTimeout(function() { typeText(el, qa[idx].a, 12); }, 200);
     }
 
-    function toggleProject(el) {
-      var detail = el.querySelector('.project-detail');
-      var wasOpen = detail.style.display === 'block';
-      document.querySelectorAll('.project-detail').forEach(function(d) { d.style.display = 'none'; });
-      if (!wasOpen) detail.style.display = 'block';
-    }
 
     var askAnswers = [
       "Most designers either make things pretty or they ship products. I do both, and I write the code too. Thirty years across nuclear, finance, telecom, government, and energy. I don't need a translator between design and engineering - I am the translator.",
@@ -2658,13 +2854,6 @@
       origToggleRole(el);
       if (!wasExpanded) el.classList.add('expanded');
     };
-    var origToggleProject = toggleProject;
-    toggleProject = function(el) {
-      var wasExpanded = el.classList.contains('expanded');
-      document.querySelectorAll('.project-item').forEach(function(r) { r.classList.remove('expanded'); });
-      origToggleProject(el);
-      if (!wasExpanded) el.classList.add('expanded');
-    };
 
     // ============================================================
     // ICON SYSTEM - "I want to break free" - Queen, 1984
@@ -2698,6 +2887,7 @@
     function showEasterEgg() { openWin('easter'); }
 
     /* ===== PDF EXPORT ===== */
+    function downloadPDF() { var a = document.getElementById('pdf-link'); if (a) a.click(); }
     function exportPDF() {
       ['about','readme','career','projects','contact'].forEach(function(id) {
         document.getElementById('win-' + id).classList.add('open');
@@ -2797,6 +2987,7 @@
         });
       } else {
         openWin('about');
+        if (window.innerWidth >= 1280) openWin('career');
       }
       BootEngine.setIcons(BOOT_EXTENSIONS);
       BootEngine.bootOnLoad(activeOs);
@@ -3307,7 +3498,8 @@ document.getElementById('desktop').addEventListener('contextmenu', (e) => {
     { label: 'Cyberhacker', action: () => EasterEggEngine.launchScreensaver('cyberhacker') },
     null,
     { label: 'About This Resume', action: showEasterEgg },
-    { label: 'Save as PDF...', action: exportPDF },
+    { label: 'Download Resume (PDF)', action: downloadPDF },
+    { label: 'Print...', action: exportPDF },
   ];
   items.forEach((it) => {
     const el = document.createElement('div');
@@ -3326,6 +3518,8 @@ document.addEventListener('DOMContentLoaded', () => {
   EasterEggEngine.init();
 });
   </script>
+
+  <a id="pdf-link" href="Micah_Boswell_Resume.pdf" download="Micah_Boswell_Resume.pdf" hidden>Download Resume (PDF)</a>
 
   <!-- After Dark tribute screensaver overlay -->
   <!-- "Computer, enhance." - every 80s movie ever -->

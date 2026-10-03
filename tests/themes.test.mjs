@@ -76,3 +76,11 @@ test('phones keep the XP and BeOS menus reachable', () => {
   assert.match(mobile, /\[data-os="beos"\] \.menu-dropdown \{ left: 0; right: auto; \}/);
 });
 
+test('phones show only open windows and a tapped window scrolls into view', () => {
+  const mobile = html.slice(html.indexOf('@media (max-width: 640px) {'), html.indexOf('SCREENSAVER OVERLAY'));
+  assert.ok(!/\.window \{[^}]*display: block !important/.test(mobile), 'closed windows stay hidden on phones');
+  assert.match(mobile, /\.window\.open \{ display: block !important; \}/);
+  const open = html.slice(html.indexOf('function openWin(id)'), html.indexOf('function closeWin(id)'));
+  assert.match(open, /if \(window\.innerWidth <= 640\) el\.scrollIntoView/);
+});
+

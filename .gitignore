@@ -4,3 +4,4 @@ node_modules/
 *.pdf
 .env
 tailored/
+!Micah_Boswell_Resume.pdf
