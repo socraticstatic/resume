@@ -1958,27 +1958,74 @@
     var SITE_VERSION = '2.1';
     var wins = {};
     var topZ = 10;
-    var nextX = 80, nextY = 60;
 
     // ============================================================
     // WINDOW MANAGEMENT - "Open Arms" - Journey, 1981
     // ============================================================
+
+    /* Where a window may live: inside the viewport, clear of the menu bar or taskbar and of the icon column. */
+    function desktopBounds() {
+      var os = document.documentElement.dataset.os || 'mac7';
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var iconsLeft = (os === 'win31' || os === 'winxp' || os === 'beos');
+      return {
+        left: iconsLeft ? 116 : 12,
+        right: iconsLeft ? vw - 12 : vw - 116,
+        top: (os === 'winxp' || os === 'beos') ? 12 : 30,
+        bottom: (os === 'winxp') ? vh - 44 : vh - 12
+      };
+    }
+    function winRect(o) { return { left: o.offsetLeft, top: o.offsetTop, right: o.offsetLeft + o.offsetWidth, bottom: o.offsetTop + o.offsetHeight }; }
+    function overlapArea(a, b) {
+      var w = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+      var h = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+      return (w > 0 && h > 0) ? w * h : 0;
+    }
+    /* Smart placement, three tiers: a fully free spot nearest the middle of the screen; failing that,
+       the spot that overlaps the least, as long as it covers under a third of the new window; failing
+       that, a cascade from the front window by a full title bar plus margin, so every tab stays reachable. */
+    function placeWindow(el) {
+      var b = desktopBounds();
+      var w = el.offsetWidth, h = Math.min(el.offsetHeight, b.bottom - b.top);
+      var openEls = Array.prototype.filter.call(document.querySelectorAll('.window.open'), function (o) { return o !== el; });
+      var others = openEls.map(winRect);
+      var cx = (b.left + b.right) / 2, cy = (b.top + b.bottom) / 2;
+      var best = null, bestOverlap = Infinity, bestDist = Infinity, step = 16;
+      var maxX = Math.max(b.left, b.right - w), maxY = Math.max(b.top, b.bottom - h);
+      for (var y = b.top; y <= maxY; y += step) {
+        for (var x = b.left; x <= maxX; x += step) {
+          var cand = { left: x, top: y, right: x + w, bottom: y + h };
+          var overlap = 0;
+          for (var i = 0; i < others.length; i++) overlap += overlapArea(cand, others[i]);
+          var d = Math.abs(x + w / 2 - cx) + Math.abs(y + h / 2 - cy);
+          if (overlap < bestOverlap - 1 || (Math.abs(overlap - bestOverlap) <= 1 && d < bestDist)) { bestOverlap = overlap; bestDist = d; best = cand; }
+        }
+      }
+      if (!best || bestOverlap > w * h / 3) {
+        var front = null, z = -1;
+        openEls.forEach(function (o, i) { var zi = parseInt(o.style.zIndex) || 0; if (zi > z) { z = zi; front = others[i]; } });
+        var ox = front ? front.left + 44 : b.left, oy = front ? front.top + 44 : b.top;
+        if (ox + w > b.right) ox = b.left; if (oy + h > b.bottom) oy = b.top;
+        best = { left: ox, top: oy };
+      }
+      el.style.left = Math.round(best.left) + 'px';
+      el.style.top = Math.round(best.top) + 'px';
+    }
 
     // >OPEN WINDOW. You are in a maze of twisty little dialogs, all alike.
     function openWin(id) {
       var el = document.getElementById('win-' + id);
       if (!el) return;
       if (!wins[id]) {
-        var vw = window.innerWidth, vh = window.innerHeight;
-        var w = el.offsetWidth || 400, h = el.offsetHeight || 300;
+        var b = desktopBounds();
+        el.style.visibility = 'hidden'; el.classList.add('open');
         if (id === 'about') {
-          el.style.left = Math.max(40, (vw - w) / 2 - 40) + 'px';
-          el.style.top = Math.max(28, (vh - h) / 2) + 'px';
+          el.style.left = Math.max(b.left, Math.round((window.innerWidth - el.offsetWidth) / 2)) + 'px';
+          el.style.top = Math.max(b.top, Math.round((window.innerHeight - el.offsetHeight) / 2)) + 'px';
         } else {
-          el.style.left = nextX + 'px'; el.style.top = nextY + 'px';
-          nextX += 28; nextY += 28;
-          if (nextX > vw - 200) { nextX = 80; nextY = 60; }
+          placeWindow(el);
         }
+        el.style.visibility = '';
         wins[id] = { el: el };
       }
       el.classList.add('open');

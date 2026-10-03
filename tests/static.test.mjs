@@ -55,3 +55,12 @@ test('theme ids agree across shortcuts, menu, and theme boxes', () => {
   assert.deepEqual([...boxes].sort(), [...keys].sort(), 'theme boxes vs Cmd shortcuts');
   assert.deepEqual([...menu].sort(), [...keys].sort(), 'Theme menu vs Cmd shortcuts');
 });
+
+test('new windows are placed in free desktop space, not cascaded from a corner', () => {
+  assert.match(html, /function placeWindow\(el\)/);
+  assert.match(html, /function desktopBounds\(\)/);
+  assert.ok(!/var nextX = 80, nextY = 60;/.test(html), 'the corner cascade is gone');
+  const open = html.slice(html.indexOf('function openWin(id)'), html.indexOf('function closeWin(id)'));
+  assert.match(open, /placeWindow\(el\)/);
+});
+
