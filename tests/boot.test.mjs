@@ -48,10 +48,15 @@ test('INIT applies the theme on every first visit, light mode included', () => {
   assert.ok(!/if \(saved\) \{ setTheme\(saved\); \}/.test(init), 'conditional setTheme is gone');
 });
 
-test('the extension parade uses each system\'s own icon set', () => {
+test('the extension parade marches real Mac extension and control panel icons', () => {
   const init = html.slice(html.indexOf('/* ===== INIT ===== */'), html.indexOf('// AFTER DARK: CYBERHACKER'));
-  assert.match(init, /BootEngine\.setIcons\(\{ mac7: osIcons\.mac7, mac9: osIcons\.mac9 \}\)/);
-  assert.match(html, /var map = iconMap && iconMap\[ctx\.os\];/);
+  assert.match(init, /BootEngine\.setIcons\(BOOT_EXTENSIONS\)/);
+  assert.match(html, /var list = iconMap && iconMap\[ctx\.os\];/);
+  const ext = html.match(/var BOOT_EXTENSIONS = \(function \(\) \{[\s\S]*?\n    \}\)\(\);/);
+  assert.ok(ext, 'BOOT_EXTENSIONS defined');
+  for (const name of ['quicktime', 'applescript', 'appleshare', 'open-transport', 'appearance']) assert.ok(ext[0].includes(`'${name}'`), `mac9 parade has ${name}`);
+  assert.ok(ext[0].includes("imgs('mac7'"), 'System 7 marches 1-bit icons');
+  assert.ok(ext[0].includes("imgs('mac9'"), 'Mac OS 9 marches color icons');
 });
 
 

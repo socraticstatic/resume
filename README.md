@@ -76,6 +76,7 @@ Node 20 or newer. The tests are static checks on `index.html`.
 
 ## Credits
 
+- Extension parade: the icons that march along the bottom of the Mac boots are the real `icl8` and `ICN#` resources of Mac OS 9's Extensions and Control Panels (QuickTime, AppleScript, AppleShare, Open Transport, Appearance and the rest), read out of a Mac OS 9 System Folder and rendered through the standard 256-color table; System 7 marches the 1-bit versions.
 - Startup screens: the period bitmaps in `assets/boot/` are the [GUIdebook Gallery](https://guidebookgallery.org) startup screenshots of System 7.0, Mac OS 9.0, Windows 3.1, Windows XP Professional, Mac OS X 10.1, and BeOS R5, used as the base of each boot; only the moving parts are drawn on top.
 - Charcoal and Monaco fonts, the Mac OS 9 desktop pictures, and the Platinum scroll slider: [grassmunk/Platinum9](https://github.com/grassmunk/Platinum9).
 - System 7 and Mac OS 9 desktop icons: the SevenIcons and NineIcons sets. Other systems use period icon sets.

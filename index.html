@@ -2447,8 +2447,8 @@
           ctx.at(from + i * every, function () {
             var chip = document.createElement('div'); chip.className = 'boot-ext-chip';
             var key = sections[i];
-            var map = iconMap && iconMap[ctx.os];
-        chip.innerHTML = (map && key && map[key]) ? map[key] : puzzle(i);
+            var list = iconMap && iconMap[ctx.os];
+        chip.innerHTML = (list && list[i]) ? list[i] : puzzle(i);
             strip.appendChild(chip);
           });
         })(i);
@@ -2486,7 +2486,7 @@
               ['.b9-cover', '.b9-starting', '.b9-bar'].forEach(function (sel) { var e = ctx.stage.querySelector(sel); if (e) e.classList.remove('boot-hidden'); });
               startFill(ctx, '.b9-fill', 1500);
             });
-            parade(ctx, 1200, 110, 12);
+            parade(ctx, 1200, 100, 16);
           } },
         win31: { duration: 2800,
           html: function () {
@@ -2706,6 +2706,18 @@
       e.preventDefault(); e.stopPropagation();
     }
 
+    /* ===== BOOT EXTENSIONS =====
+       The icons that march along the bottom of a Mac boot are the real ones: icl8 and ICN#
+       resources read out of the Extensions and Control Panels folders of a Mac OS 9 System Folder,
+       rendered through the standard 256-color table. System 7 marches the 1-bit ICN# versions. */
+    var BOOT_EXTENSIONS = (function () {
+      function imgs(dir, names) { return names.map(function (n) { return '<img src="assets/boot/ext/' + dir + '/' + n + '.png" alt="">'; }); }
+      return {
+        mac7: imgs('mac7', ['applescript', 'appleshare', 'quicktime', 'file-sharing-extension', 'apple-guide', 'sound-manager', 'macintalk-3', 'color-picker', 'monitors', 'general-controls']),
+        mac9: imgs('mac9', ['quicktime', 'applescript', 'appleshare', 'apple-guide', 'colorsync-extension', 'contextual-menu-extension', 'control-strip-extension', 'file-sharing-extension', 'internet-config-extension', 'open-transport', 'sound-manager', 'speech-manager', 'text-encoding-converter', 'appearance', 'energy-saver', 'extensions-manager'])
+      };
+    })();
+
     /* ===== INIT ===== */
     // "Start me up" - Rolling Stones, 1981 / If you start me up, I'll never stop
     (function() {
@@ -2739,7 +2751,7 @@
       } else {
         openWin('about');
       }
-      BootEngine.setIcons({ mac7: osIcons.mac7, mac9: osIcons.mac9 });
+      BootEngine.setIcons(BOOT_EXTENSIONS);
       BootEngine.bootOnLoad(activeOs);
       // "You have died of dysentery." - Oregon Trail, 1971 (just checking if you're reading)
     })();
