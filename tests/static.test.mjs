@@ -63,3 +63,11 @@ test('new windows are placed in free desktop space, not cascaded from a corner',
   assert.match(open, /placeWindow\(el\)/);
 });
 
+test('placement keeps every title bar visible: BeOS reserves its floating tab and the Deskbar', () => {
+  const bounds = html.slice(html.indexOf('function desktopBounds()'), html.indexOf('function winRect(o)'));
+  assert.match(bounds, /beos.*\? 34/s, 'BeOS top bound leaves room for the 20px tab');
+  const place = html.slice(html.indexOf('function placeWindow(el)'), html.indexOf('// >OPEN WINDOW'));
+  assert.match(place, /reservedRects\(\)/, 'placement treats the Deskbar as occupied');
+  assert.match(html, /function reservedRects\(\)/);
+});
+

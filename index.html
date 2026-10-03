@@ -1026,6 +1026,22 @@
       .sys-dialog { width: 92vw; }
     }
 
+
+    /* ===== KEYBOARD FOCUS, per system ===== */
+    .menu-item:focus-within .menu-dropdown, .menu-apple:focus-within .menu-dropdown, [data-os="beos"] .menu-os-label:focus-within .menu-dropdown { display: block; }
+    :focus:not(:focus-visible) { outline: none; }
+    .desktop-icon:focus-visible { outline: none; }
+    .desktop-icon:focus-visible .icon-graphic { outline: 2px dotted var(--icon-text); outline-offset: 3px; }
+    .desktop-icon:focus-visible .icon-label { background: var(--selection-bg); color: var(--selection-text); }
+    .closebox:focus-visible { outline: 2px solid var(--selection-bg); outline-offset: 2px; }
+    .window:focus-visible { outline: none; }
+    [data-os="mac7"] :focus-visible { outline: 2px dotted #000; outline-offset: 1px; }
+    [data-os="mac9"] :focus-visible { outline: 2px solid #336; outline-offset: 1px; }
+    [data-os="win31"] :focus-visible { outline: 1px dotted #000; outline-offset: 1px; }
+    [data-os="winxp"] :focus-visible { outline: 1px dotted #000; outline-offset: 1px; }
+    [data-os="aqua"] :focus-visible { outline: 3px solid rgba(100, 160, 255, 0.85); outline-offset: 1px; border-radius: 3px; }
+    [data-os="beos"] :focus-visible { outline: 2px solid #336699; outline-offset: 1px; }
+
     /* Project windows: the work, image first */
     .pw-body { padding: 14px 16px; }
     .pw-shot { display: block; width: 100%; height: auto; border: 1px solid var(--content-border); margin-bottom: 10px; background: #fff; }
@@ -1368,6 +1384,10 @@
       a { color: #000 !important; }
     }
   </style>
+    <!-- Analytics: the hub's shared page-view beacon (conscious-shell.com). Only the live host reports;
+         a dev server, a preview, Do Not Track, or the owner's own browser sends nothing. No cookie for visitors. -->
+    <script>window.__ANALYTICS_SITE__ = 'resume'; window.__ANALYTICS_HOST__ = 'socraticstatic.github.io';</script>
+    <script defer src="analytics-pageview.js"></script>
 </head>
 <body>
   <div id="desktop">
@@ -2237,9 +2257,15 @@
       return {
         left: iconsLeft ? 116 : 12,
         right: iconsLeft ? vw - 12 : vw - 116,
-        top: (os === 'winxp' || os === 'beos') ? 12 : 30,
+        top: os === 'winxp' ? 12 : (os === 'beos' ? 34 : 30),   /* BeOS tabs float 20px above the frame */
         bottom: (os === 'winxp') ? vh - 44 : vh - 12
       };
+    }
+    /* Screen furniture a window must not hide under: the BeOS Deskbar panel in the corner. */
+    function reservedRects() {
+      var os = document.documentElement.dataset.os || 'mac7';
+      if (os === 'beos') return [{ left: window.innerWidth - 232, top: 0, right: window.innerWidth, bottom: 72 }];
+      return [];
     }
     function winRect(o) { return { left: o.offsetLeft, top: o.offsetTop, right: o.offsetLeft + o.offsetWidth, bottom: o.offsetTop + o.offsetHeight }; }
     function overlapArea(a, b) {
@@ -2254,7 +2280,7 @@
       var b = desktopBounds();
       var w = el.offsetWidth, h = Math.min(el.offsetHeight, b.bottom - b.top);
       var openEls = Array.prototype.filter.call(document.querySelectorAll('.window.open'), function (o) { return o !== el; });
-      var others = openEls.map(winRect);
+      var others = openEls.map(winRect).concat(reservedRects());
       var cx = (b.left + b.right) / 2, cy = (b.top + b.bottom) / 2;
       var best = null, bestOverlap = Infinity, bestDist = Infinity, step = 16;
       var maxX = Math.max(b.left, b.right - w), maxY = Math.max(b.top, b.bottom - h);
@@ -2271,7 +2297,7 @@
         var front = null, z = -1;
         openEls.forEach(function (o, i) { var zi = parseInt(o.style.zIndex) || 0; if (zi > z) { z = zi; front = others[i]; } });
         var ox = front ? front.left + 44 : b.left, oy = front ? front.top + 44 : b.top;
-        if (ox + w > b.right) ox = b.left; if (oy + h > b.bottom) oy = b.top;
+        if (ox + w > b.right) ox = b.left; if (oy + h > b.bottom) oy = b.top; if (oy < b.top) oy = b.top;
         best = { left: ox, top: oy };
       }
       el.style.left = Math.round(best.left) + 'px';
@@ -2282,6 +2308,7 @@
     function openWin(id) {
       var el = document.getElementById('win-' + id);
       if (!el) return;
+      var wasOpen = el.classList.contains('open');
       if (!wins[id]) {
         var b = desktopBounds();
         el.style.visibility = 'hidden'; el.classList.add('open');
@@ -2294,12 +2321,13 @@
         el.style.visibility = '';
         wins[id] = { el: el };
       }
-      var wasOpen = el.classList.contains('open');
       el.classList.add('open');
       var icon = document.querySelector('.icon-' + id);
       if (icon) icon.classList.add('visited');
       bringToFront(id);
       if (!wasOpen && typeof Sound !== 'undefined') Sound.ui('window-open');
+      if (!wasOpen && el.hasAttribute('tabindex')) el.focus({ preventScroll: true });
+      if (!wasOpen) track('window_' + id);
       if (window.innerWidth <= 640) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -2838,7 +2866,7 @@
         var t = THEMES[os];
         if (!t) { if (done) done(); return null; }
         var isReduced = reduced();
-        var overlay = document.createElement('div'); overlay.className = 'boot-overlay boot-' + os;
+        var overlay = document.createElement('div'); overlay.className = 'boot-overlay boot-' + os; overlay.setAttribute('aria-hidden', 'true');
         var stage = document.createElement('div'); stage.className = 'boot-stage'; overlay.appendChild(stage);
         var ctx = { os: os, stage: stage, overlay: overlay, shift: opts.shift != null ? opts.shift : shiftHeld, reduced: isReduced, timers: [],
           duration: isReduced ? Math.min(t.duration, 700) : t.duration,
@@ -2878,7 +2906,7 @@
       function setIcons(map) { iconMap = map || null; } /* { mac7: {...}, mac9: {...} }: each system marches its own icons */
       return { run: run, bootOnLoad: bootOnLoad, setIcons: setIcons, themes: THEMES };
     })();
-    function switchTheme(os) { Sound.chime(os); BootEngine.run(os, function () { setTheme(os); }); }
+    function switchTheme(os) { track('theme_' + os); Sound.chime(os); BootEngine.run(os, function () { setTheme(os); }); }
 
     /* ===== KEYBOARD SHORTCUTS ===== */
     document.addEventListener('keydown', function(e) {
@@ -2956,7 +2984,8 @@
     function showEasterEgg() { openWin('easter'); }
 
     /* ===== PDF EXPORT ===== */
-    function downloadPDF() { var a = document.getElementById('pdf-link'); if (a) a.click(); }
+    function downloadPDF() {
+      track('pdf_download'); var a = document.getElementById('pdf-link'); if (a) a.click(); }
     function exportPDF() {
       ['about','readme','career','projects','contact'].forEach(function(id) {
         document.getElementById('win-' + id).classList.add('open');
@@ -2984,6 +3013,7 @@
       document.querySelectorAll('[data-i18n]').forEach(function(el) { var k = el.getAttribute('data-i18n'); if (t.sec[k]) el.textContent = t.sec[k]; });
       var bgPs = document.querySelectorAll('#readme-background p');
       t.bg.forEach(function(line, i) { if (bgPs[i]) bgPs[i].textContent = line; });
+      document.documentElement.lang = currentLang;
       var btn = document.getElementById('lang-toggle');
       if (btn) btn.textContent = currentLang === 'en' ? 'ES' : 'EN';
     }
@@ -3086,7 +3116,7 @@
         var i = menuActions.push(it.action) - 1;
         var cls = 'menu-dd-item' + (it.disabled || !it.action ? ' disabled' : '');
         var swatch = it.swatch ? '<span class="menu-dd-check" style="display:inline-block;width:10px;height:10px;background:' + it.swatch + ';border:1px solid #000;margin-right:6px"></span>' : (it.check ? '<span class="menu-dd-check">\u2713</span>' : '<span class="menu-dd-check"></span>');
-        return '<div class="' + cls + '" onclick="menuAction(' + i + ')">' + swatch + it.label + (it.shortcut ? '<span class="menu-dd-shortcut">' + it.shortcut + '</span>' : '') + '</div>';
+        return '<div class="' + cls + '" role="menuitem" tabindex="0" data-activate onclick="menuAction(' + i + ')">' + swatch + it.label + (it.shortcut ? '<span class="menu-dd-shortcut">' + it.shortcut + '</span>' : '') + '</div>';
       }).join('');
     }
     function renderMenus(os) {
@@ -3096,7 +3126,7 @@
       if (def.apple) apple.innerHTML = ddHTML(def.apple);
       if (def.be) be.innerHTML = ddHTML(def.be);
       if (def.menus) bar.innerHTML = def.menus.map(function (m) {
-        return '<div class="menu-item" onmouseenter="Sound.ui(\'menu-open\')" onmouseleave="Sound.ui(\'menu-close\')">' + m.title + '<div class="menu-dropdown">' + ddHTML(m.items) + (m.windows ? '<div class="menu-dd-windows"></div>' : '') + '</div></div>';
+        return '<div class="menu-item" role="button" tabindex="0" aria-haspopup="true" onmouseenter="Sound.ui(\'menu-open\')" onmouseleave="Sound.ui(\'menu-close\')">' + m.title + '<div class="menu-dropdown" role="menu">' + ddHTML(m.items) + (m.windows ? '<div class="menu-dd-windows"></div>' : '') + '</div></div>';
       }).join('');
       if (os === 'beos') bar.innerHTML = '<div class="deskbar-apps"></div>';
       var sm = document.getElementById('start-menu');
@@ -3105,7 +3135,7 @@
       refreshWindowLists();
     }
     function smHTML(items) {
-      return items.filter(function (it) { return !it.sep; }).map(function (it) { var i = menuActions.push(it.action) - 1; return '<div class="sm-item' + (it.disabled ? ' menu-dd-item disabled' : '') + '" onclick="menuAction(' + i + '); toggleStart();">' + it.label + '</div>'; }).join('');
+      return items.filter(function (it) { return !it.sep; }).map(function (it) { var i = menuActions.push(it.action) - 1; return '<div class="sm-item' + (it.disabled ? ' menu-dd-item disabled' : '') + '" role="menuitem" tabindex="0" data-activate onclick="menuAction(' + i + '); toggleStart();">' + it.label + '</div>'; }).join('');
     }
     function toggleStart(e) {
       if (document.documentElement.dataset.os !== 'winxp') return;
@@ -3121,12 +3151,12 @@
       var wins = openWindowsByZ(), front = wins[wins.length - 1];
       var rows = wins.map(function (w) { var id = w.id.replace('win-', ''); var i = menuActions.push(function () { openWin(id); }) - 1; return { id: id, title: winTitle(w), i: i, front: w === front }; });
       document.querySelectorAll('.menu-dd-windows').forEach(function (el) {
-        el.innerHTML = rows.length ? '<div class="menu-dd-sep"></div>' + rows.map(function (r) { return '<div class="menu-dd-item" onclick="menuAction(' + r.i + ')"><span class="menu-dd-check">' + (r.front ? '\u2713' : '') + '</span>' + r.title + '</div>'; }).join('') : '';
+        el.innerHTML = rows.length ? '<div class="menu-dd-sep"></div>' + rows.map(function (r) { return '<div class="menu-dd-item" role="menuitem" tabindex="0" data-activate onclick="menuAction(' + r.i + ')"><span class="menu-dd-check">' + (r.front ? '\u2713' : '') + '</span>' + r.title + '</div>'; }).join('') : '';
       });
       var tb = document.getElementById('taskbar-windows');
-      if (tb) tb.innerHTML = rows.map(function (r) { return '<div class="tb-btn' + (r.front ? ' front' : '') + '" onclick="menuAction(' + r.i + ')">' + r.title + '</div>'; }).join('');
+      if (tb) tb.innerHTML = rows.map(function (r) { return '<div class="tb-btn' + (r.front ? ' front' : '') + '" role="button" tabindex="0" data-activate onclick="menuAction(' + r.i + ')">' + r.title + '</div>'; }).join('');
       var db = document.querySelector('.deskbar-apps');
-      if (db) db.innerHTML = rows.map(function (r) { return '<div class="db-app' + (r.front ? ' front' : '') + '" onclick="menuAction(' + r.i + ')">' + r.title + '</div>'; }).join('');
+      if (db) db.innerHTML = rows.map(function (r) { return '<div class="db-app' + (r.front ? ' front' : '') + '" role="button" tabindex="0" data-activate onclick="menuAction(' + r.i + ')">' + r.title + '</div>'; }).join('');
     }
     function closeFrontWindow() { var w = openWindowsByZ(); if (w.length) closeWin(w[w.length - 1].id.replace('win-', '')); }
     function closeAllWindows() { openWindowsByZ().forEach(function (w) { closeWin(w.id.replace('win-', '')); }); }
@@ -3260,6 +3290,47 @@
       return { play: play, ui: ui, chime: chime, toggle: toggle, init: init, isOn: function () { return enabled; } };
     })();
 
+    // ============================================================
+    // ANALYTICS - "Every Breath You Take" - The Police, 1983 / Not every one. A page view and five named events, no person attached.
+    // The beacon itself is the hub's analytics-pageview.js; these are the resume's events riding on it.
+    // ============================================================
+    function track(name) { if (typeof window.ppTrack === 'function') window.ppTrack(name); }
+    function analyticsInit() {
+      document.addEventListener('DOMContentLoaded', function () { track('boot_' + (document.documentElement.getAttribute('data-os') || 'unknown')); });
+      document.addEventListener('click', function (e) { var a = e.target && e.target.closest && e.target.closest('a[href^="mailto:"]'); if (a) track('contact_email'); }, true);
+    }
+
+    // ============================================================
+    // ACCESSIBILITY - "Everybody Hurts" - R.E.M., 1992 / Everybody can use it.
+    // Keyboard reach for icons, windows, menus, rows, and bars; dialog semantics; one activation rule.
+    // ============================================================
+    function a11yInit() {
+      document.querySelectorAll('.desktop-icon').forEach(function (icon) {
+        icon.setAttribute('tabindex', '0'); icon.setAttribute('role', 'button');
+        var label = icon.querySelector('.icon-label'); if (label) icon.setAttribute('aria-label', 'Open ' + label.textContent.trim());
+        icon.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (typeof icon.ondblclick === 'function') icon.ondblclick.call(icon, e); }
+        });
+      });
+      document.querySelectorAll('.window').forEach(function (w) {
+        w.setAttribute('role', 'dialog'); w.setAttribute('tabindex', '-1');
+        var t = w.querySelector('.titlebar-title'); if (t) { t.id = t.id || (w.id + '-title'); w.setAttribute('aria-labelledby', t.id); }
+        var c = w.querySelector('.closebox'); if (c) { c.setAttribute('role', 'button'); c.setAttribute('tabindex', '0'); c.setAttribute('aria-label', 'Close window'); c.setAttribute('data-activate', ''); }
+        var r = w.querySelector('.win-resize'); if (r) r.setAttribute('aria-hidden', 'true');
+      });
+      document.querySelectorAll('.career-role, .project-item').forEach(function (row) {
+        row.setAttribute('tabindex', '0'); row.setAttribute('role', 'button'); row.setAttribute('data-activate', '');
+      });
+      var apple = document.querySelector('.menu-apple'); if (apple) { apple.setAttribute('tabindex', '0'); apple.setAttribute('role', 'button'); apple.setAttribute('aria-haspopup', 'true'); apple.setAttribute('aria-label', 'Apple menu'); }
+      var osl = document.querySelector('.menu-os-label'); if (osl) { osl.setAttribute('tabindex', '0'); osl.setAttribute('role', 'button'); osl.setAttribute('aria-label', 'Start menu'); osl.setAttribute('data-activate', ''); }
+      var snd = document.querySelector('.menu-sound'); if (snd) { snd.setAttribute('tabindex', '0'); snd.setAttribute('role', 'button'); snd.setAttribute('aria-label', 'Sound on or off'); snd.setAttribute('data-activate', ''); }
+      document.addEventListener('keydown', function (e) {
+        var t = e.target;
+        if ((e.key === 'Enter' || e.key === ' ') && t && t.hasAttribute && t.hasAttribute('data-activate')) { e.preventDefault(); t.click(); return; }
+        if (e.key === 'Escape' && t && t.closest && t.closest('.menu-item, .menu-apple, .menu-os-label, #start-menu')) { t.blur(); var sm = document.getElementById('start-menu'); if (sm) sm.classList.remove('open'); }
+      });
+    }
+
     /* ===== BOOT EXTENSIONS =====
        The icons that march along the bottom of a Mac boot are the real ones: icl8 and ICN#
        resources read out of the Extensions and Control Panels folders of a Mac OS 9 System Folder,
@@ -3276,9 +3347,10 @@
     // "Start me up" - Rolling Stones, 1981 / If you start me up, I'll never stop
     (function() {
       Sound.init();
+      a11yInit();
+      analyticsInit();
       var saved = localStorage.getItem('os-theme');
-      var prefersDark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      var activeOs = saved || (prefersDark ? 'aqua' : 'mac7');
+      var activeOs = saved || 'mac9';
       setTheme(activeOs);
       var themeWp = localStorage.getItem('wallpaper-' + activeOs);
       if (themeWp) applyWallpaperCss(themeWp);

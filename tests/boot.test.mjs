@@ -19,7 +19,7 @@ test('BootEngine is present and the old boot config is gone', () => {
 });
 
 test('switchTheme delegates to BootEngine and ends in setTheme', () => {
-  assert.match(html, /function switchTheme\(os\) \{ Sound\.chime\(os\); BootEngine\.run\(os, function \(\) \{ setTheme\(os\); \}\); \}/);
+  assert.match(html, /function switchTheme\(os\) \{ track\('theme_' \+ os\); Sound\.chime\(os\); BootEngine\.run\(os, function \(\) \{ setTheme\(os\); \}\); \}/);
 });
 
 test('INIT gives the parade real icons and boots once per tab', () => {
@@ -42,9 +42,9 @@ test('a key pressed to skip a boot never reaches the window and easter-egg handl
   assert.match(html, /document\.removeEventListener\('keydown', skipKey, \{ capture: true \}\)/);
 });
 
-test('INIT applies the theme on every first visit, light mode included', () => {
+test('INIT boots Mac OS 9 for a new visitor and the saved system after that', () => {
   const init = html.slice(html.indexOf('/* ===== INIT ===== */'), html.indexOf('// AFTER DARK: CYBERHACKER'));
-  assert.match(init, /var activeOs = saved \|\| \(prefersDark \? 'aqua' : 'mac7'\);\s*setTheme\(activeOs\);/);
+  assert.match(init, /var activeOs = saved \|\| 'mac9';\s*setTheme\(activeOs\);/, 'Mac OS 9 is the first boot for every new visitor');
   assert.ok(!/if \(saved\) \{ setTheme\(saved\); \}/.test(init), 'conditional setTheme is gone');
 });
 
