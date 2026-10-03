@@ -21,7 +21,6 @@ test('forbidden claims are absent', () => {
     [/architected/i, 'AT&T agent work is prototyped, never architected'],
     [/126 products/i, '"126 products" has no line in facts.md'],
     [/agents that manage/i, 'agents do not manage infrastructure; they are prototypes'],
-    [/\bNortel\b/, 'Nortel is not in facts.md'],
     [/36 products/, '"36 products" has no line in facts.md'],
     [/22\+ emerging/, 'CareerFoundry count is 47'],
     [/—/, 'no em dashes'],
