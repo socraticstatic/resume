@@ -938,6 +938,94 @@
     .project-detail { display: none; padding: 8px 0 4px; font-size: 13px; line-height: 1.5; }
     .project-tags { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
 
+
+    /* ============================================================
+       MENUS, POWER, SOUND - "Don't Stop Believin'" - Journey, 1981
+       Real menu bars per system. Special > Shut Down shows the real power-off screens.
+       Sound is opt-in: the Platinum sound set for Mac OS 9, synthesized chimes for the Mac boots.
+       ============================================================ */
+    .menu-apple { position: relative; }
+    .menu-apple-icon.has-svg { width: 12px; height: 14px; }
+    .menu-apple-icon.has-svg::before, .menu-apple-icon.has-svg::after { display: none; }
+    .menu-apple-icon.has-svg svg { display: block; width: 12px; height: 14px; }
+    .menu-apple:hover .menu-dropdown, .menu-apple.open .menu-dropdown { display: block; }
+    .menu-apple .menu-dropdown { left: -8px; }
+    .menu-os-label { position: relative; }
+    [data-os="beos"] .menu-os-label:hover .menu-dropdown { display: block; }
+    [data-os="beos"] .menu-os-label .menu-dropdown { left: 0; right: auto; top: 100%; }
+    .menu-dd-item.disabled { opacity: 0.45; pointer-events: none; }
+    .menu-dd-item .menu-dd-check { display: inline-block; width: 12px; }
+    #menu-items { display: flex; align-items: center; }
+    #taskbar-windows { display: none; }
+    .menu-sound { margin-left: auto; width: 18px; height: 14px; cursor: default; opacity: 0.45; color: currentColor; display: flex; align-items: center; }
+    .menu-sound .snd-wave { display: none; }
+    .menu-sound.on { opacity: 1; }
+    .menu-sound.on .snd-wave { display: block; }
+    .menu-sound.on .snd-mute { display: none; }
+    .menu-clock { margin-left: 8px; }
+    [data-os="beos"] .menu-sound { order: 1; margin-left: auto; }
+    [data-os="beos"] .menu-clock { margin-left: 6px; }
+    /* BeOS Deskbar: the running list below the menu row */
+    [data-os="beos"] #menu-items { display: block; width: 100%; order: 3; }
+    .deskbar-apps { display: none; }
+    [data-os="beos"] .deskbar-apps { display: block; }
+    .db-app { padding: 2px 8px; font-size: 11px; cursor: default; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .db-app:hover { background: #336699; color: #fff; }
+    .db-app.front { font-weight: bold; }
+    /* XP: start button, taskbar buttons, the start menu */
+    [data-os="winxp"] #menu-items { display: none; }
+    [data-os="winxp"] #taskbar-windows { display: flex; align-items: center; gap: 4px; flex: 1; padding: 0 6px; overflow: hidden; }
+    .tb-btn { height: 24px; padding: 0 10px; border-radius: 3px; color: #fff; font-size: 11px; display: flex; align-items: center; max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;
+      background: linear-gradient(to bottom, #3c81f3, #2d6ad7); border: 1px solid #1b4fb0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+    .tb-btn.front { background: linear-gradient(to bottom, #1f4ea6, #2a5fc4); box-shadow: inset 1px 1px 2px rgba(0,0,0,0.45); }
+    #start-menu { display: none; position: fixed; left: 0; bottom: 30px; width: 390px; z-index: 10003; font-family: Tahoma, 'Segoe UI', sans-serif; font-size: 12px; color: #000;
+      background: #fff; border: 1px solid #0831d9; border-radius: 6px 6px 0 0; box-shadow: 2px -2px 8px rgba(0,0,0,0.35); overflow: hidden; }
+    #start-menu.open { display: block; }
+    .sm-head { display: flex; align-items: center; gap: 10px; padding: 10px 12px; color: #fff; font-weight: bold; font-size: 14px; background: linear-gradient(to bottom, #1c5ad3, #2a6be0 50%, #1c57cc); text-shadow: 1px 1px 1px rgba(0,0,0,0.4); }
+    .sm-avatar { width: 32px; height: 32px; border: 2px solid #fff; border-radius: 3px; background: linear-gradient(135deg, #ffd27a, #e08a2a); }
+    .sm-cols { display: flex; min-height: 220px; }
+    .sm-left { flex: 1; padding: 6px 0; background: #fff; }
+    .sm-right { width: 170px; padding: 6px 0; background: #d3e5fa; border-left: 1px solid #a6c2e6; }
+    .sm-item { padding: 6px 12px; cursor: default; white-space: nowrap; }
+    .sm-item:hover { background: #316ac5; color: #fff; }
+    .sm-right .sm-item { font-weight: bold; color: #1b3c7a; }
+    .sm-right .sm-item:hover { color: #fff; }
+    .sm-foot { display: flex; justify-content: flex-end; gap: 6px; padding: 8px 10px; background: linear-gradient(to bottom, #2a62d6, #1b4fb0); }
+    .sm-foot .sm-item { color: #fff; padding: 3px 8px; border-radius: 3px; }
+    .sm-foot .sm-item:hover { background: rgba(255,255,255,0.18); }
+    /* System dialogs: alerts and the shutdown prompts, drawn with each system's window chrome */
+    .sys-dialog { position: fixed; left: 50%; top: 42%; transform: translate(-50%, -50%); width: 430px; z-index: 10006; animation: none; }
+    .sd-body { display: grid; grid-template-columns: 40px 1fr; gap: 10px 14px; padding: 16px 18px 14px; font-size: 13px; line-height: 1.45; }
+    .sd-icon { width: 36px; height: 36px; border: 2px solid #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 22px; }
+    .sd-text { align-self: center; }
+    .sd-buttons { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 10px; margin-top: 4px; }
+    .sd-btn { font: inherit; font-size: 12px; padding: 3px 14px; min-width: 70px; cursor: default; background: var(--content-bg); border: 1px solid var(--content-border); border-radius: var(--pill-radius); }
+    [data-os="mac7"] .sd-btn, [data-os="mac9"] .sd-btn { border-radius: 6px; }
+    [data-os="mac7"] .sd-btn.primary { box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000; }
+    [data-os="mac9"] .sd-btn.primary { box-shadow: 0 0 0 2px #ebebeb, 0 0 0 4px #333; }
+    [data-os="win31"] .sd-btn { border: 2px outset #dfdfdf; background: #c0c0c0; }
+    [data-os="win31"] .sd-btn.primary { outline: 1px solid #000; outline-offset: -3px; }
+    [data-os="winxp"] .sd-btn { border: 1px solid #003c74; border-radius: 3px; background: linear-gradient(to bottom, #fff, #ece9d8); }
+    [data-os="winxp"] .sd-btn.primary { box-shadow: inset 0 0 0 1px #4a90e2; }
+    [data-os="aqua"] .sd-btn { border-radius: 12px; border: 1px solid #777; background: linear-gradient(to bottom, #fff, #e4e4e4); }
+    [data-os="aqua"] .sd-btn.primary { background: linear-gradient(to bottom, #9ec3ff, #3f80f6 55%, #2a62c9); color: #fff; border-color: #2a5bb8; }
+    [data-os="beos"] .sd-btn { border: 1px solid #808080; background: #d8d8d8; }
+    [data-os="beos"] .sd-btn.primary { box-shadow: 0 0 0 1px #808080; }
+    [data-os="aqua"] .sd-icon { border-color: #888; color: #888; }
+    /* Power-off screens */
+    .off-screen { position: fixed; inset: 0; z-index: 99998; background: #000; display: flex; align-items: center; justify-content: center; cursor: default; user-select: none; opacity: 0; transition: opacity 0.5s; }
+    .off-screen.on { opacity: 1; }
+    .off-screen .boot-stage { width: 640px; height: 480px; }
+    .off-mac { color: #fff; font-family: ChicagoFLF, Chicago, Charcoal, Geneva, sans-serif; font-size: 18px; text-align: center; }
+    .off-mac .off-hint, .off-dos .off-hint, .off-x .off-hint { font-size: 11px; opacity: 0.5; margin-top: 28px; font-family: Geneva, Helvetica, sans-serif; }
+    .off-dos { color: #aaa; font: 16px/1.25 'Courier New', Courier, monospace; white-space: pre; align-self: flex-start; margin: 8px; }
+    .off-x { color: #666; font-family: 'Lucida Grande', sans-serif; font-size: 12px; }
+    .sleep-screen { position: fixed; inset: 0; z-index: 99997; background: rgba(0,0,0,0.88); cursor: default; }
+    @media (max-width: 640px) {
+      #start-menu { width: 100%; bottom: auto; top: 30px; }
+      .sys-dialog { width: 92vw; }
+    }
+
     /* Project windows: the work, image first */
     .pw-body { padding: 14px 16px; }
     .pw-shot { display: block; width: 100%; height: auto; border: 1px solid var(--content-border); margin-bottom: 10px; background: #fff; }
@@ -1284,44 +1372,19 @@
 <body>
   <div id="desktop">
     <div id="crt-overlay"></div>
-    <!-- MENU BAR -->
+    <!-- MENU BAR: rendered per system by renderMenus(); the Apple menu, the XP start button, and the Be menu live here too -->
     <div id="menubar">
-      <div class="menu-apple"><div class="menu-apple-icon"></div></div>
-      <div class="menu-os-label">MB</div>
-      <div class="menu-item">File
-        <div class="menu-dropdown">
-          <div class="menu-dd-item" onclick="openWin('about')">Open About</div>
-          <div class="menu-dd-item" onclick="openWin('readme')">Open Read Me</div>
-          <div class="menu-dd-item" onclick="openWin('career')">Open Career</div>
-          <div class="menu-dd-item" onclick="openWin('projects')">Open Projects</div>
-          <div class="menu-dd-item" onclick="openWin('contact')">Open Contact</div>
-          <div class="menu-dd-sep"></div>
-          <div class="menu-dd-item" onclick="openWin('chooser')">Chooser...</div>
-          <div class="menu-dd-item" onclick="saveAsSit()">Save as Resume.sit...</div>
-          <div class="menu-dd-item" onclick="downloadPDF()">Download Resume (PDF)</div>
-          <div class="menu-dd-item" onclick="exportPDF()">Print...</div>
-        </div>
-      </div>
-      <div class="menu-item">Theme
-        <div class="menu-dropdown">
-          <div class="menu-dd-item" onclick="switchTheme('mac7')">Mac OS 7<span class="menu-dd-shortcut">Cmd+1</span></div>
-          <div class="menu-dd-item" onclick="switchTheme('mac9')">Mac OS 9<span class="menu-dd-shortcut">Cmd+2</span></div>
-          <div class="menu-dd-item" onclick="switchTheme('win31')">Windows 3.1<span class="menu-dd-shortcut">Cmd+3</span></div>
-          <div class="menu-dd-item" onclick="switchTheme('winxp')">Windows XP<span class="menu-dd-shortcut">Cmd+4</span></div>
-          <div class="menu-dd-item" onclick="switchTheme('aqua')">Mac OS X<span class="menu-dd-shortcut">Cmd+5</span></div>
-          <div class="menu-dd-item" onclick="switchTheme('beos')">BeOS<span class="menu-dd-shortcut">Cmd+6</span></div>
-          <div class="menu-dd-sep"></div>
-          <div class="menu-dd-item" onclick="randomWallpaper()">Random Wallpaper</div>
-          <div class="menu-dd-item" onclick="nextWallpaper()">Next Wallpaper</div>
-          <div class="menu-dd-item" onclick="setWallpaper('none')">Default Wallpaper</div>
-          <div class="menu-dd-sep"></div>
-          <div class="menu-dd-item" onclick="toggleCRT()">CRT Scanlines</div>
-          <div class="menu-dd-sep"></div>
-          <div class="menu-dd-item" onclick="toggleLang()">English</div>
-          <div class="menu-dd-item" onclick="toggleLang()">Espa&#241;ol</div>
-        </div>
-      </div>
+      <div class="menu-apple"><div class="menu-apple-icon"></div><div class="menu-dropdown" id="apple-menu"></div></div>
+      <div class="menu-os-label" onclick="toggleStart(event)"><div class="menu-dropdown" id="be-menu"></div></div>
+      <div id="menu-items"></div>
+      <div id="taskbar-windows"></div>
+      <div class="menu-sound" onclick="Sound.toggle()" title="Sound"><svg viewBox="0 0 16 14" width="16" height="14"><path d="M1 5h3l4-4v12l-4-4H1z" fill="currentColor"/><path class="snd-wave" d="M10.5 4.5a4 4 0 0 1 0 5M12.5 2.5a7 7 0 0 1 0 9" fill="none" stroke="currentColor" stroke-width="1.3"/><path class="snd-mute" d="M10 5l4 4M14 5l-4 4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></div>
       <div class="menu-clock" id="menu-clock"></div>
+    </div>
+    <div id="start-menu">
+      <div class="sm-head"><span class="sm-avatar"></span><span>Micah Boswell</span></div>
+      <div class="sm-cols"><div class="sm-left" id="sm-left"></div><div class="sm-right" id="sm-right"></div></div>
+      <div class="sm-foot" id="sm-foot"></div>
     </div>
 
     <!-- DESKTOP ICONS (SVG) -->
@@ -1587,7 +1650,7 @@
       <div class="win-body">
         <div class="project-list">
           <div class="project-item" onclick="openWin('proj-netbond-sdci')" data-when="AT&amp;T, 2025 - 2026" data-stack="Agentic AI, Cloud Platforms, TypeScript, Prototype" data-notes="React and TypeScript functional-ideation prototype for Software-Defined Cloud Interconnect. Secured roadmap approval with an executive prototype. Framed an agentic model for network operations (agents that provision, diagnose, optimize, and decommission) and prototyped its NetBond agent: it shows its evidence, proposes a fix, and waits for the customer. Auto-resolve is off by default.">
-            <div class="project-head"><strong>NetBond SDCI prototype</strong><span>AT&amp;T, 2025 - 2026</span></div>
+            <div class="project-head"><strong>NetBond Advanced prototype</strong><span>AT&amp;T, 2025 - 2026</span></div>
           </div>
           <div class="project-item" onclick="openWin('proj-cloud-assistant')" data-when="AT&amp;T, 2026" data-stack="Agentic AI, Conversational UX, Prototype" data-notes="Prototype assistant for a cloud networking portal. It answers from live data, knows the current screen, previews each change with Do it and Cancel buttons, runs the same command a person would, and keeps approvals in a plain-language audit trail. Wrote the design spec for plugging another AT&amp;T team's assistant into every screen.">
             <div class="project-head"><strong>Cloud networking portal assistant</strong><span>AT&amp;T, 2026</span></div>
@@ -1608,7 +1671,7 @@
             <div class="project-head"><strong>Helen (vault-daemon)</strong><span>Independent, 2025 - present</span></div>
           </div>
           <div class="project-item" onclick="openWin('proj-roots')" data-when="familyroots.center, 2025 - present" data-stack="Agentic AI, Next.js, Genealogy, Stripe" data-notes="Paid family-history product with an AI family historian built on Claude inside a Stripe subscription, with tests for the privacy of the AI's family context, and a 13-agent research workflow (blind researchers by record type, adversarial verification per fact, a judge) that scored 93/100 against a DAR-accepted lineage record.">
-            <div class="project-head"><strong>Roots</strong><span>familyroots.center, 2025 - present</span></div>
+            <div class="project-head"><strong>Family Roots</strong><span>familyroots.center, 2025 - present</span></div>
           </div>
           <div class="project-item" onclick="openWin('proj-pen-and-paper')" data-when="penpaperandink.app, 2025 - present" data-stack="Agentic AI, Editorial, Supabase, Japanese" data-notes="Daily autonomous curation agent for a fountain pen, paper, and ink almanac. It verifies stale entries, researches new ones, and publishes in English and Japanese only after gates: every field needs a source URL plus a verbatim quote, performance fields need two independent sources, holds are respected, and a daily digest reports every action. A citation radar tracks how AI assistants answer and cite questions in its niche.">
             <div class="project-head"><strong>Pen &amp; Paper curation agent</strong><span>penpaperandink.app, 2025 - present</span></div>
@@ -1754,7 +1817,7 @@
       <div class="titlebar" onmousedown="startDrag(event, 'proj-netbond-sdci')">
         <div class="closebox" onclick="closeWin('proj-netbond-sdci')"></div>
         <div class="titlebar-lines"></div>
-        <div class="titlebar-title">NetBond SDCI prototype</div>
+        <div class="titlebar-title">NetBond Advanced prototype</div>
       </div>
       <div class="win-body pw-body">
         <div class="pw-meta"><span>AT&amp;T</span><span>2025 - 2026</span></div>
@@ -1847,10 +1910,10 @@
       <div class="titlebar" onmousedown="startDrag(event, 'proj-roots')">
         <div class="closebox" onclick="closeWin('proj-roots')"></div>
         <div class="titlebar-lines"></div>
-        <div class="titlebar-title">Roots</div>
+        <div class="titlebar-title">Family Roots</div>
       </div>
       <div class="win-body pw-body">
-        <img class="pw-shot" src="assets/work/roots.webp" alt="Roots">
+        <img class="pw-shot" src="assets/work/roots.webp" alt="Family Roots">
         <div class="pw-meta"><span>familyroots.center</span><span>2025 - present</span></div>
         <p class="pw-summary">Paid family-history product with an AI family historian built on Claude inside a Stripe subscription, with tests for the privacy of the AI's family context, and a 13-agent research workflow (blind researchers by record type, adversarial verification per fact, a judge) that scored 93/100 against a DAR-accepted lineage record.</p>
         <div class="project-tags"><span class="about-cap">Agentic AI</span> <span class="about-cap">Next.js</span> <span class="about-cap">Genealogy</span> <span class="about-cap">Stripe</span></div>
@@ -2231,23 +2294,27 @@
         el.style.visibility = '';
         wins[id] = { el: el };
       }
+      var wasOpen = el.classList.contains('open');
       el.classList.add('open');
       var icon = document.querySelector('.icon-' + id);
       if (icon) icon.classList.add('visited');
       bringToFront(id);
+      if (!wasOpen && typeof Sound !== 'undefined') Sound.ui('window-open');
       if (window.innerWidth <= 640) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // "Don't close your eyes" - Kix, 1988 / Or do. We'll be here.
     function closeWin(id) {
       var el = document.getElementById('win-' + id);
-      if (el) el.classList.remove('open');
+      if (el && el.classList.contains('open')) { el.classList.remove('open'); if (typeof Sound !== 'undefined') Sound.ui('window-close'); }
+      if (typeof refreshWindowLists === 'function') refreshWindowLists();
     }
 
     function bringToFront(id) {
       topZ++;
       var el = document.getElementById('win-' + id);
       if (el) el.style.zIndex = topZ;
+      if (typeof refreshWindowLists === 'function') refreshWindowLists();
     }
 
     document.addEventListener('mousedown', function(e) {
@@ -2387,6 +2454,7 @@
       }
       var themeWp = localStorage.getItem('wallpaper-' + os);
       applyWallpaperCss(themeWp || 'none');
+      if (typeof renderMenus === 'function') renderMenus(os);
     }
 
     // Saving throw vs. icon corruption: rolled 18. Success.
@@ -2405,11 +2473,12 @@
       if (logoEl) {
         var isMac = /^(mac7|mac9|aqua)$/.test(os);
         logoEl.style.display = isMac ? 'flex' : 'none';
-        if (isMac) logoEl.innerHTML = '<div style="width:12px;height:14px">' + (os === 'aqua' ? aquaApple : os === 'mac9' ? rainbowApple : classicApple) + '</div>';
+        if (isMac) { var ic = logoEl.querySelector('.menu-apple-icon'); if (ic) { ic.classList.add('has-svg'); ic.innerHTML = (os === 'aqua' ? aquaApple : os === 'mac9' ? rainbowApple : classicApple); } }
         if (osLbl) {
-          if (os === 'win31') { osLbl.innerHTML = ''; osLbl.style.display = 'none'; }
-          else if (os === 'winxp') { osLbl.innerHTML = '<svg width="18" height="18" viewBox="0 0 64 64"><path d="M4 12 C14 6 22 10 30 8 L30 30 C22 32 14 28 4 34 Z" fill="#f35325"/><path d="M34 7 C44 4 52 8 60 4 L60 26 C52 30 44 26 34 29 Z" fill="#81bc06"/><path d="M4 38 C14 32 22 36 30 34 L30 56 C22 58 14 54 4 60 Z" fill="#05a6f0"/><path d="M34 33 C44 30 52 34 60 30 L60 52 C52 56 44 52 34 55 Z" fill="#ffba08"/></svg><span class="start-label">start</span>'; osLbl.style.display = 'flex'; }
-          else if (os === 'beos') { osLbl.innerHTML = '<svg width="30" height="14" viewBox="0 0 60 28"><rect x="1" y="1" width="26" height="26" rx="5" fill="#d8201c"/><path d="M14 6c-5 2-7 7-4 11 2 3 6 3 8 1-3 0-5-2-5-5 0-3 2-5 5-6-1-1-2-1-4-1z" fill="#fff"/><text x="31" y="22" font-family="Georgia, serif" font-weight="bold" font-size="22" fill="#2244aa">Be</text></svg>'; osLbl.style.display = 'flex'; }
+          var mark = osLbl.querySelector('.os-label-mark') || osLbl.appendChild(Object.assign(document.createElement('span'), { className: 'os-label-mark' }));
+          if (os === 'win31') { mark.innerHTML = ''; osLbl.style.display = 'none'; }
+          else if (os === 'winxp') { mark.innerHTML = '<svg width="18" height="18" viewBox="0 0 64 64"><path d="M4 12 C14 6 22 10 30 8 L30 30 C22 32 14 28 4 34 Z" fill="#f35325"/><path d="M34 7 C44 4 52 8 60 4 L60 26 C52 30 44 26 34 29 Z" fill="#81bc06"/><path d="M4 38 C14 32 22 36 30 34 L30 56 C22 58 14 54 4 60 Z" fill="#05a6f0"/><path d="M34 33 C44 30 52 34 60 30 L60 52 C52 56 44 52 34 55 Z" fill="#ffba08"/></svg><span class="start-label">start</span>'; osLbl.style.display = 'flex'; }
+          else if (os === 'beos') { mark.innerHTML = '<svg width="30" height="14" viewBox="0 0 60 28"><rect x="1" y="1" width="26" height="26" rx="5" fill="#d8201c"/><path d="M14 6c-5 2-7 7-4 11 2 3 6 3 8 1-3 0-5-2-5-5 0-3 2-5 5-6-1-1-2-1-4-1z" fill="#fff"/><text x="31" y="22" font-family="Georgia, serif" font-weight="bold" font-size="22" fill="#2244aa">Be</text></svg>'; osLbl.style.display = 'flex'; }
           else { osLbl.style.display = 'none'; }
         }
       }
@@ -2809,7 +2878,7 @@
       function setIcons(map) { iconMap = map || null; } /* { mac7: {...}, mac9: {...} }: each system marches its own icons */
       return { run: run, bootOnLoad: bootOnLoad, setIcons: setIcons, themes: THEMES };
     })();
-    function switchTheme(os) { BootEngine.run(os, function () { setTheme(os); }); }
+    function switchTheme(os) { Sound.chime(os); BootEngine.run(os, function () { setTheme(os); }); }
 
     /* ===== KEYBOARD SHORTCUTS ===== */
     document.addEventListener('keydown', function(e) {
@@ -2943,6 +3012,254 @@
       e.preventDefault(); e.stopPropagation();
     }
 
+    // ============================================================
+    // MENUS - "Everybody Wants to Rule the World" - Tears for Fears, 1985
+    // One definition per system, rendered into the bar. Items call the same functions the icons do.
+    // ============================================================
+
+    var menuActions = [];
+    function menuAction(i) { var a = menuActions[i]; if (a) { Sound.ui('select'); a(); } }
+    function dd(label, action, opts) { return Object.assign({ label: label, action: action }, opts || {}); }
+    var SEP = { sep: true };
+    var WINDOW_TITLES = { about: 'About Micah', readme: 'Read Me', career: 'Career', projects: 'Projects', contact: 'Contact', ask: 'Ask Micah', themes: 'Appearance', chooser: 'Chooser', easter: 'About This Resume' };
+    function openers() {
+      return [dd('About Micah', function () { openWin('about'); }), dd('Career', function () { openWin('career'); }), dd('Projects', function () { openWin('projects'); }),
+        dd('Contact', function () { openWin('contact'); }), dd('Ask Micah', function () { openWin('ask'); }), dd('Read Me', function () { openWin('readme'); })];
+    }
+    function fileItems(os) {
+      var mac = /^(mac7|mac9|aqua)$/.test(os), k = mac ? '\u2318' : 'Ctrl+';
+      return [dd('New Folder', null, { disabled: true, shortcut: k + 'N' }), dd('Open', function () { openWin('about'); }, { shortcut: k + 'O' }), SEP,
+        dd('Close Window', closeFrontWindow, { shortcut: k + 'W' }), dd('Close All Windows', closeAllWindows), SEP,
+        dd('Get Info', showEasterEgg, { shortcut: k + 'I' }), dd('Chooser...', function () { openWin('chooser'); }), SEP,
+        dd('Download Resume (PDF)', downloadPDF), dd('Save as Resume.sit...', saveAsSit), dd('Print...', exportPDF, { shortcut: k + 'P' })];
+    }
+    function editItems() {
+      return [dd('Undo', null, { disabled: true, shortcut: '\u2318Z' }), SEP, dd('Cut', null, { disabled: true }), dd('Copy Email Address', function () { copyText('micah@conscious-shell.com', 'Email address copied.'); }),
+        dd('Copy Site Link', function () { copyText('https://conscious-shell.com', 'Link copied.'); }), dd('Paste', null, { disabled: true }), SEP, dd('Select All', selectAllIcons, { shortcut: '\u2318A' })];
+    }
+    function viewItems(label) {
+      return [dd('by Icon', null, { check: true }), dd('by Name', null, { disabled: true }), SEP, dd(label || 'Clean Up Windows', cleanUpWindows), SEP,
+        dd('Random Wallpaper', randomWallpaper), dd('Next Wallpaper', nextWallpaper), dd('Default Wallpaper', function () { setWallpaper('none'); }), SEP,
+        dd('CRT Scanlines', toggleCRT), dd('Espa\u00f1ol / English', toggleLang)];
+    }
+    function labelItems() {
+      var labels = [['None', ''], ['Essential', '#f90'], ['Hot', '#f00'], ['In Progress', '#f0f'], ['Cool', '#0cc'], ['Personal', '#00f'], ['Project 1', '#0a0'], ['Project 2', '#960']];
+      return labels.map(function (l) { return dd(l[0], function () { labelIcons(l[1]); }, { swatch: l[1] }); });
+    }
+    function helpItems() {
+      return [dd('Help Center', function () { openWin('readme'); }), dd('Keyboard Shortcuts', function () { sysAlert('Cmd 1 to 6 switch systems. Cmd W or Esc closes the front window. Click, Esc, Space, or Enter skips a boot. Hold Shift while a Mac boots for Extensions Off.'); }),
+        dd('Easter Eggs...', function () { sysAlert('Type zork, iddqd, contra, dnukem, afterdark, rebuild, or about. The Konami code works. The Trash knows things. Ninety idle seconds brings the toasters.'); }), SEP, dd('About This Resume', showEasterEgg)];
+    }
+    function specialItems(os) {
+      var items = [dd('Empty Trash...', emptyTrash), dd('Eject Disk', null, { disabled: true, shortcut: '\u2318E' }), dd('Erase Disk...', null, { disabled: true }), SEP];
+      if (os === 'mac9') items.push(dd('Sleep', sleep));
+      items.push(dd('Restart', restart), dd('Shut Down', shutDown));
+      return items;
+    }
+    function soundItem() { return dd(Sound.isOn() ? 'Sound Off' : 'Sound On', function () { Sound.toggle(); }); }
+
+    function menusFor(os) {
+      if (os === 'mac7') return { apple: [dd('About This Macintosh...', function () { openWin('about'); }), SEP, dd('Appearance', function () { openWin('themes'); }), dd('Chooser', function () { openWin('chooser'); }), SEP].concat(openers()),
+        menus: [{ title: 'File', items: fileItems(os) }, { title: 'Edit', items: editItems() }, { title: 'View', items: viewItems('Clean Up Windows') }, { title: 'Label', items: labelItems() },
+          { title: 'Special', items: [dd('Clean Up Desktop', cleanUpWindows), SEP].concat(specialItems(os)).concat([SEP, soundItem()]) }] };
+      if (os === 'mac9') return { apple: [dd('About This Computer', function () { openWin('about'); }), SEP, dd('Appearance', function () { openWin('themes'); }), dd('Chooser', function () { openWin('chooser'); }), SEP].concat(openers()),
+        menus: [{ title: 'File', items: fileItems(os) }, { title: 'Edit', items: editItems() }, { title: 'View', items: viewItems('Clean Up Windows') }, { title: 'Window', items: [], windows: true },
+          { title: 'Special', items: specialItems(os).concat([SEP, soundItem()]) }, { title: 'Help', items: helpItems() }] };
+      if (os === 'aqua') return { apple: [dd('About This Mac', function () { openWin('about'); }), SEP, dd('System Preferences...', function () { openWin('themes'); }), SEP, dd('Sleep', sleep), dd('Restart...', restart), dd('Shut Down...', shutDown), SEP, soundItem()],
+        menus: [{ title: 'File', items: fileItems(os) }, { title: 'Edit', items: editItems() }, { title: 'View', items: viewItems('Clean Up') },
+          { title: 'Go', items: openers().concat([SEP, dd('Chooser...', function () { openWin('chooser'); }), SEP, dd('conscious-shell.com', function () { window.open('https://conscious-shell.com', '_blank'); }), dd('GitHub', function () { window.open('https://github.com/socraticstatic', '_blank'); })]) },
+          { title: 'Window', items: [dd('Bring All to Front', cleanUpWindows), SEP], windows: true }, { title: 'Help', items: helpItems() }] };
+      if (os === 'win31') return { apple: null,
+        menus: [{ title: 'File', items: [dd('New...', null, { disabled: true }), dd('Open', function () { openWin('about'); }, { shortcut: 'Enter' }), dd('Move...', null, { disabled: true }), dd('Copy...', null, { disabled: true }), dd('Delete', null, { disabled: true, shortcut: 'Del' }), dd('Properties...', showEasterEgg), SEP, dd('Run...', function () { openWin('ask'); }), SEP, dd('Download Resume (PDF)', downloadPDF), dd('Print...', exportPDF), SEP, dd('Exit Windows...', shutDown)] },
+          { title: 'Options', items: [dd('Auto Arrange', cleanUpWindows, { check: true }), dd('Minimize on Use', null, { disabled: true }), dd('Save Settings on Exit', null, { disabled: true }), SEP, dd('Appearance...', function () { openWin('themes'); }), dd('Chooser...', function () { openWin('chooser'); }), SEP, dd('Random Wallpaper', randomWallpaper), dd('Default Wallpaper', function () { setWallpaper('none'); }), dd('CRT Scanlines', toggleCRT), dd('Espa\u00f1ol / English', toggleLang), SEP, soundItem()] },
+          { title: 'Window', items: [dd('Cascade', cleanUpWindows, { shortcut: 'Shift+F5' }), dd('Tile', cleanUpWindows, { shortcut: 'Shift+F4' }), dd('Arrange Icons', selectAllIcons), dd('Close All', closeAllWindows), SEP], windows: true },
+          { title: 'Help', items: [dd('Contents', function () { openWin('readme'); }), dd('Search for Help on...', function () { openWin('ask'); }), SEP, dd('Easter Eggs...', function () { sysAlert('Type zork, iddqd, contra, dnukem, afterdark, rebuild, or about. The Konami code works.'); }), SEP, dd('About Program Manager...', function () { openWin('about'); })] }] };
+      if (os === 'winxp') return { start: { left: openers(), right: [dd('Appearance', function () { openWin('themes'); }), dd('Chooser', function () { openWin('chooser'); }), dd('Print', exportPDF), dd('Download Resume (PDF)', downloadPDF), SEP, dd('Clean Up Windows', cleanUpWindows), dd('CRT Scanlines', toggleCRT), dd('Espa\u00f1ol / English', toggleLang), soundItem()],
+        foot: [dd('Log Off', null, { disabled: true }), dd('Turn Off Computer', shutDown)] } };
+      if (os === 'beos') return { be: [dd('About BeOS', function () { openWin('about'); }), SEP, dd('Preferences', function () { openWin('themes'); }), dd('Chooser', function () { openWin('chooser'); }), dd('Read Me', function () { openWin('readme'); }), SEP, dd('Clean Up Windows', cleanUpWindows), dd('Random Wallpaper', randomWallpaper), dd('Espa\u00f1ol / English', toggleLang), soundItem(), SEP, dd('Restart', restart), dd('Shut Down', shutDown)] };
+      return { menus: [] };
+    }
+
+    function ddHTML(items) {
+      return items.map(function (it) {
+        if (it.sep) return '<div class="menu-dd-sep"></div>';
+        var i = menuActions.push(it.action) - 1;
+        var cls = 'menu-dd-item' + (it.disabled || !it.action ? ' disabled' : '');
+        var swatch = it.swatch ? '<span class="menu-dd-check" style="display:inline-block;width:10px;height:10px;background:' + it.swatch + ';border:1px solid #000;margin-right:6px"></span>' : (it.check ? '<span class="menu-dd-check">\u2713</span>' : '<span class="menu-dd-check"></span>');
+        return '<div class="' + cls + '" onclick="menuAction(' + i + ')">' + swatch + it.label + (it.shortcut ? '<span class="menu-dd-shortcut">' + it.shortcut + '</span>' : '') + '</div>';
+      }).join('');
+    }
+    function renderMenus(os) {
+      menuActions = [];
+      var def = menusFor(os), bar = document.getElementById('menu-items'), apple = document.getElementById('apple-menu'), be = document.getElementById('be-menu');
+      bar.innerHTML = ''; apple.innerHTML = ''; be.innerHTML = '';
+      if (def.apple) apple.innerHTML = ddHTML(def.apple);
+      if (def.be) be.innerHTML = ddHTML(def.be);
+      if (def.menus) bar.innerHTML = def.menus.map(function (m) {
+        return '<div class="menu-item" onmouseenter="Sound.ui(\'menu-open\')" onmouseleave="Sound.ui(\'menu-close\')">' + m.title + '<div class="menu-dropdown">' + ddHTML(m.items) + (m.windows ? '<div class="menu-dd-windows"></div>' : '') + '</div></div>';
+      }).join('');
+      if (os === 'beos') bar.innerHTML = '<div class="deskbar-apps"></div>';
+      var sm = document.getElementById('start-menu');
+      if (def.start) { document.getElementById('sm-left').innerHTML = smHTML(def.start.left); document.getElementById('sm-right').innerHTML = smHTML(def.start.right); document.getElementById('sm-foot').innerHTML = smHTML(def.start.foot); }
+      sm.classList.remove('open');
+      refreshWindowLists();
+    }
+    function smHTML(items) {
+      return items.filter(function (it) { return !it.sep; }).map(function (it) { var i = menuActions.push(it.action) - 1; return '<div class="sm-item' + (it.disabled ? ' menu-dd-item disabled' : '') + '" onclick="menuAction(' + i + '); toggleStart();">' + it.label + '</div>'; }).join('');
+    }
+    function toggleStart(e) {
+      if (document.documentElement.dataset.os !== 'winxp') return;
+      var sm = document.getElementById('start-menu'); sm.classList.toggle('open');
+      if (e) e.stopPropagation();
+    }
+    document.addEventListener('click', function (e) { var sm = document.getElementById('start-menu'); if (sm && sm.classList.contains('open') && !sm.contains(e.target) && !e.target.closest('.menu-os-label')) sm.classList.remove('open'); });
+    function openWindowsByZ() {
+      return Array.prototype.slice.call(document.querySelectorAll('.window.open:not(.sys-dialog)')).sort(function (a, b) { return (parseInt(a.style.zIndex) || 0) - (parseInt(b.style.zIndex) || 0); });
+    }
+    function winTitle(el) { var t = el.querySelector('.titlebar-title'); return t ? t.textContent : el.id; }
+    function refreshWindowLists() {
+      var wins = openWindowsByZ(), front = wins[wins.length - 1];
+      var rows = wins.map(function (w) { var id = w.id.replace('win-', ''); var i = menuActions.push(function () { openWin(id); }) - 1; return { id: id, title: winTitle(w), i: i, front: w === front }; });
+      document.querySelectorAll('.menu-dd-windows').forEach(function (el) {
+        el.innerHTML = rows.length ? '<div class="menu-dd-sep"></div>' + rows.map(function (r) { return '<div class="menu-dd-item" onclick="menuAction(' + r.i + ')"><span class="menu-dd-check">' + (r.front ? '\u2713' : '') + '</span>' + r.title + '</div>'; }).join('') : '';
+      });
+      var tb = document.getElementById('taskbar-windows');
+      if (tb) tb.innerHTML = rows.map(function (r) { return '<div class="tb-btn' + (r.front ? ' front' : '') + '" onclick="menuAction(' + r.i + ')">' + r.title + '</div>'; }).join('');
+      var db = document.querySelector('.deskbar-apps');
+      if (db) db.innerHTML = rows.map(function (r) { return '<div class="db-app' + (r.front ? ' front' : '') + '" onclick="menuAction(' + r.i + ')">' + r.title + '</div>'; }).join('');
+    }
+    function closeFrontWindow() { var w = openWindowsByZ(); if (w.length) closeWin(w[w.length - 1].id.replace('win-', '')); }
+    function closeAllWindows() { openWindowsByZ().forEach(function (w) { closeWin(w.id.replace('win-', '')); }); }
+    function cleanUpWindows() {
+      var ids = openWindowsByZ().map(function (w) { return w.id.replace('win-', ''); });
+      ids.forEach(function (id) { delete wins[id]; document.getElementById('win-' + id).classList.remove('open'); });
+      ids.forEach(function (id) { openWin(id); });
+    }
+    function selectAllIcons() { document.querySelectorAll('.desktop-icon').forEach(function (i) { i.classList.add('selected'); }); }
+    function labelIcons(color) {
+      var sel = document.querySelectorAll('.desktop-icon.selected');
+      if (!sel.length) { sysAlert('Select an icon first, then choose a label.'); return; }
+      sel.forEach(function (i) { var l = i.querySelector('.icon-label'); l.style.background = color || ''; l.style.color = color ? '#fff' : ''; });
+    }
+    function copyText(text, msg) {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { sysAlert(msg); }, function () { sysAlert(text); });
+      else sysAlert(text);
+    }
+    function emptyTrash() { Sound.ui('trash'); sysAlert('The Trash contains no items.'); }
+
+    // ============================================================
+    // SYSTEM DIALOGS AND POWER - "Turn Off the Lights" - Teddy Pendergrass, 1978
+    // ============================================================
+
+    function sysDialog(opts) {
+      document.querySelectorAll('.sys-dialog').forEach(function (d) { d.remove(); });
+      var box = document.createElement('div'); box.className = 'window sys-dialog open';
+      box.innerHTML = '<div class="win-body sd-body"><div class="sd-icon">' + (opts.icon || '!') + '</div><div class="sd-text">' + opts.text + '</div><div class="sd-buttons"></div></div>';
+      var btns = box.querySelector('.sd-buttons');
+      (opts.buttons || [{ label: 'OK', primary: true }]).forEach(function (b) {
+        var el = document.createElement('button'); el.className = 'sd-btn' + (b.primary ? ' primary' : ''); el.textContent = b.label;
+        el.onclick = function () { Sound.ui('button'); box.remove(); if (b.action) b.action(); };
+        btns.appendChild(el);
+      });
+      box.style.zIndex = 10006;
+      document.body.appendChild(box);
+      if (opts.beep) Sound.ui('beep');
+      return box;
+    }
+    function sysAlert(text) { return sysDialog({ text: text, beep: true }); }
+    function currentOS() { return document.documentElement.dataset.os || 'mac7'; }
+    function shutDown() {
+      var os = currentOS();
+      if (os === 'mac7') return sysDialog({ text: 'Are you sure you want to shut down your computer now?', buttons: [{ label: 'Restart', action: restart }, { label: 'Sleep', action: sleep }, { label: 'Cancel' }, { label: 'Shut Down', primary: true, action: powerOff }] });
+      if (os === 'mac9') {
+        var n = 9, box = sysDialog({ icon: '\u23FB', text: 'Seconds until shut down: <b class="sd-count">' + n + '</b>', buttons: [{ label: 'Cancel', action: function () { clearInterval(t); } }, { label: 'Shut Down', primary: true, action: function () { clearInterval(t); powerOff(); } }] });
+        var t = setInterval(function () { n--; var c = box.querySelector('.sd-count'); if (!document.body.contains(box)) { clearInterval(t); return; } if (c) c.textContent = n; if (n <= 0) { clearInterval(t); box.remove(); powerOff(); } }, 1000);
+        return box;
+      }
+      if (os === 'aqua') return sysDialog({ icon: '\u23FB', text: 'Are you sure you want to shut down your computer now?', buttons: [{ label: 'Cancel' }, { label: 'Shut Down', primary: true, action: powerOff }] });
+      if (os === 'win31') return sysDialog({ icon: 'i', text: 'This will end your Windows session.', buttons: [{ label: 'OK', primary: true, action: powerOff }, { label: 'Cancel' }] });
+      if (os === 'winxp') return sysDialog({ icon: '\u23FB', text: '<b>Turn off computer</b>', buttons: [{ label: 'Stand By', action: sleep }, { label: 'Turn Off', primary: true, action: powerOff }, { label: 'Restart', action: restart }, { label: 'Cancel' }] });
+      if (os === 'beos') return sysDialog({ text: 'Asking "' + (openWindowsByZ().length ? winTitle(openWindowsByZ()[0]) : 'Tracker') + '" to quit.', buttons: [{ label: 'Kill Application', action: powerOff }, { label: 'Cancel Shutdown' }] });
+    }
+    function offScreenHTML(os) {
+      var hint = '<div class="off-hint">Click anywhere to start up again.</div>';
+      if (os === 'mac7' || os === 'mac9') return '<div class="off-mac">You may now switch off your Macintosh safely.' + hint + '</div>';
+      if (os === 'aqua') return '<div class="off-x">' + hint + '</div>';
+      if (os === 'win31') return '<div class="off-dos">C:\\WINDOWS&gt;<span class="w31-cursor">_</span>' + hint + '</div>';
+      if (os === 'winxp') return '<div class="boot-stage"><img class="boot-bitmap b-shutting" src="assets/boot/winxp-shutting-down.png" alt=""><img class="boot-bitmap b-off boot-hidden" src="assets/boot/winxp-off.png" alt=""></div>';
+      if (os === 'beos') return '<div class="boot-stage"><img class="boot-bitmap" src="assets/boot/beos-off.png" alt=""></div>';
+      return hint;
+    }
+    function powerOff(opts) {
+      opts = opts || {};
+      var os = currentOS();
+      document.querySelectorAll('.sys-dialog, .sleep-screen, .off-screen').forEach(function (d) { d.remove(); });
+      closeAllWindows();
+      var off = document.createElement('div'); off.className = 'off-screen off-' + os;
+      off.innerHTML = opts.restart ? '' : offScreenHTML(os);
+      document.body.appendChild(off);
+      var stage = off.querySelector('.boot-stage');
+      function fit() { if (!stage) return; var s = Math.max(0.5, Math.min(window.innerWidth / 640, window.innerHeight / 480, 2.2)); stage.style.transform = 'scale(' + s + ')'; }
+      fit(); window.addEventListener('resize', fit);
+      requestAnimationFrame(function () { off.classList.add('on'); });
+      if (os === 'winxp' && !opts.restart) setTimeout(function () { var a = off.querySelector('.b-shutting'), b = off.querySelector('.b-off'); if (a && b) { a.classList.add('boot-hidden'); b.classList.remove('boot-hidden'); } }, 1800);
+      function powerOn() {
+        window.removeEventListener('resize', fit); off.remove();
+        Sound.chime(os);
+        BootEngine.run(os, function () { setTheme(os); openWin('about'); });
+      }
+      if (opts.restart) setTimeout(powerOn, 900);
+      else setTimeout(function () { off.addEventListener('click', powerOn, { once: true }); document.addEventListener('keydown', function onKey() { document.removeEventListener('keydown', onKey); powerOn(); }, { once: true }); }, 1200);
+    }
+    function restart() { powerOff({ restart: true }); }
+    function sleep() {
+      document.querySelectorAll('.sys-dialog').forEach(function (d) { d.remove(); });
+      var s = document.createElement('div'); s.className = 'sleep-screen'; document.body.appendChild(s);
+      setTimeout(function () { s.addEventListener('click', function () { s.remove(); }, { once: true }); document.addEventListener('keydown', function onKey() { document.removeEventListener('keydown', onKey); s.remove(); }, { once: true }); }, 400);
+    }
+
+    // ============================================================
+    // SOUND - "Sounds of Silence" - Simon and Garfunkel, 1964
+    // Off until asked. The Mac OS 9 sounds are the real Platinum set; the boot chimes are
+    // synthesized as the right chords, since the real ones live in ROM code, not resources.
+    // ============================================================
+
+    var Sound = (function () {
+      var enabled = false, cache = {}, ctx = null;
+      var UI = {
+        mac9: { 'menu-open': 'menu-open', 'menu-close': 'menu-close', select: 'menu-select', 'window-open': 'window-open', 'window-close': 'window-close', button: 'button-press', trash: 'trash-empty', beep: 'simple-beep', drop: 'drop' },
+        mac7: { beep: 'simple-beep', trash: 'simple-beep' },
+        aqua: { beep: 'sosumi', trash: 'trash-empty' }
+      };
+      function play(name) {
+        if (!enabled) return;
+        try {
+          var a = cache[name]; if (!a) { a = cache[name] = new Audio('assets/sound/' + name + '.wav'); a.preload = 'auto'; }
+          var c = a.cloneNode(); c.volume = 0.6; var p = c.play(); if (p && p.catch) p.catch(function () {});
+        } catch (e) {}
+      }
+      function ui(event) { var map = UI[document.documentElement.dataset.os]; if (map && map[event]) play(map[event]); }
+      function chime(os) {
+        if (!enabled) return;
+        var notes = os === 'mac7' ? [261.63, 329.63, 392.0, 523.25] : (os === 'mac9' || os === 'aqua') ? [92.5, 185.0, 233.08, 277.18, 369.99] : null;
+        if (!notes) return;
+        try { ctx = ctx || new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return; }
+        var t = ctx.currentTime, master = ctx.createGain(); master.gain.value = 0.22; master.connect(ctx.destination);
+        var hold = os === 'mac7' ? 1.6 : 2.6;
+        notes.forEach(function (f) {
+          [['sine', 1], ['triangle', 0.3]].forEach(function (p) {
+            var o = ctx.createOscillator(), g = ctx.createGain(); o.type = p[0]; o.frequency.value = f;
+            g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(p[1] / notes.length, t + 0.03); g.gain.exponentialRampToValueAtTime(0.0008, t + hold);
+            o.connect(g); g.connect(master); o.start(t); o.stop(t + hold + 0.1);
+          });
+        });
+      }
+      function paint() { var el = document.querySelector('.menu-sound'); if (el) el.classList.toggle('on', enabled); }
+      function toggle() { enabled = !enabled; try { localStorage.setItem('sound', enabled ? '1' : ''); } catch (e) {} paint(); if (enabled) play(document.documentElement.dataset.os === 'mac9' ? 'button-press' : 'simple-beep'); renderMenus(document.documentElement.dataset.os); }
+      function init() { try { enabled = !!localStorage.getItem('sound'); } catch (e) {} paint(); }
+      return { play: play, ui: ui, chime: chime, toggle: toggle, init: init, isOn: function () { return enabled; } };
+    })();
+
     /* ===== BOOT EXTENSIONS =====
        The icons that march along the bottom of a Mac boot are the real ones: icl8 and ICN#
        resources read out of the Extensions and Control Panels folders of a Mac OS 9 System Folder,
@@ -2958,6 +3275,7 @@
     /* ===== INIT ===== */
     // "Start me up" - Rolling Stones, 1981 / If you start me up, I'll never stop
     (function() {
+      Sound.init();
       var saved = localStorage.getItem('os-theme');
       var prefersDark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
       var activeOs = saved || (prefersDark ? 'aqua' : 'mac7');

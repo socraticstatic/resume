@@ -44,7 +44,7 @@ test('the resume PDF is a real download, and Save as Resume.sit ends in it', () 
   assert.match(html, /function downloadPDF\(\)/);
   const sit = html.slice(html.indexOf('function saveAsSit()'), html.indexOf('/* Chooser:'));
   assert.ok(sit.includes('downloadPDF()'), 'StuffIt dialog hands off to the download');
-  assert.ok(html.includes(`onclick="exportPDF()">Print`), 'Print stays its own menu item');
+  assert.ok(html.includes("dd('Print...', exportPDF"), 'Print stays its own menu item');
 });
 
 test('a wide first load opens Career beside About', () => {

@@ -19,7 +19,7 @@ test('BootEngine is present and the old boot config is gone', () => {
 });
 
 test('switchTheme delegates to BootEngine and ends in setTheme', () => {
-  assert.match(html, /function switchTheme\(os\) \{\s*BootEngine\.run\(os, function \(\) \{ setTheme\(os\); \}\);\s*\}/);
+  assert.match(html, /function switchTheme\(os\) \{ Sound\.chime\(os\); BootEngine\.run\(os, function \(\) \{ setTheme\(os\); \}\); \}/);
 });
 
 test('INIT gives the parade real icons and boots once per tab', () => {

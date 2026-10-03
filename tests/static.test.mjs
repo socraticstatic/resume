@@ -48,12 +48,11 @@ test('status bars are filled at init, not in markup', () => {
   }
 });
 
-test('theme ids agree across shortcuts, menu, and theme boxes', () => {
+test('theme ids agree across shortcuts, theme boxes, and boot sequences', () => {
   const keys = [...html.match(/var themeKeys = \{([^}]*)\}/)[1].matchAll(/:\s*'([a-z0-9]+)'/g)].map((m) => m[1]);
   const boxes = [...html.matchAll(/id="theme-([a-z0-9]+)"/g)].map((m) => m[1]);
-  const menu = [...html.matchAll(/class="menu-dd-item" onclick="switchTheme\('([a-z0-9]+)'\)"/g)].map((m) => m[1]);
   assert.deepEqual([...boxes].sort(), [...keys].sort(), 'theme boxes vs Cmd shortcuts');
-  assert.deepEqual([...menu].sort(), [...keys].sort(), 'Theme menu vs Cmd shortcuts');
+  for (const k of keys) assert.match(html, new RegExp(`\\n\\s+${k}: \\{ duration: \\d+,`), `boot sequence for ${k}`);
 });
 
 test('new windows are placed in free desktop space, not cascaded from a corner', () => {
