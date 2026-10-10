@@ -2685,7 +2685,7 @@
       dell: [{a:'Instead of organizing search by specs, I redesigned around customer goals. A small business owner and an enterprise IT buyer searching the same term have different needs. The UX adapted based on detected intent.'}],
       broadlane: [{a:'Started as IC, rose to Creative Director over 5 years. Branded 21 products. When the company sold, the CEO specifically credited the design work as a key factor.'}],
       early: [{a:'Nortel in 1996, as a senior web designer. Before tech, I was a gang intervention counselor and a minister. Then IMC2 in 1998, building healthcare interfaces for Eli Lilly, the American Diabetes Association, and Galderma, then GSK\'s Zyban and Trizivir, NCH templates across 12 websites, and a creative staff of seven. From there: Perot Systems, Broadlane, Dell, The Richards Group, Hitachi. Each role was bigger than the last.'}],
-      own: [{a:'On my own sites, yes. The family historian in Roots, the Pen & Paper curation agent, the job-application agent: they run every day with a human gate, evidence attached to every claim, and a report of every action. At AT&T the agent work is prototypes. Same principles. Different stage.'}]
+      own: [{a:'On my own sites, yes. The family historian in Roots and the Pen & Paper curation agent run every day with a human gate, evidence attached to every claim, and a report of every action. At AT&T the agent work is prototypes. Same principles. Different stage.'}]
     };
 
     // ============================================================
@@ -2721,7 +2721,7 @@
       "Most designers either make things pretty or they ship products. I do both, and I write the code too. Thirty years across nuclear, finance, telecom, government, and energy. I don't need a translator between design and engineering - I am the translator.",
       "Because I've already made every expensive mistake a designer can make, and I know which corners you can cut and which ones will cost you six months. I've watched two companies get acquired partly on the strength of work I led. Experience compounds. You're not hiring my age, you're hiring my pattern library.",
       "Complexity is the enemy. Every system I touch gets simpler for the person using it, even if the underlying problem is harder. I start with the human workflow, not the data model. If a field worker in a flood zone can't use it with wet hands, the design failed.",
-      "At AT&T I prototype agents for network operations: they provision, diagnose, optimize, and decommission, and they show their evidence and wait for a person before they act. I also led the enterprise AI design pilot there. On my own sites the agents are live every day: a family historian on Claude, a bilingual curation agent, a job-application agent, all behind human gates. I'm not theorizing about AI. I run it, and I know where the gates go.",
+      "At AT&T I prototype agents for network operations: they provision, diagnose, optimize, and decommission, and they show their evidence and wait for a person before they act. I also led the enterprise AI design pilot there. On my own sites the agents are live every day: a family historian on Claude and a bilingual curation agent, both behind human gates. I'm not theorizing about AI. I run it, and I know where the gates go.",
       "GE Nuclear. Hundreds of separate Fortran applications built over decades, each with its own data silo. Errors from manual data transfer between systems. I proposed unifying everything into one database with role-based dashboards. Everyone said it couldn't be done inside federal nuclear compliance requirements. I did it. 48% error reduction.",
       "Because design without implementation knowledge is decoration. I write production code because it makes my designs honest. I know what's expensive to build and what's cheap. That saves months of back-and-forth. My GitHub is active. I ship every week.",
       "A team that's solving hard problems and needs someone who can own the full arc - from user research through design system through shipped product. I want to work where design is a strategic function, not a service desk. Ideally somewhere building AI tools, cloud infrastructure, or developer experience."
@@ -3377,12 +3377,13 @@
       var ev = document.getElementById('easter-version');
       if (ev) ev.textContent = 'Version ' + SITE_VERSION;
       if (window.innerWidth <= 640) {
-        ['about','readme','career','projects','contact','ask'].forEach(function(id) {
+        ['about','readme','career','projects','contact','ask','themes'].forEach(function(id) {
           document.getElementById('win-' + id).classList.add('open');
         });
       } else {
         openWin('about');
         if (window.innerWidth >= 1280) openWin('career');
+        openWin('themes');
       }
       BootEngine.setIcons(BOOT_EXTENSIONS);
       BootEngine.bootOnLoad(activeOs);

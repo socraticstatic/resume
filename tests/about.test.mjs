@@ -37,5 +37,5 @@ test('the long sections moved to a Read Me window that the menu, the dialog, pri
   assert.ok(html.includes("dd('Read Me', function () { openWin('readme'); })"), 'menu entry for Read Me');
   assert.ok(about.includes(`openWin('readme')`), 'About dialog opens Read Me');
   assert.match(html, /\['about','readme','career','projects','contact'\]\.forEach\(function\(id\) \{\s*document\.getElementById\('win-' \+ id\)\.classList\.add\('open'\);/, 'print opens Read Me too');
-  assert.match(html, /\['about','readme','career','projects','contact','ask'\]\.forEach/, 'mobile opens Read Me too');
+  assert.match(html, /\['about','readme','career','projects','contact','ask','themes'\]\.forEach/, 'mobile opens Read Me too');
 });

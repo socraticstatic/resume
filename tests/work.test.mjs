@@ -35,7 +35,8 @@ test('the registry drives the project rows and windows', { skip: !hasData && 'jo
   for (const p of registry.projects) {
     assert.equal(html.includes(`id="win-proj-${p.id}"`), !!p.surfaces.retro, `${p.id} window presence matches surfaces.retro`);
   }
-  assert.ok(!html.includes('Job-application agent'), 'the job-application agent is off the site');
+  assert.ok(!/job[- ]?application agent/i.test(html), 'the job-application agent is off the site, in every case and spelling');
+  assert.ok(!/job[- ]?hunter/i.test(html), 'the job-hunter pipeline is never named on the site');
 });
 
 test('the resume PDF is a real download, and Save as Resume.sit ends in it', () => {
@@ -47,7 +48,8 @@ test('the resume PDF is a real download, and Save as Resume.sit ends in it', () 
   assert.ok(html.includes("dd('Print...', exportPDF"), 'Print stays its own menu item');
 });
 
-test('a wide first load opens Career beside About', () => {
+test('every first load opens Appearance; a wide one opens Career beside About', () => {
   const init = html.slice(html.indexOf('/* ===== INIT ===== */'), html.indexOf('// AFTER DARK: CYBERHACKER'));
-  assert.match(init, /openWin\('about'\);\s*if \(window\.innerWidth >= 1280\) openWin\('career'\);/);
+  assert.match(init, /openWin\('about'\);\s*if \(window\.innerWidth >= 1280\) openWin\('career'\);\s*openWin\('themes'\);/);
+  assert.match(init, /\['about','readme','career','projects','contact','ask','themes'\]/, 'phones open Appearance too');
 });
