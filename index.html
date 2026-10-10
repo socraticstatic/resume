@@ -1176,6 +1176,8 @@
     /* Mac OS X 10.1: the bar fills inside the bitmap's empty trough */
     .aq-bar { position: absolute; left: 254px; top: 286px; width: 132px; height: 8px; overflow: hidden; }
     .aq-fill { width: 0; height: 100%; background: linear-gradient(to bottom, #c9c9c9, #9c9c9c); transition: width 1.9s linear; }
+    /* 10.1 printed its startup items under the panel's welcome line, one at a time */
+    .aq-status { position: absolute; left: 0; top: 326px; width: 640px; text-align: center; font: 10px/12px 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: #3a3a3a; letter-spacing: 0.1px; }
     /* BeOS: the seven icons start dimmed and light in order */
     .be-dim { position: absolute; width: 62px; height: 62px; border-radius: 50%; background: rgba(0,0,0,0.74); transition: opacity 0.25s; }
     .be-dim.lit { opacity: 0; }
@@ -1752,14 +1754,14 @@
           <div class="project-item" onclick="openWin('proj-roy-lipski-site')" data-when="Roy Lipski, 2016 - 2020" data-stack="Web, Brand" data-notes="Roy Lipski's personal site, designed in Adobe XD and built, with the image treatments and a final draft reviewed in 2020.">
             <div class="project-head"><strong>Roy Lipski site</strong><span>Roy Lipski, 2016 - 2020</span></div>
           </div>
-          <div class="project-item" onclick="openWin('proj-peppercorn-ai')" data-when="Peppercorn.ai, 2015 - 2021" data-stack="Strategy, Brand, AI" data-notes="Consulting for Peppercorn.ai: the pitch deck design (Simple Pitch and the SVB fundraising webinar), customer personas, UX research in Sketch, the brand guide and logo.">
+          <div class="project-item" onclick="openWin('proj-peppercorn-ai')" data-when="Peppercorn.ai, 2015 - 2021" data-stack="Strategy, Research, AI" data-notes="Consulting for Peppercorn.ai, an AI recruiting startup: strategy, customer personas and UX research. No visual design work.">
             <div class="project-head"><strong>Peppercorn.ai</strong><span>Peppercorn.ai, 2015 - 2021</span></div>
           </div>
           <div class="project-item" onclick="openWin('proj-deserve')" data-when="Deserve, 2019" data-stack="Product Design, Mobile, Fintech" data-notes="For Deserve, a credit-card startup, in July to October 2019: subscription discovery and cancellation flows (recurrences, stop requests, charge-after-stop), a competitor analysis, and milestone walkthrough videos.">
             <div class="project-head"><strong>Deserve subscription management</strong><span>Deserve, 2019</span></div>
           </div>
-          <div class="project-item" onclick="openWin('proj-treverity-products')" data-when="Treverity, 2016 - 2020" data-stack="Product Design, Field Systems, Energy, Design Systems" data-notes="The named products of a utility-software company's design practice: EDGE (shown to CenterPoint Energy and NAVFAC), Utility360 mobile, Duty Roster, Damage Assessment for the field, Service Center, and Home Service Plus for CenterPoint's home-services arm. Design ops and modular libraries tied into development; 36 products launched.">
-            <div class="project-head"><strong>Treverity product suite</strong><span>Treverity, 2016 - 2020</span></div>
+          <div class="project-item" onclick="openWin('proj-treverity-products')" data-when="Treverity, 2016 - 2020" data-stack="Product Design, Field Systems, Energy, Design Systems" data-notes="EDGE, Treverity's analytics platform for utilities: configuration-based, with GIS, dashboards and mobile apps. The 2016 CenterPoint Energy build carried Gas Leak Management, Exception Management with SAP correction, TCC, IG Geospatial, Engineering Projects, Primary Metering, Service Center, VPN Logins, Crew Productivity and Premise Research dashboards, with Siemens Spectrum Power 7 and EnergyIP integrations. Around it: Utility360 mobile, Duty Roster, Damage Assessment for the field, Service Center and Home Service Plus. Design ops and modular libraries tied into development; 36 products launched.">
+            <div class="project-head"><strong>Treverity EDGE and the product suite</strong><span>Treverity, 2016 - 2020</span></div>
           </div>
         </div>
       </div>
@@ -2231,10 +2233,9 @@
         <div class="titlebar-title">Peppercorn.ai</div>
       </div>
       <div class="win-body pw-body">
-        <img class="pw-shot" src="assets/work/peppercorn-ai.webp" alt="Peppercorn.ai">
         <div class="pw-meta"><span>Peppercorn.ai</span><span>2015 - 2021</span></div>
-        <p class="pw-summary">Consulting for Peppercorn.ai: the pitch deck design (Simple Pitch and the SVB fundraising webinar), customer personas, UX research in Sketch, the brand guide and logo.</p>
-        <div class="project-tags"><span class="about-cap">Strategy</span> <span class="about-cap">Brand</span> <span class="about-cap">AI</span></div>
+        <p class="pw-summary">Consulting for Peppercorn.ai, an AI recruiting startup: strategy, customer personas and UX research. No visual design work.</p>
+        <div class="project-tags"><span class="about-cap">Strategy</span> <span class="about-cap">Research</span> <span class="about-cap">AI</span></div>
       </div>
       <div class="win-resize" onmousedown="startResize(event, 'proj-peppercorn-ai')"></div>
     </div>
@@ -2256,12 +2257,12 @@
       <div class="titlebar" onmousedown="startDrag(event, 'proj-treverity-products')">
         <div class="closebox" onclick="closeWin('proj-treverity-products')"></div>
         <div class="titlebar-lines"></div>
-        <div class="titlebar-title">Treverity product suite</div>
+        <div class="titlebar-title">Treverity EDGE and the product suite</div>
       </div>
       <div class="win-body pw-body">
-        <img class="pw-shot" src="assets/work/treverity-products.webp" alt="Treverity product suite">
+        <img class="pw-shot" src="assets/work/treverity-products.webp" alt="Treverity EDGE and the product suite">
         <div class="pw-meta"><span>Treverity</span><span>2016 - 2020</span></div>
-        <p class="pw-summary">The named products of a utility-software company's design practice: EDGE (shown to CenterPoint Energy and NAVFAC), Utility360 mobile, Duty Roster, Damage Assessment for the field, Service Center, and Home Service Plus for CenterPoint's home-services arm. Design ops and modular libraries tied into development; 36 products launched.</p>
+        <p class="pw-summary">EDGE, Treverity's analytics platform for utilities: configuration-based, with GIS, dashboards and mobile apps. The 2016 CenterPoint Energy build carried Gas Leak Management, Exception Management with SAP correction, TCC, IG Geospatial, Engineering Projects, Primary Metering, Service Center, VPN Logins, Crew Productivity and Premise Research dashboards, with Siemens Spectrum Power 7 and EnergyIP integrations. Around it: Utility360 mobile, Duty Roster, Damage Assessment for the field, Service Center and Home Service Plus. Design ops and modular libraries tied into development; 36 products launched.</p>
         <div class="project-tags"><span class="about-cap">Product Design</span> <span class="about-cap">Field Systems</span> <span class="about-cap">Energy</span> <span class="about-cap">Design Systems</span></div>
       </div>
       <div class="win-resize" onmousedown="startResize(event, 'proj-treverity-products')"></div>
@@ -2999,12 +3000,18 @@
           html: function () {
             return bitmap('winxp-splash') + '<div class="xp-track"><div class="xp-blocks"><i></i><i></i><i></i></div></div>';
           } },
-        aqua: { duration: 3000,
+        aqua: { duration: 6200,
+          /* Mac OS X 10.1: the gray Happy Mac holds for a beat, then the pinstripe panel with the Aqua apple,
+             the bar, "Welcome to Macintosh." and the startup items printing beneath it, the way the real boot did. */
           html: function () {
-            return bitmap('aqua-happy', 'b-prelude') + bitmap('aqua-splash', 'b-main boot-hidden') + '<div class="aq-bar boot-hidden"><div class="aq-fill"></div></div>';
+            return bitmap('aqua-happy', 'b-prelude') + bitmap('aqua-splash', 'b-main boot-hidden') + '<div class="aq-bar boot-hidden"><div class="aq-fill"></div></div><div class="aq-status boot-hidden"></div>';
           },
           start: function (ctx) {
-            ctx.at(700, function () { swapTo(ctx, '.b-prelude', '.b-main'); var b = ctx.stage.querySelector('.aq-bar'); if (b) b.classList.remove('boot-hidden'); startFill(ctx, '.aq-fill', 1100); });
+            var status = ctx.stage.querySelector('.aq-status');
+            ctx.at(1400, function () { swapTo(ctx, '.b-prelude', '.b-main'); var b = ctx.stage.querySelector('.aq-bar'); if (b) b.classList.remove('boot-hidden'); if (status) status.classList.remove('boot-hidden'); startFill(ctx, '.aq-fill', 1600); });
+            [[1700, 'Starting Mac OS X'], [2700, 'Checking disks'], [3600, 'Starting network services'], [4500, 'Starting Apple File Service'], [5300, 'Starting login window']].forEach(function (step) {
+              ctx.at(step[0], function () { if (status) status.textContent = step[1] + '...'; });
+            });
           } },
         beos: { duration: 3000,
           html: function () {
