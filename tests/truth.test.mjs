@@ -21,7 +21,7 @@ test('forbidden claims are absent', () => {
     [/architected/i, 'AT&T agent work is prototyped, never architected'],
     [/126 products/i, '"126 products" has no line in facts.md'],
     [/agents that manage/i, 'agents do not manage infrastructure; they are prototypes'],
-    [/36 products/, '"36 products" has no line in facts.md'],
+    // "36 products" is in facts.md since 2026-10-10 (Micah confirmed the Treverity count).
     [/22\+ emerging/, 'CareerFoundry count is 47'],
     [/—/, 'no em dashes'],
   ];
