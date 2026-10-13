@@ -11,7 +11,7 @@ import { dirname, join } from 'node:path';
 const here = dirname(fileURLToPath(import.meta.url));
 const html = readFileSync(join(here, '..', 'index.html'), 'utf8');
 const dataDir = join(here, '..', '..', 'job-hunter', 'data');
-const hasData = existsSync(join(dataDir, 'resume.json')) && existsSync(join(dataDir, 'projects.json'));
+const hasData = existsSync(join(dataDir, 'career.json')) && existsSync(join(dataDir, 'projects.json'));
 
 const unescape = (s) => s.replace(/&amp;/g, '&').replace(/&#8239;/g, ' ').replace(/&nbsp;/g, ' ');
 const text = unescape(html);
@@ -23,6 +23,10 @@ test('forbidden claims are absent', () => {
     [/agents that manage/i, 'agents do not manage infrastructure; they are prototypes'],
     // "36 products" is in facts.md since 2026-10-10 (Micah confirmed the Treverity count).
     [/22\+ emerging/, 'CareerFoundry count is 47'],
+    [/Hitachi Vantara/, 'Hitachi Consulting, 2012 (Hitachi Vantara did not exist until 2017)'],
+    [/Director, UX Strategy/, 'the Mint title is UX Consultant Strategist (employment spreadsheet)'],
+    [/50 COVID Haiku/, 'unpublished title, removed 2026-10-13'],
+    [/\b126 /, 'unsourced number, removed 2026-10-13'],
     [/—/, 'no em dashes'],
   ];
   for (const [re, why] of forbidden) {
@@ -31,12 +35,13 @@ test('forbidden claims are absent', () => {
   }
 });
 
-test('role and employer dates match resume.json', { skip: !hasData && 'job-hunter data not present' }, () => {
-  const resume = JSON.parse(readFileSync(join(dataDir, 'resume.json'), 'utf8'));
-  const rows = [...resume.roles, ...resume.earlier];
-  for (const r of rows) {
-    const needle = `${unescape(r.company)}, ${r.dates}`;
-    assert.ok(text.includes(needle), `missing "${needle}" in index.html`);
+test('career heads match career.json', { skip: !hasData && 'job-hunter data not present' }, async () => {
+  const { loadCareer, roleYears } = await import(join(dataDir, '..', 'lib', 'career.mjs'));
+  for (const r of loadCareer(dataDir).roles) {
+    const needle = r.section === 'experience'
+      ? `${r.title}</strong><span>${r.company}, ${roleYears(r)}</span>`
+      : `${r.title}</strong><span>${r.company}</span>`;
+    assert.ok(text.includes(needle), `missing career head "${needle}" in index.html`);
   }
 });
 
