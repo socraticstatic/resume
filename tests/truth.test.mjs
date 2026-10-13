@@ -26,6 +26,7 @@ test('forbidden claims are absent', () => {
     [/Hitachi Vantara/, 'Hitachi Consulting, 2012 (Hitachi Vantara did not exist until 2017)'],
     [/Director, UX Strategy/, 'the Mint title is UX Consultant Strategist (employment spreadsheet)'],
     [/50 COVID Haiku/, 'unpublished title, removed 2026-10-13'],
+    [/Insight Engine/, 'removed from every surface (Micah 2026-10-13)'],
     [/\b126 /, 'unsourced number, removed 2026-10-13'],
     [/—/, 'no em dashes'],
   ];

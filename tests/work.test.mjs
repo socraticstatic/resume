@@ -27,7 +27,7 @@ test('project windows carry the screenshot that exists on disk, and nothing else
     const inHtml = block.includes(`assets/work/${id}.webp`);
     assert.equal(inHtml, onDisk, `${id}: image reference ${inHtml} vs file on disk ${onDisk}`);
   }
-  for (const id of ['roots', 'insight-engine', 'ge-fortran']) assert.ok(html.includes(`assets/work/${id}.webp`), `${id} shows its screenshot`);
+  for (const id of ['roots', 'treverity-products', 'ge-fortran']) assert.ok(html.includes(`assets/work/${id}.webp`), `${id} shows its screenshot`);
 });
 
 test('the registry drives the project rows and windows', { skip: !hasData && 'job-hunter data not present' }, () => {
