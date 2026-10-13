@@ -96,6 +96,23 @@ test('a block without a head line is reported, and the next block keeps its head
   assert.ok(!r.html.includes('NewCo'));
 });
 
+test('a location without a state says what it needs', () => {
+  assert.throws(() => educationBlock({ ...fixture, education: { ...fixture.education, location: 'London' } }), /location needs "City, State": London/);
+});
+
+test('escaping is plain: a canon entity shows as typed', () => {
+  assert.match(headLine({ ...fixture.roles[0], company: 'AT&amp;T' }), /AT&amp;amp;T/);
+  assert.match(headLine(fixture.roles[0]), /<span>AT&amp;T, 2021/);
+});
+
+test('a block whose role left the canon is reported', () => {
+  const html = page([role('att', '<div class="career-head"></div>'), role('ge', '<div class="career-head"></div>'),
+    role('gone', '<div class="career-head"><strong>Old</strong><span>Gone Co</span></div>')]);
+  const r = applyCareer(html, fixture);
+  assert.deepEqual(r.unknown, ['gone']);
+  assert.ok(r.html.includes('<span>Gone Co</span>'));
+});
+
 test('missing markers throw', () => {
   assert.throws(() => applyCareer('<div class="career-list"></div>', fixture), /marker not found: CAREER FACTS/);
 });

@@ -3,7 +3,7 @@
 // and writing. Descriptions under each head stay hand-written.
 
 const STATES = { Texas: 'TX', Alabama: 'AL' };
-const esc = (t) => String(t).replace(/&(?!amp;|lt;|gt;|quot;|#)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 function years(role) {
   const start = String(role.start).slice(0, 4);
@@ -13,6 +13,7 @@ function years(role) {
 
 function place(location) {
   const [city, state] = location.split(', ');
+  if (!state) throw new Error(`location needs "City, State": ${location}`);
   if (!STATES[state]) throw new Error(`no abbreviation for ${state}`);
   return `${city}, ${STATES[state]}`;
 }
@@ -57,5 +58,7 @@ export function applyCareer(html, career) {
     const eol = out.indexOf('\n', head);
     out = out.slice(0, head) + headLine(role) + out.slice(eol < 0 ? out.length : eol);
   }
-  return { html: out, missing, hidden, headless };
+  const known = new Set(career.roles.map((r) => r.id));
+  const unknown = [...out.matchAll(/data-role="([^"]+)"/g)].map((m) => m[1]).filter((id) => !known.has(id));
+  return { html: out, missing, hidden, headless, unknown };
 }
