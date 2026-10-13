@@ -44,14 +44,18 @@ export function applyCareer(html, career) {
   let out = html.replace(FACTS, (_, start, end) => `${start}${educationBlock(career)}${end}`);
   const missing = [];
   const hidden = [];
+  const headless = [];
   for (const role of career.roles) {
     const shown = role.surfaces?.retro !== false;
     const at = out.indexOf(`data-role="${role.id}"`);
     if (at < 0) { if (shown) missing.push(role.id); continue; }
     if (!shown) { hidden.push(role.id); continue; }
+    // The head must sit inside this block: before the next data-role, if any.
+    const next = out.indexOf('data-role="', at + 1);
     const head = out.indexOf(HEAD, at);
+    if (head < 0 || (next >= 0 && head > next)) { headless.push(role.id); continue; }
     const eol = out.indexOf('\n', head);
     out = out.slice(0, head) + headLine(role) + out.slice(eol < 0 ? out.length : eol);
   }
-  return { html: out, missing, hidden };
+  return { html: out, missing, hidden, headless };
 }

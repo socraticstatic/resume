@@ -84,6 +84,18 @@ test('applyCareer reports a shown role with no block, and a hidden role with one
   assert.deepEqual(r.hidden, ['nortel']);
 });
 
+test('a block without a head line is reported, and the next block keeps its head', () => {
+  const headless = '          <div class="career-role" data-role="newrole" onclick="toggleRole(this)">\n            <div class="career-body">New.</div>\n          </div>';
+  const html = page([headless,
+    role('att', '<div class="career-head"><strong>Lead Product Designer</strong><span>AT&amp;T, 2021 - Present</span></div>'),
+    role('ge', '<div class="career-head"><strong>UX Lead</strong><span>GE Nuclear (via Kraybill), 2012 - 2016</span></div>')]);
+  const canon = { ...fixture, roles: [{ id: 'newrole', section: 'experience', title: 'Design Director', company: 'NewCo', start: '2026', end: null }, ...fixture.roles] };
+  const r = applyCareer(html, canon);
+  assert.deepEqual(r.headless, ['newrole']);
+  assert.ok(r.html.includes('<strong>Lead Product Designer</strong><span>AT&amp;T, 2021 - Present</span>'));
+  assert.ok(!r.html.includes('NewCo'));
+});
+
 test('missing markers throw', () => {
   assert.throws(() => applyCareer('<div class="career-list"></div>', fixture), /marker not found: CAREER FACTS/);
 });

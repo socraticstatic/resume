@@ -17,9 +17,10 @@ if (!existsSync(canonPath)) {
 
 const file = join(root, 'index.html');
 const html = readFileSync(file, 'utf8');
-const { html: out, missing, hidden } = applyCareer(html, JSON.parse(readFileSync(canonPath, 'utf8')));
-if (missing.length) {
-  console.error(`role on the canon but not on the page: ${missing.join(', ')}. Write its block (with data-role) first.`);
+const { html: out, missing, hidden, headless } = applyCareer(html, JSON.parse(readFileSync(canonPath, 'utf8')));
+if (missing.length || headless.length) {
+  if (missing.length) console.error(`role on the canon but not on the page: ${missing.join(', ')}. Write its block (with data-role) first.`);
+  if (headless.length) console.error(`block with no career-head line: ${headless.join(', ')}. Add the head line inside the block.`);
   process.exit(1);
 }
 if (hidden.length) console.warn(`hidden on the canon, still on the page: ${hidden.join(', ')}`);

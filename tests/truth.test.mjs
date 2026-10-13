@@ -38,7 +38,7 @@ test('forbidden claims are absent', () => {
 
 test('career heads match career.json', { skip: !hasData && 'job-hunter data not present' }, async () => {
   const { loadCareer, roleYears } = await import(join(dataDir, '..', 'lib', 'career.mjs'));
-  for (const r of loadCareer(dataDir).roles) {
+  for (const r of loadCareer(dataDir).roles.filter((r) => r.surfaces?.retro !== false)) {
     const needle = r.section === 'experience'
       ? `${r.title}</strong><span>${r.company}, ${roleYears(r)}</span>`
       : `${r.title}</strong><span>${r.company}</span>`;
