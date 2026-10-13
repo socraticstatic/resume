@@ -16,9 +16,9 @@ Design skills fire automatically on frontend work via the `frontend-design-enfor
 See `~/CLAUDE.md` for full career history, professional context, and AT&T role details. Key facts:
 
 - 30+ years UX/product design
-- Current: Experience Lead, DNI at AT&T (cloud management platforms, API portals, network dashboards)
-- Prior: CareerFoundry (mentor/advisory board), Wells Fargo (via Granite Solutions), Treverity (VP Experience Design), Citi, GE Nuclear, U.S. Mint, Hitachi Vantara, The Richards Group, Dell, Broadlane (Creative Director), Perot Systems, IMC2/NCH/GSK
-- Pier 1, Home Depot, Chuck E. Cheese were Richards Group *clients*, not employers. Never worked at Toyota, Myspace, or TubeMogul.
+- Current: Lead Product Designer at AT&T (cloud management platforms, API portals, network dashboards)
+- Prior roles, titles and dates: `~/Developer/job-hunter/data/career.json` (from the employment spreadsheet; never retype them here)
+- Pier 1, Home Depot, Chuck E. Cheese were Richards Group *clients*, not employers. Employers he never had are on the never-claim list in `facts.md`.
 - Source of truth for career and project facts: `~/Developer/job-hunter/data/` (`career.json` roles, dates, titles, awards and certifications; `facts.md` claims bank; `resume.json` bullets; `projects.json` project registry). Before pushing career copy, `node ~/Developer/job-hunter/bin/career-lint.mjs --live --surface retro` must exit 0. The `micah-career` skill covers this site. `index.html` is derived from it and `npm test` fails on drift (dates, project names, forbidden claims). Do not assert an employer or a project that is not in those files.
 - The same data feeds conscious-shell.com (`scripts/sync-projects-from-registry.mjs` there generates the portfolio_projects migration) and the job-hunter pipeline. Change the data, then regenerate; never edit a surface by hand.
 - Founded Sportsgunner. 13 years independent consulting between full-time roles.
