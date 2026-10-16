@@ -10,7 +10,7 @@ import { dirname, join } from 'node:path';
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
 const html = readFileSync(join(root, 'index.html'), 'utf8');
-const dataDir = join(root, '..', 'job-hunter', 'data');
+const dataDir = join(root, '..', 'identity', 'canon');
 const hasData = existsSync(join(dataDir, 'projects.json'));
 
 test('every project row opens its own window, and every window exists', () => {
@@ -30,7 +30,7 @@ test('project windows carry the screenshot that exists on disk, and nothing else
   for (const id of ['roots', 'treverity-products', 'ge-fortran']) assert.ok(html.includes(`assets/work/${id}.webp`), `${id} shows its screenshot`);
 });
 
-test('the registry drives the project rows and windows', { skip: !hasData && 'job-hunter data not present' }, () => {
+test('the registry drives the project rows and windows', { skip: !hasData && 'identity canon not present' }, () => {
   const registry = JSON.parse(readFileSync(join(dataDir, 'projects.json'), 'utf8'));
   for (const p of registry.projects) {
     assert.equal(html.includes(`id="win-proj-${p.id}"`), !!p.surfaces.retro, `${p.id} window presence matches surfaces.retro`);

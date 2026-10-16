@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Regenerate the Projects window rows and the per-project windows in index.html
-// from the shared registry (../job-hunter/data/projects.json). A project shows a
+// from the shared registry (../identity/canon/projects.json). A project shows a
 // screenshot when assets/work/<id>.webp exists; a GitHub link when its repo is
 // public; a Live link when it has one. Run after any registry change:
 //   node scripts/sync-projects.mjs
@@ -10,7 +10,7 @@ import { dirname, join } from 'node:path';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
-const registry = JSON.parse(readFileSync(join(root, '..', 'job-hunter', 'data', 'projects.json'), 'utf8'));
+const registry = JSON.parse(readFileSync(join(root, '..', 'identity', 'canon', 'projects.json'), 'utf8'));
 const esc = (t) => t.replace(/&(?!amp;|lt;|gt;|quot;|#)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const attr = (t) => esc(t).replace(/"/g, '&quot;');
 

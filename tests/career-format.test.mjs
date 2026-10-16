@@ -1,4 +1,4 @@
-// Role heads and the education block come from ../job-hunter/data/career.json
+// Role heads and the education block come from ../identity/canon/career.json
 // through scripts/sync-career.mjs. These tests pin the formats.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -10,7 +10,7 @@ import { headLine, educationBlock, applyCareer } from '../scripts/lib/career-for
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
-const canonPath = join(root, '..', 'job-hunter', 'data', 'career.json');
+const canonPath = join(root, '..', 'identity', 'canon', 'career.json');
 const hasCanon = existsSync(canonPath);
 const EM_DASH = String.fromCharCode(0x2014);
 
@@ -132,7 +132,7 @@ test('missing canon exits 2 and writes nothing', () => {
   assert.equal(statSync(join(root, 'index.html')).mtimeMs, before);
 });
 
-test('index.html is in sync with career.json', { skip: !hasCanon && 'job-hunter data not present' }, () => {
+test('index.html is in sync with career.json', { skip: !hasCanon && 'identity canon not present' }, () => {
   const html = readFileSync(join(root, 'index.html'), 'utf8');
   const r = applyCareer(html, JSON.parse(readFileSync(canonPath, 'utf8')));
   assert.deepEqual(r.missing, []);

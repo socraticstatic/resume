@@ -1,5 +1,5 @@
 // Truth tests: the site's career and project copy must not drift from the
-// shared source of truth in ../job-hunter/data (facts.md, resume.json,
+// shared source of truth in ../identity/canon (facts.md, resume.json,
 // projects.json). When that checkout is absent (CI, a stranger's clone) the
 // cross-checks skip and only the forbidden-claims test runs.
 import { test } from 'node:test';
@@ -10,7 +10,7 @@ import { dirname, join } from 'node:path';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const html = readFileSync(join(here, '..', 'index.html'), 'utf8');
-const dataDir = join(here, '..', '..', 'job-hunter', 'data');
+const dataDir = join(here, '..', '..', 'identity', 'canon');
 const hasData = existsSync(join(dataDir, 'career.json')) && existsSync(join(dataDir, 'projects.json'));
 
 const unescape = (s) => s.replace(/&amp;/g, '&').replace(/&#8239;/g, ' ').replace(/&nbsp;/g, ' ');
@@ -36,7 +36,7 @@ test('forbidden claims are absent', () => {
   }
 });
 
-test('career heads match career.json', { skip: !hasData && 'job-hunter data not present' }, async () => {
+test('career heads match career.json', { skip: !hasData && 'identity canon not present' }, async () => {
   const { loadCareer, roleYears } = await import(join(dataDir, '..', 'lib', 'career.mjs'));
   for (const r of loadCareer(dataDir).roles.filter((r) => r.surfaces?.retro !== false)) {
     const needle = r.section === 'experience'
@@ -46,7 +46,7 @@ test('career heads match career.json', { skip: !hasData && 'job-hunter data not 
   }
 });
 
-test('every registry project marked for the retro site appears', { skip: !hasData && 'job-hunter data not present' }, () => {
+test('every registry project marked for the retro site appears', { skip: !hasData && 'identity canon not present' }, () => {
   const registry = JSON.parse(readFileSync(join(dataDir, 'projects.json'), 'utf8'));
   for (const p of registry.projects.filter((p) => p.surfaces.retro)) {
     assert.ok(text.includes(`<strong>${p.name}</strong>`), `project "${p.name}" (${p.id}) missing from the Projects window`);

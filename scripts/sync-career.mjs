@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Regenerate the role heads and the education block in index.html from the
-// career canon (../job-hunter/data/career.json, or $CAREER_JSON). Each role's
+// career canon (../identity/canon/career.json, or $CAREER_JSON). Each role's
 // description stays hand-written. Run after any career.json change:
 //   node scripts/sync-career.mjs
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -9,7 +9,7 @@ import { dirname, join } from 'node:path';
 import { applyCareer } from './lib/career-format.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const canonPath = process.env.CAREER_JSON || join(root, '..', 'job-hunter', 'data', 'career.json');
+const canonPath = process.env.CAREER_JSON || join(root, '..', 'identity', 'canon', 'career.json');
 if (!existsSync(canonPath)) {
   console.error(`career.json not found: ${canonPath}`);
   process.exit(2);
