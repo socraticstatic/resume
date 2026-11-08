@@ -52,4 +52,6 @@ test('every first load opens Appearance; a wide one opens Career beside About', 
   const init = html.slice(html.indexOf('/* ===== INIT ===== */'), html.indexOf('// AFTER DARK: CYBERHACKER'));
   assert.match(init, /openWin\('about'\);\s*if \(window\.innerWidth >= 1280\) openWin\('career'\);\s*openWin\('themes'\);/);
   assert.match(init, /\['about','readme','career','projects','contact','ask','themes'\]/, 'phones open Appearance too');
+  // 2026-11-08: at 768 Appearance landed on About and hid it; where they overlap, About stays in front
+  assert.match(init, /if \(ab && th && overlapArea\(winRect\(ab\), winRect\(th\)\) > 0\) bringToFront\('about'\);/);
 });

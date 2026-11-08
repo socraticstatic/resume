@@ -45,6 +45,7 @@ test('a key pressed to skip a boot never reaches the window and easter-egg handl
 test('INIT boots Mac OS 9 for a new visitor and the saved system after that', () => {
   const init = html.slice(html.indexOf('/* ===== INIT ===== */'), html.indexOf('// AFTER DARK: CYBERHACKER'));
   assert.match(init, /var activeOs = saved \|\| 'mac9';\s*setTheme\(activeOs\);/, 'Mac OS 9 is the first boot for every new visitor');
+  assert.match(init, /if \(asked && BootEngine\.themes\[asked\]\) saved = asked;/, '?os= opens a known system only');
   assert.ok(!/if \(saved\) \{ setTheme\(saved\); \}/.test(init), 'conditional setTheme is gone');
 });
 
