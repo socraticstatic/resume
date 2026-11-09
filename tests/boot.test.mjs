@@ -64,9 +64,16 @@ test('the extension parade marches real Mac extension and control panel icons', 
 
 test('every boot screen is built from its period screenshot bitmap, not a hand-drawn logo', () => {
   const engine = html.slice(html.indexOf('var BootEngine = (function () {'), html.indexOf('function switchTheme(os)'));
-  for (const f of ['mac7-happy', 'mac7-welcome', 'mac9-happy', 'mac9-welcome', 'win31-splash', 'winxp-splash', 'aqua-happy', 'aqua-splash', 'beos-splash']) {
+  for (const f of ['mac7-happy', 'mac7-welcome', 'mac9-happy', 'mac9-welcome', 'win31-splash', 'winxp-splash', 'aqua-happy', 'beos-splash']) {
     assert.ok(engine.includes(`bitmap('${f}'`), `boot bitmap ${f} referenced`);
   }
+  // Mac OS X is the one exception (2026-11-09): its 640x480 screenshot scaled up 1.9x read as "crap", so the
+  // panel is drawn live, traced to that screenshot's geometry: Aqua gel Apple, outlined wordmark, pinstripes.
+  assert.ok(!engine.includes("bitmap('aqua-splash'"), 'the Mac OS X panel is drawn, not the scaled screenshot');
+  assert.match(engine, /var AQUA_ART = '<svg class="aq-art" viewBox="0 0 640 480"/);
+  assert.match(html, /\.aq-panel \{ position: absolute; left: 170px; top: 127px; width: 300px; height: 225px;/);
+  assert.match(html, /\.boot-overlay\.boot-aqua\.aq-pre \{ background: #888; \}/, 'the Happy Mac screen is gray edge to edge');
+  assert.equal((engine.match(/class="aq-status"/g) || []).length, 1, 'one status line');
   for (const sym of ['function win31Logo', 'var xpFlag', 'var macOsLogo', 'var beGlyphs', 'var beMark', 'var happyMac =', 'var macMouse']) {
     // every hand-drawn mark is gone; the bitmaps carry the art
     assert.ok(!engine.includes(sym), `${sym} still present`);

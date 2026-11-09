@@ -71,3 +71,9 @@ test('placement keeps every title bar visible: BeOS reserves its floating tab an
   assert.match(html, /function reservedRects\(\)/);
 });
 
+
+test('markup carries no JavaScript escapes (a \\uXXXX in HTML prints as text; the Chooser showed them over its names)', () => {
+  const markup = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '');
+  const hits = markup.match(/\\u[0-9A-Fa-f]{4}/g) || [];
+  assert.deepEqual(hits, []);
+});

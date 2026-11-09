@@ -1179,11 +1179,29 @@
     .xp-blocks { position: absolute; top: 1px; left: 0; display: flex; gap: 1px; animation: xpSlide 1.6s linear infinite; }
     .xp-blocks i { display: block; width: 7px; height: 9px; background: linear-gradient(to bottom, #869ef3, #5979ef 50%, #2838c7); }
     @keyframes xpSlide { from { transform: translateX(-24px); } to { transform: translateX(122px); } }
-    /* Mac OS X 10.1: the bar fills inside the bitmap's empty trough */
-    .aq-bar { position: absolute; left: 254px; top: 286px; width: 132px; height: 8px; overflow: hidden; }
-    .aq-fill { width: 0; height: 100%; background: linear-gradient(to bottom, #c9c9c9, #9c9c9c); transition: width 1.9s linear; }
-    /* 10.1 printed its startup items under the panel's welcome line, one at a time */
-    .aq-status { position: absolute; left: 0; top: 326px; width: 640px; text-align: center; font: 10px/12px 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: #3a3a3a; letter-spacing: 0.1px; }
+    /* Mac OS X 10.1: the startup panel is drawn live, traced to the GUIdebook screenshot's own geometry
+       (panel 300x225 at 170,127; apple 299-340 x 151-204; wordmark 265-374 x 218-241; bar 251-388 x 284-295).
+       The screenshot itself, scaled up 1.9x, gave jagged stripes, a blotch round the wordmark and soft type
+       (Micah, 2026-11-09: "Mac OS X startup screen is crap"). The gray Happy Mac screen comes first, all gray. */
+    .boot-overlay.boot-aqua.aq-pre { background: #888; }
+    .aq-panel { position: absolute; left: 170px; top: 127px; width: 300px; height: 225px;
+      /* Aqua pinstripes: 2 screen px white, 2 light gray, whatever the stage scale */
+      background: repeating-linear-gradient(to bottom, #fbfbfb 0 calc(2px / var(--stage-s, 1)), #ebebeb 0 calc(4px / var(--stage-s, 1)));
+      box-shadow: 0 3px 12px rgba(0, 10, 40, 0.55), 0 0 1px rgba(0, 0, 0, 0.45); }
+    .aq-art { position: absolute; left: 0; top: 0; width: 640px; height: 480px; overflow: visible; }
+    .aq-bar { position: absolute; left: 251px; top: 284px; width: 138px; height: 12px; border-radius: 3px; overflow: hidden;
+      background: linear-gradient(to bottom, #b4b4b4, #dedede 25%, #f6f6f6 60%, #e2e2e2);
+      box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(0, 0, 0, 0.2); }
+    .aq-fill { width: 0; height: 100%; border-radius: 3px; transition: width 1.9s linear;
+      background:
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.28) 0 4px, rgba(255, 255, 255, 0) 4px 8px),
+        linear-gradient(to bottom, #c8e4ff, #77b6f6 45%, #3b8de6 52%, #5aa6f2 80%, #9ad3ff);
+      background-size: 11.3px 100%, 100% 100%; animation: aqStripes 0.6s linear infinite;
+      box-shadow: inset 0 0 0 0.5px rgba(10, 60, 150, 0.6); }
+    @keyframes aqStripes { to { background-position: 11.3px 0, 0 0; } }
+    /* one status line, where the screenshot printed "Welcome to Macintosh." */
+    .aq-status { position: absolute; left: 170px; top: 303px; width: 300px; text-align: center;
+      font: 9px/14px 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: #111; }
     /* BeOS: the seven icons start dimmed and light in order */
     .be-dim { position: absolute; width: 62px; height: 62px; border-radius: 50%; background: rgba(0,0,0,0.74); transition: opacity 0.25s; }
     .be-dim.lit { opacity: 0; }
@@ -1195,13 +1213,13 @@
 
     /* Chooser dialog styling */
     .chooser-grid { display:flex; flex-direction:column; gap:2px; border:1px solid #999; background:#fff; }
-    .chooser-row { padding:8px 10px; cursor:pointer; border-bottom:1px solid #eee; }
+    .chooser-row { padding:8px 10px; cursor:pointer; border-bottom:1px solid #eee; display:grid; grid-template-columns:24px 1fr; column-gap:8px; align-items:center; }
     .chooser-row:last-child { border-bottom:none; }
     .chooser-row:hover { background: var(--selection-bg, #336); color: var(--selection-text, #fff); }
     .chooser-row:hover .chooser-note { color: var(--selection-text, #fff); opacity: 0.9; }
-    .chooser-ico { display:inline-block; width:24px; font-size:18px; vertical-align:middle; margin-right:6px; }
-    .chooser-name { display:inline-block; font-weight:bold; font-size:13px; vertical-align:middle; }
-    .chooser-note { font-size:11px; opacity:0.75; margin-top:3px; margin-left:30px; }
+    .chooser-ico { font-size:18px; line-height:1; text-align:center; }
+    .chooser-name { font-weight:bold; font-size:13px; }
+    .chooser-note { grid-column:2; font-size:11px; opacity:0.75; margin-top:3px; }
 
     /* Mac 9 Get Info dialog */
     #get-info-dialog {
@@ -2300,22 +2318,22 @@
         <div style="font-size:12px;margin-bottom:10px;">Which version of Micah are you hiring?</div>
         <div class="chooser-grid">
           <div class="chooser-row" onclick="applyRole('lead')">
-            <div class="chooser-ico">\uD83C\uDFAF</div>
+            <div class="chooser-ico">&#x1F3AF;</div>
             <div class="chooser-name">Lead Product Designer</div>
             <div class="chooser-note">AT&amp;T scale. Agentic AI, network ops, design systems.</div>
           </div>
           <div class="chooser-row" onclick="applyRole('builder')">
-            <div class="chooser-ico">\uD83E\uDD16</div>
+            <div class="chooser-ico">&#x1F916;</div>
             <div class="chooser-name">AI Builder</div>
             <div class="chooser-note">MCP servers, agent frameworks, TypeScript infra.</div>
           </div>
           <div class="chooser-row" onclick="applyRole('consultant')">
-            <div class="chooser-ico">\uD83D\uDCBC</div>
+            <div class="chooser-ico">&#x1F4BC;</div>
             <div class="chooser-name">Consultant</div>
             <div class="chooser-note">13+ indie years. Fast diagnostics, clean handoffs.</div>
           </div>
           <div class="chooser-row" onclick="applyRole('mentor')">
-            <div class="chooser-ico">\uD83E\uDDED</div>
+            <div class="chooser-ico">&#x1F9ED;</div>
             <div class="chooser-name">Mentor</div>
             <div class="chooser-note">47 designers mentored. CareerFoundry advisor.</div>
           </div>
@@ -2332,7 +2350,7 @@
       </div>
       <div class="gi-body">
         <div class="gi-head">
-          <div class="gi-icon" id="gi-icon">\uD83D\uDCC1</div>
+          <div class="gi-icon" id="gi-icon">&#x1F4C1;</div>
           <div>
             <div class="gi-name" id="gi-name">Project</div>
             <div class="gi-kind" id="gi-kind">Project</div>
@@ -2940,6 +2958,9 @@
         var a = ctx.stage.querySelector(hideSel), b = ctx.stage.querySelector(showSel);
         if (a) a.classList.add('boot-hidden'); if (b) b.classList.remove('boot-hidden');
       }
+      /* Mac OS X 10.1 panel art: the Apple from Lucida Grande (10.1's system face) in Aqua gel; the wordmark
+         is Hoefler Text outlined and condensed to the screenshot's Apple Garamond box. */
+      var AQUA_ART = '<svg class="aq-art" viewBox="0 0 640 480" aria-hidden="true"><defs><linearGradient id="aqBody" x1="0" y1="151" x2="0" y2="205" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5d9ff0"/><stop offset=".45" stop-color="#3f8de8"/><stop offset=".8" stop-color="#7cc6ff"/><stop offset="1" stop-color="#b6ecff"/></linearGradient><linearGradient id="aqGloss" x1="0" y1="165" x2="0" y2="182" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".55" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><clipPath id="aqClip"><path d="M339.7 168.7Q334.2 173.1 334.2 179.2Q334.2 186.5 341 190.4Q339.2 196.3 335.7 200.6Q332.2 205 329.3 205Q328 205 325.6 204L324.9 203.7Q322.6 202.7 320.8 202.7Q319.2 202.7 317.2 203.5L316.3 203.8L315.1 204.4Q313.7 205 312.2 205Q308.9 205 304.8 198.9Q299 190.1 299 179.7Q299 172.4 302.6 167.9Q306.3 163.4 312.3 163.4Q314.5 163.4 316.5 164.3L317.4 164.7L318.3 165.1Q319.6 165.7 320.4 165.7Q321.4 165.7 322.6 165.2L323.8 164.7L324.7 164.3Q326.9 163.4 329.6 163.4Q335.9 163.4 339.7 168.7ZM329.8 151Q329.8 151.9 329.8 152.4Q329.8 157.1 326.8 160.6Q323.7 164.1 319.7 164.1Q319.6 163 319.6 162.6Q319.6 158.6 322.4 155.2Q325.2 151.7 329 151.1Q329.2 151.1 329.8 151Z"/></clipPath><filter id="aqDrop" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="1.6" stdDeviation="1.4" flood-color="#000" flood-opacity=".35"/></filter><filter id="aqWordDrop" x="-10%" y="-30%" width="120%" height="170%"><feDropShadow dx="0" dy="1" stdDeviation=".8" flood-color="#000" flood-opacity=".28"/></filter></defs><path d="M339.7 168.7Q334.2 173.1 334.2 179.2Q334.2 186.5 341 190.4Q339.2 196.3 335.7 200.6Q332.2 205 329.3 205Q328 205 325.6 204L324.9 203.7Q322.6 202.7 320.8 202.7Q319.2 202.7 317.2 203.5L316.3 203.8L315.1 204.4Q313.7 205 312.2 205Q308.9 205 304.8 198.9Q299 190.1 299 179.7Q299 172.4 302.6 167.9Q306.3 163.4 312.3 163.4Q314.5 163.4 316.5 164.3L317.4 164.7L318.3 165.1Q319.6 165.7 320.4 165.7Q321.4 165.7 322.6 165.2L323.8 164.7L324.7 164.3Q326.9 163.4 329.6 163.4Q335.9 163.4 339.7 168.7ZM329.8 151Q329.8 151.9 329.8 152.4Q329.8 157.1 326.8 160.6Q323.7 164.1 319.7 164.1Q319.6 163 319.6 162.6Q319.6 158.6 322.4 155.2Q325.2 151.7 329 151.1Q329.2 151.1 329.8 151Z" fill="url(#aqBody)" stroke="#1f55c4" stroke-width=".9" filter="url(#aqDrop)"/><ellipse cx="318.5" cy="174" rx="16" ry="9" fill="url(#aqGloss)" clip-path="url(#aqClip)"/><path d="M288.2 241Q288.2 241.5 288 241.5Q287.2 241.5 286 241.4Q284.9 241.3 284.2 241.3Q283.4 241.3 282.3 241.4Q281.2 241.5 280.4 241.5Q280.1 241.5 280.1 241Q280.1 240.6 280.4 240.6Q281.8 240.3 282.3 239.8Q282.8 239.4 282.8 238V237.8L282.3 221.8L276.4 241.7Q276.3 242 276.1 242Q275.8 242 275.7 241.7L270.1 222.6L269.2 237.8Q269.2 238.1 269.2 238.3Q269.2 239.4 269.8 239.8Q270.4 240.3 271.8 240.6Q272 240.6 272 241Q272 241.5 271.8 241.5Q271.1 241.5 270 241.4Q269 241.3 268.4 241.3Q267.8 241.3 266.8 241.4Q265.7 241.5 265.2 241.5Q265 241.5 265 241Q265 240.6 265.2 240.6Q266.8 240.3 267.4 239.8Q268 239.3 268.1 237.8L269.3 222.2Q269.3 221.9 269.3 221.7Q269.3 220.6 268.8 220.2Q268.2 219.7 266.7 219.4Q266.6 219.4 266.6 219Q266.6 218.8 266.6 218.6Q266.7 218.5 266.8 218.5Q267.2 218.5 268.1 218.6Q268.8 218.7 269.1 218.7Q269.5 218.7 270.3 218.6Q271.2 218.5 271.6 218.5L276.9 236.9L282.3 218.5Q282.8 218.5 283.6 218.6Q284.4 218.7 284.8 218.7Q285.3 218.7 286 218.6Q286.8 218.5 287.3 218.5Q287.5 218.5 287.5 219Q287.5 219.4 287.3 219.4Q285.9 219.7 285.4 220.1Q284.9 220.6 284.9 221.9V222.2L285.4 237.8Q285.4 238.9 285.7 239.4Q285.9 239.8 286.5 240.1Q287 240.4 288 240.6Q288.2 240.6 288.2 241ZM297.5 241.8Q296.8 241.8 296.3 241.4Q295.8 240.9 295.6 240.2Q294.3 242 292.2 242Q291.1 242 290.4 241.1Q289.7 240.1 289.7 238.8Q289.7 235.4 295.6 233.3L295.7 230.7V230.6Q295.7 229.4 295.3 228.7Q294.9 228 294.1 228Q293.4 228 292.9 228.5Q292.4 229 292.4 229.7Q292.4 230.7 292 231.3Q291.6 231.9 290.9 231.9Q290.5 231.9 290.3 231.6Q290 231.3 290 230.8Q290 229.5 291.7 228.1Q293.5 226.7 294.9 226.7Q296.3 226.7 297.1 227.8Q297.9 228.8 297.9 230.6V230.8L297.7 238.3V238.4Q297.7 240.1 298.6 240.1Q299 240.1 299.5 239.5L299.6 239.4Q299.7 239.4 299.8 239.6Q299.9 239.8 299.9 240Q299.9 240.4 299.1 241.1Q298.4 241.8 297.5 241.8ZM295.6 234.4Q292 235.5 292 238Q292 240.3 293.4 240.3Q294 240.3 294.7 239.9Q295.3 239.5 295.5 238.8ZM310.1 229.3Q310.1 230.7 309 230.7Q308.6 230.7 308.3 230.4Q308.1 230.2 307.8 229.3Q307.4 228.4 307.1 228.1Q306.7 227.8 306.1 227.8Q304.6 227.8 303.8 229.4Q303.1 231.1 303.1 234.3Q303.1 236.9 304 238.6Q305 240.2 306.7 240.2Q308.5 240.2 309.6 238.6L309.7 238.6Q309.8 238.6 309.9 238.8Q310 239 310 239.2Q310 239.5 309.3 240.3Q308.6 241.1 307.7 241.6Q306.9 242 305.9 242Q303.7 242 302.1 239.8Q300.6 237.6 300.6 234.3Q300.6 231 302.2 228.9Q303.9 226.7 306.1 226.7Q307.8 226.7 308.9 227.5Q310.1 228.2 310.1 229.3ZM336.4 230.1Q336.4 235.3 333.9 238.7Q331.4 242 327.4 242Q323.3 242 320.8 238.7Q318.3 235.3 318.3 230.1Q318.3 224.8 320.8 221.4Q323.4 218 327.4 218Q331.4 218 333.9 221.4Q336.4 224.8 336.4 230.1ZM333.7 230.1Q333.7 225.2 332 222.2Q330.2 219.1 327.4 219.1Q324.5 219.1 322.8 222.2Q321 225.2 321 230.1Q321 234.9 322.7 237.9Q324.5 240.9 327.4 240.9Q330.2 240.9 332 237.9Q333.7 234.9 333.7 230.1ZM349.1 234.8Q349.1 238.1 347.6 240.1Q346.2 242 343.7 242Q342.6 242 341.1 241.5Q339.7 241 338.8 241Q338.8 238.2 338.5 235.4Q338.5 235.1 338.9 235.1Q339.2 235.1 339.2 235.4Q339.9 238.4 340.9 239.7Q341.9 240.9 343.8 240.9Q345.3 240.9 346.1 239.8Q346.9 238.6 346.9 236.6Q346.9 235.2 346.2 234.1Q345.5 232.9 343.2 231.1Q340.5 229 339.7 227.6Q338.9 226.2 338.9 224.4Q338.9 221.7 340.4 219.9Q341.8 218 344.1 218Q345 218 346.1 218.3Q347.1 218.6 347.9 218.6Q348.1 221.5 348.3 223.7Q348.3 224 348 224Q347.6 224 347.6 223.7Q347.2 221.2 346.4 220.2Q345.5 219.1 344.1 219.1Q342.7 219.1 341.9 220.2Q341.1 221.2 341.1 223.1Q341.1 224.3 341.8 225.3Q342.5 226.4 344.7 228.2Q347.4 230.3 348.3 231.7Q349.1 233.1 349.1 234.8ZM375 241Q375 241.5 374.8 241.5Q374.2 241.5 373.2 241.4Q372.1 241.3 371.4 241.3Q370.7 241.3 369.5 241.4Q368.2 241.5 367.4 241.5Q367.2 241.5 367.2 241Q367.2 240.6 367.4 240.6Q369.1 240.2 369.1 239.5Q369.1 239 368.5 237.8L365.3 231.6L362.1 237.8Q361.7 238.5 361.7 239.1Q361.7 239.7 362.2 240Q362.6 240.3 363.7 240.6Q363.9 240.6 363.9 241Q363.9 241.5 363.7 241.5Q362.8 241.5 361.7 241.4Q360.8 241.3 360.1 241.3Q359.6 241.3 358.8 241.4Q357.9 241.5 357.1 241.5Q356.9 241.5 356.9 241Q356.9 240.6 357.2 240.6Q358.4 240.4 359.1 239.9Q359.8 239.3 360.7 237.8L364.8 230.6L360.5 222.2Q359.6 220.5 359 220.1Q358.3 219.6 357 219.4Q356.8 219.4 356.8 219Q356.8 218.5 357 218.5Q357.6 218.5 358.6 218.6Q359.8 218.7 360.4 218.7Q361.2 218.7 362.3 218.6Q363.6 218.5 364.4 218.5Q364.6 218.5 364.6 219Q364.6 219.4 364.4 219.4Q363.4 219.6 363 219.8Q362.7 220.1 362.7 220.5Q362.7 221 363.3 222.2L366.3 228.1L369.3 222.2Q369.8 221.3 369.8 220.9Q369.8 220.3 369.3 220Q368.8 219.6 367.7 219.4Q367.5 219.4 367.5 219Q367.5 218.5 367.7 218.5Q368.6 218.5 369.5 218.6Q370.5 218.7 371.2 218.7Q371.8 218.7 372.6 218.6Q373.5 218.5 374.4 218.5Q374.6 218.5 374.6 219Q374.6 219.1 374.5 219.3Q374.4 219.4 374.3 219.4Q373 219.6 372.3 220.2Q371.6 220.7 370.7 222.2L366.8 229L371.3 237.8Q372.2 239.5 372.8 239.9Q373.4 240.3 374.8 240.6Q375 240.6 375 241Z" fill="#262626" filter="url(#aqWordDrop)"/></svg>';
       var THEMES = {
         mac7: { duration: 2400, box: [448, 126],
           html: function (ctx) {
@@ -2981,12 +3002,14 @@
           /* Mac OS X 10.1: the gray Happy Mac holds for a beat, then the pinstripe panel with the Aqua apple,
              the bar, "Welcome to Macintosh." and the startup items printing beneath it, the way the real boot did. */
           html: function () {
-            return bitmap('aqua-happy', 'b-prelude') + bitmap('aqua-splash', 'b-main boot-hidden') + '<div class="aq-bar boot-hidden"><div class="aq-fill"></div></div><div class="aq-status boot-hidden"></div>';
+            return bitmap('aqua-happy', 'b-prelude') + '<div class="aq-main b-main boot-hidden"><div class="aq-panel"></div>' + AQUA_ART +
+              '<div class="aq-bar"><div class="aq-fill"></div></div><div class="aq-status">Welcome to Macintosh.</div></div>';
           },
           start: function (ctx) {
             var status = ctx.stage.querySelector('.aq-status');
-            ctx.at(1400, function () { swapTo(ctx, '.b-prelude', '.b-main'); var b = ctx.stage.querySelector('.aq-bar'); if (b) b.classList.remove('boot-hidden'); if (status) status.classList.remove('boot-hidden'); startFill(ctx, '.aq-fill', 1600); });
-            [[1700, 'Starting Mac OS X'], [2700, 'Checking disks'], [3600, 'Starting network services'], [4500, 'Starting Apple File Service'], [5300, 'Starting login window']].forEach(function (step) {
+            ctx.overlay.classList.add('aq-pre');
+            ctx.at(1400, function () { ctx.overlay.classList.remove('aq-pre'); swapTo(ctx, '.b-prelude', '.b-main'); startFill(ctx, '.aq-fill', 1600); });
+            [[2500, 'Checking disks'], [3400, 'Starting network services'], [4300, 'Starting Apple File Service'], [5200, 'Starting login window']].forEach(function (step) {
               ctx.at(step[0], function () { if (status) status.textContent = step[1] + '...'; });
             });
           } },
@@ -3027,6 +3050,7 @@
           if (vw < 700 && t.box) s = Math.min(vw * 0.92 / t.box[0], vh * 0.8 / t.box[1]);
           s = Math.max(0.5, Math.min(s, 2.2));
           stage.style.transform = 'scale(' + s + ')';
+          stage.style.setProperty('--stage-s', String(s));
           overlay.style.setProperty('--boot-s', String(Math.max(0.75, s)));
           stage.style.setProperty('--happy-k', String(Math.max(1, 48 / (32 * s))));
           overlay.classList.toggle('boot-small', s < 1);
