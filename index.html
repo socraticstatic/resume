@@ -997,6 +997,19 @@
     .sm-foot .sm-item:hover { background: rgba(255,255,255,0.18); }
     /* System dialogs: alerts and the shutdown prompts, drawn with each system's window chrome */
     .sys-dialog { position: fixed; left: 50%; top: 42%; transform: translate(-50%, -50%); width: 430px; z-index: 10006; animation: none; }
+    /* Paused for December 2026: a system alert in the active system's own chrome over a locked desktop. */
+    .rp-scrim { position: fixed; inset: 0; z-index: 2147483000; background: rgba(0, 0, 0, .38); }
+    [data-os="mac7"] .rp-scrim { background: rgba(0, 0, 0, .45) repeating-conic-gradient(#000 0 25%, transparent 0 50%) 0 0 / 2px 2px; }
+    .sys-dialog.rp-dialog { z-index: 2147483001; }
+    .rp-dialog .sd-text b { display: block; margin-bottom: 4px; font-size: 1.08em; }
+    .rp-dialog a.sd-btn { display: inline-block; color: inherit; text-decoration: none; text-align: center; }
+    .rp-dialog a.sd-btn:focus-visible { outline: 2px solid Highlight; outline-offset: 2px; }
+    html.rp-lock, html.rp-lock body { overflow: hidden; }
+    /* The phone layout makes every .window static, full-width and side-borderless; the pause
+       alert stays a centred box (three classes outrank that rule; the sides come back in JS). */
+    @media (max-width: 640px) {
+      .window.sys-dialog.rp-dialog { position: fixed !important; left: 50%; top: 42%; width: 92vw !important; max-width: 430px; }
+    }
     .sd-body { display: grid; grid-template-columns: 40px 1fr; gap: 10px 14px; padding: 16px 18px 14px; font-size: 13px; line-height: 1.45; }
     .sd-icon { width: 36px; height: 36px; border: 2px solid #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 22px; }
     .sd-text { align-self: center; }
@@ -3522,6 +3535,49 @@
     })();
 
     /* ===== INIT ===== */
+    // ============================================================
+    // PAUSED FOR DECEMBER - "Wait for Me" - Hall and Oates, 1979
+    // From midnight Dec 1 to midnight Jan 1, Dallas time (CST, UTC-6), the first boot ends
+    // on a system alert in the active system's own dialog chrome, over a locked desktop.
+    // Micah 2026-11-25: "No actions or triggers, except an email." Nothing dismisses it;
+    // every key, click, wheel and touch is swallowed before the desktop hears it, the
+    // screensaver stays off, and the one live thing is the mailto button.
+    // ?pause=preview shows it on any day. Remove this block, the .rp- CSS and the
+    // launchScreensaver guard after January 1.
+    // ============================================================
+    function pauseIfDue() {
+      var START = Date.UTC(2026, 11, 1, 6), END = Date.UTC(2027, 0, 1, 6), MAIL = 'micah@conscious-shell.com';
+      var preview = /[?&]pause=preview\b/.test(location.search), now = Date.now();
+      if (!preview && (now < START || now >= END)) return;
+      if (document.querySelector('.rp-dialog')) return;
+      var os = currentOS();
+      var icon = (os === 'win31' || os === 'winxp') ? 'i' : '!';
+      document.documentElement.classList.add('rp-lock');
+      var behind = Array.prototype.filter.call(document.body.children, function (c) { return c.tagName !== 'SCRIPT'; });
+      behind.forEach(function (c) { c.setAttribute('inert', ''); });
+      var scrim = document.createElement('div'); scrim.className = 'rp-scrim'; scrim.setAttribute('aria-hidden', 'true');
+      var box = document.createElement('div');
+      box.className = 'window sys-dialog open rp-dialog';
+      box.setAttribute('role', 'alertdialog'); box.setAttribute('aria-modal', 'true');
+      box.setAttribute('aria-labelledby', 'rp-title'); box.setAttribute('aria-describedby', 'rp-text');
+      box.innerHTML = '<div class="win-body sd-body"><div class="sd-icon" aria-hidden="true">' + icon + '</div>' +
+        '<div class="sd-text"><b id="rp-title">Paused for December.</b><span id="rp-text">I&rsquo;m stepping away for the month. Back in January.</span></div>' +
+        '<div class="sd-buttons"><a class="sd-btn primary" id="rp-mail" href="mailto:' + MAIL + '">Email Micah</a></div></div>';
+      document.body.appendChild(scrim); document.body.appendChild(box);
+      if (window.innerWidth <= 640) {
+        var cs = getComputedStyle(box), edge = cs.borderBottomWidth + ' ' + cs.borderBottomStyle + ' ' + cs.borderBottomColor;
+        if (cs.borderBottomStyle !== 'none') { box.style.setProperty('border-left', edge, 'important'); box.style.setProperty('border-right', edge, 'important'); }
+      }
+      var link = box.querySelector('#rp-mail');
+      function onKey(e) { e.stopImmediatePropagation(); if (e.key === 'Tab' || e.key === 'Escape') { e.preventDefault(); link.focus(); } }
+      ['keydown', 'keyup', 'keypress'].forEach(function (t) { window.addEventListener(t, onKey, true); });
+      ['pointerdown', 'pointerup', 'pointermove', 'mousedown', 'mouseup', 'mousemove', 'click', 'dblclick', 'contextmenu', 'wheel', 'touchstart', 'touchmove', 'touchend'].forEach(function (t) {
+        window.addEventListener(t, function (e) { if (e.target && e.target.closest && e.target.closest('#rp-mail')) return; e.stopImmediatePropagation(); if (t === 'contextmenu') e.preventDefault(); }, { capture: true, passive: t !== 'contextmenu' });
+      });
+      if (window.Sound && Sound.ui) Sound.ui('beep');
+      try { link.focus({ preventScroll: true }); } catch (e) { link.focus(); }
+    }
+
     // "Start me up" - Rolling Stones, 1981 / If you start me up, I'll never stop
     (function() {
       Sound.init();
@@ -3565,7 +3621,7 @@
         if (ab && th && overlapArea(winRect(ab), winRect(th)) > 0) bringToFront('about');
       }
       BootEngine.setIcons(BOOT_EXTENSIONS);
-      BootEngine.bootOnLoad(activeOs);
+      BootEngine.bootOnLoad(activeOs, pauseIfDue);
       // "You have died of dysentery." - Oregon Trail, 1971 (just checking if you're reading)
     })();
 
@@ -3926,6 +3982,7 @@ const EasterEggEngine = (() => {
   }
 
   function launchScreensaver(type) {
+    if (document.documentElement.classList.contains('rp-lock')) return; /* paused: nothing may cover the pause alert */
     activeScreensaver = type;
     const overlay = document.getElementById('screensaver-overlay');
     const canvas = document.getElementById('screensaver-canvas');

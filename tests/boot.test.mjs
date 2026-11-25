@@ -24,7 +24,7 @@ test('switchTheme delegates to BootEngine and ends in setTheme', () => {
 
 test('INIT gives the parade real icons and boots once per tab', () => {
   const init = html.slice(html.indexOf('/* ===== INIT ===== */'), html.indexOf('// AFTER DARK: CYBERHACKER'));
-  assert.match(init, /BootEngine\.bootOnLoad\(activeOs\)/);
+  assert.match(init, /BootEngine\.bootOnLoad\(activeOs(, pauseIfDue)?\)/); // pauseIfDue: the December 2026 pause, which runs once the boot ends
   assert.match(html, /sessionStorage\.getItem\('booted'\)/);
 });
 
