@@ -1,0 +1,44 @@
+# Publishes the site through scripts/build-site.mjs, which decides by the date
+# what goes out: the resume, or (December 1 to January 1, Dallas time) one pause
+# page with no resume text and no PDF. A push in December publishes the pause
+# too. The schedules make the swap happen on its own: several tries in the first
+# hours of December 1 and January 1 (GitHub can delay or drop a scheduled run),
+# plus one a day through December as a backstop. All times are UTC; midnight in
+# Dallas is 06:00 UTC. Remove the schedules after January 1.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '5,25,45 6-9 1 12 *'
+    - cron: '5,25,45 6-9 1 1 *'
+    - cron: '17 12 * 12 *'
+    - cron: '17 12 1-2 1 *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - run: node --test tests/build-site.test.mjs
+      - run: node scripts/build-site.mjs _site
+      - uses: actions/configure-pages@v6.0.0
+      - uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v5.0.1
