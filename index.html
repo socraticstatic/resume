@@ -998,8 +998,12 @@
     /* System dialogs: alerts and the shutdown prompts, drawn with each system's window chrome */
     .sys-dialog { position: fixed; left: 50%; top: 42%; transform: translate(-50%, -50%); width: 430px; z-index: 10006; animation: none; }
     /* Paused for December 2026: a system alert in the active system's own chrome over a locked desktop. */
-    .rp-scrim { position: fixed; inset: 0; z-index: 2147483000; background: rgba(0, 0, 0, .38); }
-    [data-os="mac7"] .rp-scrim { background: rgba(0, 0, 0, .45) repeating-conic-gradient(#000 0 25%, transparent 0 50%) 0 0 / 2px 2px; }
+    /* Nothing behind the alert may be readable (Micah 2026-11-25: AT&T stays out of sight
+       during the move to Jama). The page itself is blurred, not the backdrop: a backdrop blur
+       misses content Chrome puts on its own layer (the phone layout's scrolling desktop). */
+    html.rp-lock body > *:not(.rp-scrim):not(.rp-dialog) { filter: blur(9px) grayscale(.5); }
+    .rp-scrim { position: fixed; inset: 0; z-index: 2147483000; background: rgba(0, 0, 0, .55); }
+    [data-os="mac7"] .rp-scrim { background: rgba(0, 0, 0, .5) repeating-conic-gradient(#000 0 25%, transparent 0 50%) 0 0 / 2px 2px; }
     .sys-dialog.rp-dialog { z-index: 2147483001; }
     .rp-dialog .sd-text b { display: block; margin-bottom: 4px; font-size: 1.08em; }
     .rp-dialog a.sd-btn { display: inline-block; color: inherit; text-decoration: none; text-align: center; }
